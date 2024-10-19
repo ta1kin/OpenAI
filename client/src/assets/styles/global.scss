@@ -1,0 +1,43 @@
+@use "./mixins";
+@use "./vars";
+@use "./fonts";
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-bg-color: #25252b;
+    --primary-font-color: #fff;
+}
+
+::selection {
+    background: rgb(18, 185, 154);
+    color: #fff;
+}
+
+body {
+    background: var(--primary-bg-color);
+    color: var(--primary-font-color);
+    font-size: 1em;
+}
+
+button {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    background: transparent;
+}
+
+a {
+    text-decoration: none;
+}
+
+.box {
+    width: 100%;
+    @include Flex();
+    padding-inline: 10%;
+}

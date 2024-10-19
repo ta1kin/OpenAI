@@ -1,0 +1,14 @@
+@mixin Flex( $f_dir: none, $j_content: center, $a_items: center ) {
+    display: flex;
+    flex-direction: $f_dir;
+    justify-content: $j_content;
+    align-items: $a_items;
+}
+
+@mixin OAuthHover( $color: red ) {
+    &:hover {
+        path {
+            fill: $color;
+        }
+    }
+}
