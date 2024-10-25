@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int         @id @default(autoincrement())
+  name      String
+  role      Role        @default(Guest)
+  password  String
+  username  String      @unique
+  division  String
+  job       String
+  Post      Post[]
+  Signature Signature[]
+}
+
+model Post {
+  id        Int         @id @default(autoincrement())
+  title     String
+  filename  String      @unique
+  hash      String
+  delivered Boolean     @default(false)
+  date      DateTime    @default(now())
+  userId    Int
+  content   Bytes
+  User      User        @relation(fields: [userId], references: [id])
+  Signature Signature[]
+}
+
+model Signature {
+  postId     Int
+  userId     Int
+  assignedAt DateTime @default(now())
+  hash       String
+  Post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  User       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([postId, userId])
+}
+
+enum Role {
+  Admin
+  Guest
+}
