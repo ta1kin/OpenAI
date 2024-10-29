@@ -8,40 +8,55 @@ datasource db {
 }
 
 model User {
-  id        Int         @id @default(autoincrement())
-  name      String
-  role      Role        @default(Guest)
+  id        Int      @id               @default( autoincrement() )
+  createdAt DateTime @default( now() ) @map( "created_at" )
+  updatedAt DateTime @updatedAt        @map( "updated_at" )
+
+  email     String   @unique
   password  String
-  username  String      @unique
-  division  String
-  job       String
-  Post      Post[]
-  Signature Signature[]
+  role      Role     @default( Guest )
+  isVerify  Boolean  @default( false )
+
+  Info      Info[]
+  // Data      Data[]
+  // Config    Config[]
 }
 
-model Post {
-  id        Int         @id @default(autoincrement())
-  title     String
-  filename  String      @unique
-  hash      String
-  delivered Boolean     @default(false)
-  date      DateTime    @default(now())
-  userId    Int
-  content   Bytes
-  User      User        @relation(fields: [userId], references: [id])
-  Signature Signature[]
+// model Data {
+//   id        Int      @id               @default(autoincrement())
+//   createdAt DateTime @default( now() ) @map("created_at")
+//   updatedAt DateTime @updatedAt        @map("updated_at")
+
+//   nickname String    @unique
+//   phone    String    @unique
+
+//   userId    Int      @map("user_id")
+//   User      User     @relation( fields: [userId], references: [id] )
+// }
+
+model Info {
+  id        Int      @id               @default( autoincrement() )
+  createdAt DateTime @default( now() ) @map("created_at")
+  updatedAt DateTime @updatedAt        @map("updated_at")
+
+  name      String   @default("Не задано")
+
+  userId    Int      @map("user_id")
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-model Signature {
-  postId     Int
-  userId     Int
-  assignedAt DateTime @default(now())
-  hash       String
-  Post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  User       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+// model Config {
+//   id        Int      @id               @default( autoincrement() )
+//   createdAt DateTime @default( now() ) @map("created_at")
+//   updatedAt DateTime @updatedAt        @map("updated_at")
 
-  @@id([postId, userId])
-}
+//   theme     String
+//   icon      Bytes
+//   accepted  Boolean
+
+//   userId    Int      @map("user_id")
+//   User      User     @relation(fields: [userId], references: [id])
+// }
 
 enum Role {
   Admin
