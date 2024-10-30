@@ -5,6 +5,8 @@ import AuthPage from './pages/Auth/AuthPage'
 import NotFoundPage from './pages/Err/NotFoundPage'
 import Layout from './components/Layout'
 
+import AuthLayout from './layouts/authLayout'
+
 import "./assets/styles/global.scss"
 
 const App = () => {
@@ -16,6 +18,10 @@ const App = () => {
                 </Route>
                 <Route path='/api/auth' element={<AuthPage />} />
                 <Route path='*' element={ <NotFoundPage /> } />
+                <Route  path='/auth' element={ <AuthLayout /> }>
+                    <Route path='/sing-in' element={ < /> } />
+                    <Route path='/sing-up' element={ < /> } />
+                </Route>
             </Routes>
         </div>
     )

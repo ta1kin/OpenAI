@@ -9,7 +9,7 @@ export default {
     generateToken: ( userId: number ) => {
 
         if( !JWT_SECRET ) {
-            throw Error( 'Не определён jsonwebtoken' )
+            throw Error( 'Don`t have a jwt secret key!' )
         }
 
         let token = jwt.sign(

@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "curl": "^0.1.4",
     "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
     "express": "^4.21.1",
     "express-async-handler": "^1.2.0",
     "express-request-id": "^3.0.0",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
+    "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.0",
     "@types/express-request-id": "^1.4.3",
     "@types/jsonwebtoken": "^9.0.7",

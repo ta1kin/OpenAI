@@ -31,7 +31,7 @@ model User {
 //   phone    String    @unique
 
 //   userId    Int      @map("user_id")
-//   User      User     @relation( fields: [userId], references: [id] )
+//   User      User     @relation( fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade )
 // }
 
 model Info {
@@ -47,15 +47,16 @@ model Info {
 
 // model Config {
 //   id        Int      @id               @default( autoincrement() )
-//   createdAt DateTime @default( now() ) @map("created_at")
-//   updatedAt DateTime @updatedAt        @map("updated_at")
+//   createdAt DateTime @default( now() ) @map( "created_at" )
+//   updatedAt DateTime @updatedAt        @map( "updated_at" )
 
 //   theme     String
-//   icon      Bytes
+//   icon      Bytes   
 //   accepted  Boolean
 
-//   userId    Int      @map("user_id")
-//   User      User     @relation(fields: [userId], references: [id])
+
+//   userId    Int      @map( "user_id" )
+//   User      User     @relation( fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade )
 // }
 
 enum Role {

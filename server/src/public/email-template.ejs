@@ -1,0 +1,43 @@
+<style type="text/css">
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 600px; 
+        margin: 0 auto; 
+        padding: 20px; 
+    }
+
+    h1 {
+        color: #333; 
+        text-align: center; 
+    }
+
+    p {
+        color: #666; 
+    }
+
+    p.warn {
+        color: #cf4545;
+        margin-bottom: 40px;
+    }
+
+    a {
+        display: block;
+        text-decoration: none; 
+        color: #007bff; 
+        border: 1px solid #007bff; 
+        padding: 10px 20px; 
+        text-align: center; 
+    }
+
+    a:hover {
+        background-color: #e9ecef; 
+        color: #0056b3; 
+    }
+</style>
+
+<div>
+    <p class="warn">*Если это были не вы, проигнорируйте данное сообщение</p>
+    <h1>Подтверждение регистрации</h1>
+    <p>Пожалуйста, подтвердите свою регистрацию, перейдя по следующей ссылке:</p>
+    <a href="http://<%= HOST %>:<%= PORT %>/api/auth/verify?token=<%= token %>">Подтвердить регистрацию</a>
+</div>

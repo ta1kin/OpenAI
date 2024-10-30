@@ -3,17 +3,30 @@ import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 
 import { prisma } from '../prisma'
-import { UserFields } from "../utils/user.utils.js";
+import { UserFields } from "../utils/user.utils";
 
 dotenv.config({ path: 'src/.env' })
 const JWT_SECRET = process.env.JWT_SECRET
 
-
-export const protect = asyncHandler( async (req, res, next) => {
+export const verifyToken = async( token: string ) => {
 
     if( !JWT_SECRET ) {
         throw Error( 'Don`t have jsonwebtoken!' )
     }
+
+    const decoded = jwt.verify( token, JWT_SECRET ) as { userId: string }
+
+    const userFound = await prisma.user.findUnique({
+        where: {
+            id: Number( decoded.userId ) 
+        },
+        select: UserFields
+    })
+
+    return userFound
+}
+
+export const protect = asyncHandler( async (req, res, next) => {
 
     let token
 
@@ -26,14 +39,7 @@ export const protect = asyncHandler( async (req, res, next) => {
         throw new Error('Not authorized, I don`t have a token!')
     }
 
-    const decoded = jwt.verify( token, JWT_SECRET ) as { userId: string }
-
-    const userFound = await prisma.user.findUnique({
-        where: {
-            id: Number( decoded.userId ) 
-        },
-        select: UserFields
-    })
+    const userFound = await verifyToken( token )
 
     if ( userFound ) {
         (req as any).user = userFound;

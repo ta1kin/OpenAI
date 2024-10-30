@@ -1,14 +1,18 @@
 import nodemailer from 'nodemailer'
+import ejs from 'ejs'
 import dotenv from 'dotenv'
+import path from 'path'
 
 dotenv.config({ path: 'src/.env' })
+const HOST = process.env.HOST
+const PORT = process.env.PORT
 
 
 const transporter = nodemailer.createTransport( {
     service: 'yandex',
     host: 'smtp.yandex.ru',
     port: 993,
-    secure: false,
+    secure: true,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -16,24 +20,15 @@ const transporter = nodemailer.createTransport( {
 } )
 
 export const sendVerifyToEmail = async (to: string, token: string) => {
-    console.log( process.env.EMAIL_USER )
+
+    const ejsPath = path.join( __dirname, '../../public/email-template.ejs' )
     
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: to,
         subject: 'Подтверждение регистрации',
-        html: `
-            <h1>Подтверждение регистрации</h1>
-            <p>Пожалуйста, подтвердите свою регистрацию, перейдя по следующей ссылке:</p>
-            <a href="http://${process.env.HOST}:${process.env.PORT}/api/auth/verify/${token}">Подтвердить регистрацию</a>
-        `
+        html: await ejs.renderFile( ejsPath, { HOST, PORT, token } )
     }
 
-    transporter.sendMail( mailOptions, ( err, info ) => {
-        if ( err ) {
-            console.error('Ошибка при отправке письма:', err);
-        } else {
-            console.log('Письмо успешно отправлено:', info.response);
-        }
-    })
+    return await transporter.sendMail( mailOptions)
 }
