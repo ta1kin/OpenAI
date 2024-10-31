@@ -1,9 +1,11 @@
-import homeRouter from '../../../server/src/app/home/home.router';
+import { Outlet } from 'react-router-dom'
+
+
 const HomeLayout = () => {
 
     return (
         <>
-        
+            <Outlet />
         </>
     )
 }

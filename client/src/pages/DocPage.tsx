@@ -1,7 +1,9 @@
 const DocPage = () => {
     return (
         <>
-        
+            <div>
+                doc
+            </div>
         </>
     )
 }

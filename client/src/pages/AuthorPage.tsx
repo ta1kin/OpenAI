@@ -1,7 +1,9 @@
 const AuthorPage = () => {
     return (
         <>
-        
+            <div>
+                author
+            </div>
         </>
     )
 }

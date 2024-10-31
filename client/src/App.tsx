@@ -31,14 +31,14 @@ const App = () => {
                     <Route path='/author' element={<AuthorPage />} />
                 </Route>
 
-                <Route path='/auth' element={ <AuthLayout /> }>
-                    <Route path='/sing-in' element={ <SingInPage /> } />
-                    <Route path='/sing-up' element={ <SingUpPage /> } />
+                <Route element={ <AuthLayout /> }>
+                    <Route path='/auth/sing-in' element={ <SingInPage /> } />
+                    <Route path='/auth/sing-up' element={ <SingUpPage /> } />
                 </Route>
 
-                <Route path='/home' element={ <HomeLayout /> }>
-                    <Route path='/' element={ <HomePage /> } />
-                    <Route path='/documents' element={ <DocPage /> } />
+                <Route element={ <HomeLayout /> }>
+                    <Route path='/home' element={ <HomePage /> } />
+                    <Route path='/home/documents' element={ <DocPage /> } />
                 </Route>
 
                 <Route path='error' element={ <ErrorPage /> } />

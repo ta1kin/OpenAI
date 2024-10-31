@@ -1,7 +1,9 @@
 const SingInPage = () => {
     return (
         <>
-        
+            <div>
+                singIn
+            </div>
         </>
     )
 }
