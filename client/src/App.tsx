@@ -13,19 +13,11 @@ import ErrorPage from './pages/ErrorPage'
 import DocPage from './pages/DocPage'
 import AuthorPage from './pages/AuthorPage'
 
-import "./assets/styles/global.scss"
-
 
 const App = () => {
     return (
         <div className="wrapper">
             <Routes>
-                {/* <Route element={ <Layout /> }>
-                    <Route path='/' element={<InfoPage />} />
-                </Route>
-                <Route path='/api/auth' element={<AuthPage />} />
-                <Route path='*' element={ <NotFoundPage /> } /> */}
-
                 <Route element={  <InfoLayout />} >
                     <Route path='/' element={<InfoPage />} />
                     <Route path='/author' element={<AuthorPage />} />

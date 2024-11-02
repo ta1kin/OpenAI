@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-    theme: 'dark'
+    theme: 'dark',
+    lng: 'ru'
 }
 
 const settingsSlice = createSlice({
@@ -11,9 +12,12 @@ const settingsSlice = createSlice({
     reducers: {
         toggleTheme: state => {
             state.theme =  state.theme === 'light' ? 'dark' : 'light'
+        },
+        toggleLang: state => {
+            state.lng = state.lng === 'ru' ? 'en' : 'ru'
         }
     }
 })
 
-export const { toggleTheme } = settingsSlice.actions
+export const { toggleTheme, toggleLang } = settingsSlice.actions
 export default settingsSlice.reducer
