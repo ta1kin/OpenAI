@@ -8,7 +8,9 @@ import store from './store'
 import App from './App'
 import i18n from './i18n'
 
-import '@/assets/styles/global.scss'
+import '@/assets/scss/index.scss'
+import '@/assets/scss/global.scss'
+import '@/assets/scss/auth.scss'
 
 
 createRoot( document.getElementById( 'root' )! )
@@ -16,8 +18,8 @@ createRoot( document.getElementById( 'root' )! )
     <StrictMode>
       <Provider store={ store }>
         <BrowserRouter>
-          <I18nextProvider i18n={i18n}>
-            <Suspense fallback={<p>Loading...</p>}>
+          <I18nextProvider i18n={ i18n }>
+            <Suspense fallback={ <p>Loading...</p> }>
               <App />
             </Suspense>
           </I18nextProvider>

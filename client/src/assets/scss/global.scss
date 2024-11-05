@@ -1,0 +1,82 @@
+@use "./mixins";
+@use "./vars";
+@use "./fonts";
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1em;
+    font-family: Arima;
+    font-weight: 400;
+    font-style: normal;
+}
+
+:root {
+    --primary-selection-bg-color: #12b99a;
+    --primary-selection-font-color: #ffffff;
+
+    #light {
+        --primary-bg-color: #f4f4f4;
+        --primary-font-color: #000000;
+
+        --primary-block-color: #ffffff;
+    }
+    
+    #dark {
+        --primary-bg-color: #39393e;
+        --primary-font-color: #e5e5e5;
+    }
+}
+
+::selection {
+    background: var(--primary-selection-bg-color);
+    color: var(--primary-selection-font-color);
+}
+
+.wrapper {
+    width: 100%;
+    min-height: 100lvh;
+    
+    background: var(--primary-bg-color);
+    color: var(--primary-font-color);
+}
+
+button {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    background: transparent;
+}
+
+a {
+    text-decoration: none;
+}
+
+img,
+svg,
+i {
+    user-select: none;
+}
+
+.box {
+    width: 100%;
+    @include Flex();
+    padding-inline: 10%;
+
+    @media ( max-width: 1024px ) {
+        padding-inline: 7%;
+    }
+
+    @media ( max-width: 768px ) {
+        padding-inline: 5%;
+    }
+
+    @media ( max-width: 425px ) {
+        padding-inline: 2%;
+    }
+}

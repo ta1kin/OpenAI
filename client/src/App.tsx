@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import type { State } from './types/redux/'
 
 import AuthLayout from './layouts/AuthLayout'
 import HomeLayout from './layouts/HomeLayout'
@@ -15,8 +17,10 @@ import AuthorPage from './pages/AuthorPage'
 
 
 const App = () => {
+    const theme = useSelector( ( state: State )  => state.settings.theme )
+
     return (
-        <div className="wrapper">
+        <div className="wrapper" id={ theme }>
             <Routes>
                 <Route element={  <InfoLayout />} >
                     <Route path='/' element={<InfoPage />} />

@@ -9,15 +9,16 @@ export default defineConfig({
 		preprocessorOptions: {
 			scss: {
 				additionalData: `
-            @use "@/assets/styles/_vars.scss" as *;
-            @use "@/assets/styles/_mixins.scss" as *;
+            @use "@/assets/scss/_vars.scss" as *;
+            @use "@/assets/scss/_mixins.scss" as *;
           `
 			}
 		}
 	},
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@Components': fileURLToPath(new URL('./src/components', import.meta.url)),
     }
   }
 })
