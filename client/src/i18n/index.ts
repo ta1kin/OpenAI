@@ -9,6 +9,7 @@ import ruInfo from './ru/info.json'
 import ruNotFound from './ru/not-found.json'
 import ruSingIn from './ru/sing-in.json'
 import ruSingUp from './ru/sing-up.json'
+import ruAuth from './ru/auth.json'
 
 import enAuthor from './en/author.json'
 import enDoc from './en/doc.json'
@@ -18,10 +19,12 @@ import enInfo from './en/info.json'
 import enNotFound from './en/not-found.json'
 import enSingIn from './en/singIn.json'
 import enSingUp from './en/singUp.json'
+import enAuth from './en/auth.json'
 
 
 const resources = {
     ru: {
+        auth: ruAuth,
         author: ruAuthor,
         doc: ruDoc,
         error: ruError,
@@ -32,6 +35,7 @@ const resources = {
         singUp: ruSingUp
     },
     en: {
+        auth: enAuth,
         author: enAuthor,
         doc: enDoc,
         error: enError,

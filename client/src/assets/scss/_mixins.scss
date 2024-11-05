@@ -1,4 +1,4 @@
-@mixin Flex( $f_dir: none, $j_content: center, $a_items: center ) {
+@mixin Flex( $f_dir: column, $j_content: center, $a_items: center ) {
     display: flex;
     flex-direction: $f_dir;
     justify-content: $j_content;
