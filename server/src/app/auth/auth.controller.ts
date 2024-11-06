@@ -1,12 +1,15 @@
 import { Request, Response } from 'express'
-import asyncHandler from 'express-async-handler'
 import { faker } from '@faker-js/faker'
 import { hash, verify } from 'argon2'
 
+import asyncHandler from 'express-async-handler'
+
 import { prisma } from '../prisma'
-import { UserFields, InfoFields } from '../utils/user.utils'
-import { sendVerifyToEmail } from '../services/auth.mailer'
+import { redis } from '../redis'
+import { InfoFields, ConfigFields, DataFields } from '../utils/user.utils'
+import { sendVerifyToEmail } from '../services/service.mailer'
 import { verifyToken } from '../middlewares/auth.middleware'
+
 import tokenGenerator from './token-generator'
 
 
@@ -24,7 +27,7 @@ export default {
 
         if( !user || !isValidUserPassword ) {
             res.status( 401 )
-            throw Error('The email or password is incorrect!')
+            throw new Error('The email or password is incorrect!')
         }
 
         const info = await prisma.info.findUnique({
@@ -34,12 +37,43 @@ export default {
             select: InfoFields
         })
 
-        if( !info ) {
+        const config = await prisma.config.findUnique({
+            where: {
+                id: user.id
+            },
+            select: ConfigFields
+        })
+
+        if( !info || !config ) {
             res.status( 504 )
-            throw Error( 'Db crashed!' )
+            throw new Error( 'Db crashed!' )
         }
 
-        const token = tokenGenerator.generateToken( user.id )
+        let data
+        data = await prisma.data.findUnique({
+            where: {
+                id: user.id
+            },
+            select: DataFields
+        })
+
+        if ( !data ) {
+            data = Object.fromEntries(
+                Object.entries( DataFields ).map( ( [key, value] ) => [key, 'Не задано'] )
+            )
+        }
+
+        const access_token = tokenGenerator.generateToken( user.id )
+        const refresh_token = tokenGenerator.generateToken( user.id )
+
+        res.cookie('refresh', refresh_token, {
+            maxAge: 30 * 24 * 60 * 1000,
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict'
+        })
+
+        res.setHeader('Authorization', `Bearer ${access_token}`)
 
         res.status( 201 ).json( { 
             data: {
@@ -48,9 +82,10 @@ export default {
                 updatedAt: user.updatedAt,
                 email: user.email,
                 role: user.role,
-                ...info
-            }, 
-            token, 
+                ...info,
+                ...config,
+                ...data
+            },
             message: "success" } )
     } ),
 
@@ -65,45 +100,51 @@ export default {
 
         if( isHaveUser ) {
             res.status( 409 )
-            throw Error( 'Пользователь с такой почтой уже существует!' )
+            throw new Error( 'Пользователь с такой почтой уже существует!' )
         }
 
         const user = await prisma.user.create({
             data: {
                 email,
                 password: await hash( password )
-            },
-            select: UserFields
+            }
         })
 
         const info = await prisma.info.create({
             data: {
                 userId: user.id,
                 name: faker.person.fullName()
-            },
-            select: InfoFields
+            }
         })
 
-        if( !user || !info ) {
+        const config = await prisma.config.create({
+            data: {
+                userId: user.id
+            }
+        })
+
+        if( !user || !info || !config ) {
             res.status( 504 )
-            throw Error( 'Db crashed!' )
+            throw new Error( 'Db crashed!' )
         }
 
-        const token = tokenGenerator.generateToken( user.id )
-        const emailRespose = await sendVerifyToEmail( email, token )
+        const access_token = tokenGenerator.generateToken( user.id )
+        const emailRespose = await sendVerifyToEmail( email, access_token )
 
         if( !emailRespose ) {
             res.status( 504 )
             throw new Error('The email has not been sent!')
         }
 
+        res.setHeader('Authorization', `Bearer ${access_token}`)
+
         res.status( 200 ).json( { message: "success" } )
     } ),
 
     verifyEmail: asyncHandler( async (req: Request, res: Response) => {
-        const token = String( req.query.token )
+        const access_token = String( req.query.access_token )
         
-        const userFound = await verifyToken( token )
+        const userFound = await verifyToken( access_token )
 
         if ( !userFound ) {
             res.status( 401 )
@@ -119,30 +160,80 @@ export default {
             }
         })
 
-        const user = await prisma.user.findUnique({
-            where: { 
-                id: userFound.id
-            },
-            select: UserFields
-        })
+        const refresh_token = tokenGenerator.generateToken( userFound.id )
 
-        const info = await prisma.info.findUnique({
-            where: { 
-                id: userFound.id
-            },
-            select: InfoFields
-        })
+        const redisResponse = await redis.set(
+            `refresh_tokens:${ userFound.id }`,
+            `${refresh_token}`,
+            'EX',
+            30 * 24 * 60 * 1000
+        )
 
-        if( !user || !info ) {
+        if( !redisResponse ) {
             res.status( 504 )
-            throw Error( 'Db crashed!' )
+            throw new Error( 'Redis crashed!' )
         }
 
-        res.status( 201 ).json( { 
-            data: { ...user, ...info }, 
-            token,
+        res.cookie('refresh', refresh_token, {
+            maxAge: 30 * 24 * 60 * 1000,
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict'
+        })
+
+        res.status( 201 ).json( {
             message: "success" 
         } )
+    } ),
 
+    updateTokens: asyncHandler( async ( req: Request, res: Response ) => {
+        let access_token
+        let refresh_token = req.cookies.refresh
+
+        const userFound = await verifyToken( refresh_token )
+
+        if ( !userFound ) {
+            res.status( 401 )
+            throw new Error('Not authorized, token failed')
+        }        
+
+        let redisRefresh = await redis.get( `refresh_tokens:${ userFound.id }` )
+
+        if( redisRefresh !== refresh_token ) {
+            throw new Error( 'Incorrect refresh token!' )
+        }
+
+        access_token = tokenGenerator.generateToken( userFound.id )
+        refresh_token = tokenGenerator.generateToken( userFound.id )
+
+        const redisResponse = await redis.set(
+            `refresh_tokens:${ userFound.id }`,
+            `${refresh_token}`,
+            'EX',
+            30 * 24 * 60 * 1000
+        )
+
+        if( !redisResponse ) {
+            res.status( 504 )
+            throw new Error( 'Redis crashed!' )
+        }
+
+        res.cookie('refresh', refresh_token, {
+            maxAge: 30 * 24 * 60 * 1000,
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict'
+        })
+
+        res.setHeader('Authorization', `Bearer ${access_token}`)
+
+        res.status( 200 ).json( { message: 'success' } )
+    } ),
+
+    rewritePass: asyncHandler( async ( req: Request, res: Response ) => {
+
+        const { email } = req.body
+
+        res.status( 202 ).json( { message: 'success' } )
     } )
 }

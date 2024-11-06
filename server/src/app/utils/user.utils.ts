@@ -9,3 +9,13 @@ export const UserFields = {
 export const InfoFields = {
     name: true,
 }
+
+export const ConfigFields = {
+    theme: true,
+    icon: true,
+}
+
+export const DataFields = {
+    nickname: true,
+    phone: true,
+}

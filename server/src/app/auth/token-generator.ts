@@ -18,7 +18,7 @@ export default {
             },
             JWT_SECRET,
             {
-                expiresIn: '10d'
+                expiresIn: '7d'
             }
         )
 
