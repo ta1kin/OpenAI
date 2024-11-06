@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
+import SingUpContent from '@Components/Auth/SingUp'
+
 
 const SingUpPage = () => {
     const { t } = useTranslation(['singUp'])
@@ -9,9 +11,8 @@ const SingUpPage = () => {
     return (
         <>
             <div className="sing-up-page">
-                { t( 'singUp:title' ) }
+                <SingUpContent />
             </div>
-            <p className="text-3xl font-bold underline">аваивива</p>
         </>
     )
 }

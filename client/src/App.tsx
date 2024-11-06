@@ -1,6 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+
 import type { State } from './types/redux/'
+
+import { RouterPathes } from './config/routerConfig'
 
 import AuthLayout from './layouts/AuthLayout'
 import HomeLayout from './layouts/HomeLayout'
@@ -23,22 +26,22 @@ const App = () => {
         <div className="wrapper" id={ theme }>
             <Routes>
                 <Route element={  <InfoLayout />} >
-                    <Route path='/' element={<InfoPage />} />
-                    <Route path='/author' element={<AuthorPage />} />
+                    <Route path={ RouterPathes.Info } element={<InfoPage />} />
+                    <Route path={ RouterPathes.Author } element={<AuthorPage />} />
                 </Route>
 
                 <Route element={ <AuthLayout /> }>
-                    <Route path='/auth/sing-in' element={ <SingInPage /> } />
-                    <Route path='/auth/sing-up' element={ <SingUpPage /> } />
+                    <Route path={ RouterPathes.Login } element={ <SingInPage /> } />
+                    <Route path={ RouterPathes.Register } element={ <SingUpPage /> } />
                 </Route>
 
                 <Route element={ <HomeLayout /> }>
-                    <Route path='/home' element={ <HomePage /> } />
-                    <Route path='/home/documents' element={ <DocPage /> } />
+                    <Route path={ RouterPathes.Home } element={ <HomePage /> } />
+                    <Route path={ RouterPathes.Doc } element={ <DocPage /> } />
                 </Route>
-
-                <Route path='error' element={ <ErrorPage /> } />
-                <Route path='*' element={ <NotFoundPage /> } />
+ 
+                <Route path={ RouterPathes.Error } element={ <ErrorPage /> } />
+                <Route path={ RouterPathes.NotFound } element={ <NotFoundPage /> } />
             </Routes>
         </div>
     )
