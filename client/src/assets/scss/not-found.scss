@@ -1,0 +1,22 @@
+.not-found-page {
+    height: 100lvh;
+    width: 100%;
+
+    .not-found-content {
+        height: 100%;
+
+        .not-found-page__info {
+
+            .info__widget {
+                
+                button {
+                    transition: all .5s ease;
+    
+                    &:hover {
+                        translate: 2.5px -2.5px;
+                    }
+                }
+            }
+        }
+    }
+}

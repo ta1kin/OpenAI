@@ -15,8 +15,10 @@ import NotFoundPage from './pages/NotFoundPage'
 import InfoPage from './pages/InfoPage'
 import HomePage from './pages/HomePage'
 import ErrorPage from './pages/ErrorPage'
-import DocPage from './pages/DocPage'
+import DocsPage from './pages/DocsPage'
+import BookPage from './pages/BookPage'
 import AuthorPage from './pages/AuthorPage'
+import RecoveryPassPage from './pages/RecoveryPassPage'
 
 
 const App = () => {
@@ -33,11 +35,13 @@ const App = () => {
                 <Route element={ <AuthLayout /> }>
                     <Route path={ RouterPathes.Login } element={ <SingInPage /> } />
                     <Route path={ RouterPathes.Register } element={ <SingUpPage /> } />
+                    <Route path={ RouterPathes.Recovery } element={ < RecoveryPassPage /> } />
                 </Route>
 
                 <Route element={ <HomeLayout /> }>
                     <Route path={ RouterPathes.Home } element={ <HomePage /> } />
-                    <Route path={ RouterPathes.Doc } element={ <DocPage /> } />
+                    <Route path={ RouterPathes.Docs } element={ <DocsPage /> } />
+                    <Route path={ RouterPathes.Book + '/:id' } element={ <BookPage /> } />
                 </Route>
  
                 <Route path={ RouterPathes.Error } element={ <ErrorPage /> } />

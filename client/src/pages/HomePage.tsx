@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
+import HomeContent from '@Components/Home/'
+
 
 const HomePage = () => {
     const { t } = useTranslation([ 'home' ])
@@ -8,7 +10,7 @@ const HomePage = () => {
     return (
         <>
             <div  className="home-page">
-                home
+                <HomeContent />
             </div>
         </>
     )

@@ -11,6 +11,8 @@ import i18n from './i18n'
 import '@/assets/scss/index.scss'
 import '@/assets/scss/global.scss'
 import '@/assets/scss/auth.scss'
+import '@/assets/scss/error.scss'
+import '@/assets/scss/not-found.scss'
 
 
 createRoot( document.getElementById( 'root' )! )

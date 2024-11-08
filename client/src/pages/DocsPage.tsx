@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
+import DocsContent from '@Components/Docs/'
+
 
 const DocPage = () => {
     const { t } = useTranslation([ 'doc' ])
@@ -8,7 +10,7 @@ const DocPage = () => {
     return (
         <>
             <div className="doc-page">
-                doc
+                <DocsContent />
             </div>
         </>
     )

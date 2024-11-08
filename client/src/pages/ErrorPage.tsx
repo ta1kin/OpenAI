@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
 
+import ErrorContent from '@Components/Error/'
+
 
 const ErrorPage = () => {
     const { t } = useTranslation([ 'error' ])
@@ -7,8 +9,8 @@ const ErrorPage = () => {
     document.title = t('error:title')
     return (
         <>
-            <div  className="error-page">
-                err
+            <div className="error-page">
+                <ErrorContent />
             </div>
         </>
     )

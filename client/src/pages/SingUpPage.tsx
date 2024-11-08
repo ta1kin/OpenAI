@@ -7,7 +7,6 @@ const SingUpPage = () => {
     const { t } = useTranslation(['singUp'])
 
     document.title = t( 'singUp:title' )
-    
     return (
         <>
             <div className="sing-up-page">

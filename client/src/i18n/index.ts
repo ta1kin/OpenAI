@@ -10,6 +10,8 @@ import ruNotFound from './ru/not-found.json'
 import ruSingIn from './ru/sing-in.json'
 import ruSingUp from './ru/sing-up.json'
 import ruAuth from './ru/auth.json'
+import ruRecoveryPass from './ru/recovery-pass.json'
+import ruBook from './ru/book.json'
 
 import enAuthor from './en/author.json'
 import enDoc from './en/doc.json'
@@ -20,6 +22,8 @@ import enNotFound from './en/not-found.json'
 import enSingIn from './en/singIn.json'
 import enSingUp from './en/singUp.json'
 import enAuth from './en/auth.json'
+import enRecoveryPass from './en/recovery-pass.json'
+import enBook from './en/book.json'
 
 
 const resources = {
@@ -32,7 +36,9 @@ const resources = {
         info: ruInfo,
         notFound: ruNotFound,
         singIn: ruSingIn,
-        singUp: ruSingUp
+        singUp: ruSingUp,
+        recoveryPass: ruRecoveryPass,
+        book: ruBook
     },
     en: {
         auth: enAuth,
@@ -43,7 +49,9 @@ const resources = {
         info: enInfo,
         notFound: enNotFound,
         singIn: enSingIn,
-        singUp: enSingUp
+        singUp: enSingUp,
+        recoveryPass: enRecoveryPass,
+        book: enBook
     }
 }
 

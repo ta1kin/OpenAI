@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    step: 0
+    step: 0,
+    maxStep: 3
 }
 
 const singUpSlice = createSlice({
@@ -10,7 +11,9 @@ const singUpSlice = createSlice({
     initialState,
     reducers: {
         nextStep: state => {
-            state.step++
+            if ( state.step < state.maxStep ) {
+                state.step = state.step + 1
+            }
         },
         prevStep: state => {
             if (state.step > 0) {

@@ -6,5 +6,7 @@ export enum RouterPathes {
     Register = '/auth/sing-up',
     Error = '/error',
     NotFound = '*',
-    Doc = '/home/documents'
+    Docs = '/home/documents',
+    Book = '/home/book',
+    Recovery = '/recovery'
 }
