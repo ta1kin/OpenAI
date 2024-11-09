@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import morgan from 'morgan'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+import helmet from 'helmet'
 
 import homeRouter from './app/home/home.router'
 import authRouter from './app/auth/auth.router'
@@ -13,6 +14,7 @@ import infoRouter from './app/info/info.router'
 import { prisma } from './app/prisma'
 import { redis } from './app/redis'
 import { notFound, errorHandler } from './app/middlewares/error.middleware'
+import { ap } from '@faker-js/faker/dist/airline-WjISwexU'
 
 
 dotenv.config({ path: 'src/.env' })
@@ -27,6 +29,7 @@ const start = async () => {
 
   app.use( express.json() )
   app.use( cookieParser() )
+  app.use( helmet() )
 
   if( isDev ) app.use( morgan( 'dev' ) )
   if( isDev ) app.use( cors() )

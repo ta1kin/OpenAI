@@ -32,6 +32,28 @@ export const verifyToken = async ( token: string ) => {
     return userFound
 }
 
+export const _verifyToken = async ( token: string, secret: string ) => {
+
+    if( !secret ) {
+        throw new Error( 'Don`t have jsonwebtoken!' )
+    }
+
+    const decoded = jwt.verify( token, secret ) as { userId: string }
+
+    if( !decoded ) {
+        throw new Error( 'Server Error!' )
+    }
+
+    const userFound = await prisma.user.findUnique({
+        where: {
+            id: Number( decoded.userId ) 
+        },
+        select: UserFields
+    })
+
+    return userFound
+}
+
 export const protect = asyncHandler( async (req: Request, res:Response, next: NextFunction) => {
 
     let token
@@ -45,7 +67,7 @@ export const protect = asyncHandler( async (req: Request, res:Response, next: Ne
         throw new Error('Not authorized, I don`t have a token!')
     }
 
-    const userFound = await verifyToken(token )
+    const userFound = await verifyToken( token )
 
     if ( userFound ) {
         (req as any).user = userFound;

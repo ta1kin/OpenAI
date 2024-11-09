@@ -35,15 +35,29 @@ const transporter = nodemailer.createTransport( {
     }
 } )
 
-export const sendVerifyToEmail = async (to: string, access_token: string) => {
+export const sendVerifyToEmail = async ( to: string, access_token: string ) => {
 
-    const ejsPath = path.join( __dirname, '../../public/email-template.ejs' )
+    const ejsPath = path.join( __dirname, '../../public/emailVerify-template.ejs' )
     
     const mailOptions = {
         from: MAIL_USER,
         to: to,
-        subject: 'Подтверждение регистрации',
+        subject: 'Подтверждение регистрации!',
         html: await ejs.renderFile( ejsPath, { HOST, PORT, access_token } )
+    }
+
+    return await transporter.sendMail( mailOptions)
+}
+
+export const sendRecoveryToEmail = async( to: string, secret_code: string ) => {
+
+    const ejsPath = path.join( __dirname, '../../public/emailRecovery-template.ejs' )
+
+    const mailOptions = {
+        from: MAIL_USER,
+        to: to,
+        subject: 'Восстановление пароля!',
+        html: await ejs.renderFile( ejsPath, { secret_code } )
     }
 
     return await transporter.sendMail( mailOptions)

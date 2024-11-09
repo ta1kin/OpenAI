@@ -1,0 +1,56 @@
+<style type="text/css">
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 600px; 
+        margin: 0 auto; 
+        padding: 20px;
+        background: #c5c5c5;
+    }
+
+    div.wrapper {
+        border: 2px solid black;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .wrapper p.warn {
+        color: #e63e3e;
+        margin-bottom: 40px;
+        font-weight: 600;
+    }
+
+    .wrapper h1.title {
+        color: #333; 
+        text-align: center; 
+    }
+
+    div.wrapper__conteiner {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: start;
+        gap: 20px;
+    }
+
+    .wrapper__conteiner p.conteiner__description {
+        font-size: 20px;
+        font-weight: 400;    
+    }
+
+    .wrapper__conteiner h2.conteiner__code {
+        letter-spacing: 2px;
+        text-decoration: underline;
+    }
+</style>
+
+<div class="wrapper">
+    <p class="warn">*Если это были не вы, проигнорируйте данное сообщение</p>
+    <h1 class="title">Восстановление пароля!</h1>
+    <p>*Никому не сообщайте код, даже представителям администрации!</p>
+    <div class="wrapper__conteiner">
+        <p class="conteiner__description">Код подтверждения:</p>
+        <h2 class="conteiner__code"><%= secret_code %></h2>
+    </div>
+</div>
