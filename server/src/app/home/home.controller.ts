@@ -2,8 +2,8 @@ import { Request, Response } from "express"
 
 
 export default {
-    hello: ( _req: Request, res: Response ) => {
-        res.status( 200 ).send( 'Hello Magic Net - backend!' )
+    hello: ( req: Request, res: Response ) => {
+        res.status( 200 ).send( 'Hello Magic Net - backend!' + req.path )
     },
     testJson: ( _req: Request, res: Response ) => {
         res.status( 200 ).json( {

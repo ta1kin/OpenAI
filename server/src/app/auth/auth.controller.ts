@@ -1,23 +1,17 @@
 import { Request, Response } from 'express'
-import { faker, ne } from '@faker-js/faker'
+import { faker } from '@faker-js/faker'
 import { hash, verify } from 'argon2'
 
 import asyncHandler from 'express-async-handler'
-import dotenv from 'dotenv'
 
 import { prisma } from '../prisma'
 import { redis } from '../redis'
 import { InfoFields, ConfigFields, DataFields } from '../utils/user.utils'
 import { sendVerifyToEmail, sendRecoveryToEmail } from '../services/service.mailer'
 import { verifyToken } from '../middlewares/auth.middleware'
+import { ACCESS, REFRESH, RESET } from '../../config/config.auth'
 
 import Generator from './auth.generator'
-
-dotenv.config({ path: 'src/.env' })
-
-const ACCESS_SECRET = process.env.ACCESS_SECRET
-const REFRESH_SECRET = process.env.REFRESH_SECRET
-const RESET_SECRET = process.env.ACCESS_SECRET
 
 
 export default {
@@ -70,8 +64,8 @@ export default {
             )
         }
 
-        const access_token = Generator.generateToken( user.id )
-        const refresh_token = Generator.generateToken( user.id )
+        const access_token = Generator.generateToken( user.id, ACCESS )
+        const refresh_token = Generator.generateToken( user.id, REFRESH )
 
         res.cookie('refresh', refresh_token, {
             maxAge: 30 * 24 * 60 * 1000,
@@ -135,8 +129,8 @@ export default {
             throw new Error( 'Db crashed!' )
         }
 
-        const access_token = Generator.generateToken( user.id )
-        const refresh_token = Generator.generateToken( user.id )
+        const access_token = Generator.generateToken( user.id, ACCESS )
+        const refresh_token = Generator.generateToken( user.id, REFRESH )
         const emailRespose = await sendVerifyToEmail( email, access_token )
 
         if( !emailRespose ) {
@@ -181,7 +175,7 @@ export default {
     verifyEmail: asyncHandler( async (req: Request, res: Response) => {
         const access_token = String( req.query.access_token )
         
-        const userFound = await verifyToken( access_token )
+        const userFound = await verifyToken( access_token, ACCESS )
 
         if ( !userFound ) {
             res.status( 401 )
@@ -206,7 +200,7 @@ export default {
         let access_token
         let refresh_token = req.cookies.refresh
 
-        const userFound = await verifyToken( refresh_token )
+        const userFound = await verifyToken( refresh_token, REFRESH )
 
         if ( !userFound ) {
             res.status( 401 )
@@ -219,8 +213,9 @@ export default {
             throw new Error( 'Incorrect refresh token!' )
         }
 
-        access_token = Generator.generateToken( userFound.id )
-        refresh_token = Generator.generateToken( userFound.id )
+
+        access_token = Generator.generateToken( userFound.id, ACCESS )
+        refresh_token = Generator.generateToken( userFound.id, REFRESH )
 
         const redisResponse = await redis.set(
             `refresh_tokens:${ userFound.id }`,
@@ -306,11 +301,17 @@ export default {
             throw new Error( 'Incorrect code!' )
         }
 
+        const reset_token = Generator.generateToken( user.id, RESET )
+
+        res.setHeader('Authorization', `Bearer ${reset_token}`)
+
         res.status( 201 ).json( { message: 'success' } )
     } ),
 
     rewritePass: asyncHandler( async ( req: Request, res: Response ) => {
         const { email, password } = req.body
+
+
 
         const user = await prisma.user.update({
             where: {
