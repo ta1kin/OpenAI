@@ -1,4 +1,4 @@
-interface WhoIsObject {
+export interface WhoIsObject {
     first: boolean,
     second: boolean,
     third: boolean,

@@ -2,6 +2,8 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { nextStep, prevStep } from '@/store/slices/recoveryPassSlice'
+import { verifyEmailAsync, verifyCodeAsync, sendNewPassAsync } from '@/store/slices/recoveryPassSlice'
+import { RouterPathes } from '@/config/config.router'
 
 import Button from '@mui/material/Button'
 
@@ -18,23 +20,53 @@ const RecoveryBtns = ( { i18nPath, baseBtnsPath }: BtnsProps ) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const {step, maxStep } = useSelector( ( state: State ) => ({
-        step: state.recoveryPass.step,
-        maxStep: state.recoveryPass.maxStep
-    }) ) 
+    const {step, maxStep, code, email, password } = useSelector( ( state: State ) => (
+        {
+            // recovery
+            step: state.recoveryPass.step,
+            maxStep: state.recoveryPass.maxStep,
+            // auth
+            code: state.auth.code,
+            email: state.auth.email,
+            password: state.auth.password,
+        }
+    ) )
     
-    const next = () => {
-        if( step === maxStep ) {
-            navigate('../auth/sing-in')
-        } else {
-            dispatch(nextStep())
+    const handleNext = async () => {
+        switch ( step ) {
+            case 0: {
+                await dispatch( verifyEmailAsync( code ) )
+                dispatch( nextStep() )
+                break
+            }
+            case 1: {
+                await dispatch( verifyCodeAsync( email ) )
+                dispatch( nextStep() )
+                break
+            }
+            case 2: {
+                await dispatch( sendNewPassAsync( password ) )
+                dispatch( nextStep() )
+                break
+            }
+            case maxStep: {
+                navigate( RouterPathes.Login )
+                break
+            }
+            default:  {
+                dispatch( nextStep() )
+            }
         }
     }
-    const prev = () => {
-        if( step === 0 || step === maxStep - 1) {
-            navigate('../auth/sing-in')
-        } else {
-            dispatch(prevStep())
+    const handlePrev = () => {
+        switch ( step ) {
+            case 0 || maxStep - 1: {
+                navigate( RouterPathes.Login )
+                break
+            }
+            default:  {
+                dispatch( prevStep() )
+            }
         }
     }
 
@@ -43,7 +75,7 @@ const RecoveryBtns = ( { i18nPath, baseBtnsPath }: BtnsProps ) => {
             <div className="btns__content w-full flex flex-col gap-[10px]">
                 <Button variant="contained"
                         className="w-full"
-                        onClick={next}
+                        onClick={handleNext}
                 >
                     { t( `${baseBtnsPath}.${step}.next` ) }
                 </Button>
@@ -52,7 +84,7 @@ const RecoveryBtns = ( { i18nPath, baseBtnsPath }: BtnsProps ) => {
                         &&
                         <Button variant="outlined"
                                 className="w-full"
-                                onClick={prev}
+                                onClick={handlePrev}
                         >
                             { t( `${baseBtnsPath}.${step}.prev` ) }
                         </Button>

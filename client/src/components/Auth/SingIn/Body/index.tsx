@@ -52,9 +52,8 @@ const SingInBody = ({ i18nPath, baseBodyPath }: BodyProps) => {
     const handleMouseUpPassword = ( event: MouseEvent<HTMLButtonElement> ) => {
         event.preventDefault()
     }
-    const handleChange = ( checked: boolean, id: number ) => {
+    const handleChange = ( checked: boolean, _id: number ) => {
         dispatch( setSaveMe( checked ) )
-        console.log( id )
     }
 
     return (

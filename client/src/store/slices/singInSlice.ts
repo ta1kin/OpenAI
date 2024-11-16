@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk  } from '@reduxjs/toolkit'
+import { RouterPathes } from '@/config/config.router'
 
 import type{ LoginData } from '@/types/types.auth'
 import type { SingInState } from '@/types/redux/interfaces/singIn'
+
 
 type SingInState = typeof SingInState
 type LoginData = typeof LoginData
@@ -12,15 +14,23 @@ const initialState: SingInState = {
 }
 
 export const loginAsync = createAsyncThunk(
-    'sing-in/login',
+    `${RouterPathes.Login}sing-in/login`,
     async ( data: LoginData, _thunkAPI ) => {
         console.log('Вход в систему')
-        console.log('Email:', data.email)
-        console.log('Password:', data.pass)
+        console.log( data )
 
-        return { success: true }
+        return new Promise<void>((resolve) => {
+            console.log('Начало задержки')
+            
+            setTimeout(() => {
+                console.log('Задержка завершена')
+                resolve();
+            }, 10000);
+
+            return { message: 'success' }
+        })
     }
-);
+)
 
 const singInSlice = createSlice({
     name: 'singIn',
@@ -38,13 +48,13 @@ const singInSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(loginAsync.pending, (state) => {
             state.isLoading = true;
-        });
+        })
         builder.addCase(loginAsync.fulfilled, (state, action) => {
             state.isLoading = false;
-        });
+        })
         builder.addCase(loginAsync.rejected, (state) => {
             state.isLoading = false;
-        });
+        })
     }
 })
 

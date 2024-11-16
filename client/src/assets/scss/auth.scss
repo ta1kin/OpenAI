@@ -50,8 +50,10 @@
     min-height: 100lvh;
     background: var(--auth-background);
 
+    .sing-in__conteiner,
+    .sing-up__conteiner,
     .recovery-pass__conteiner {
-        min-height: 200px;
+        min-height: 150px;
     }
 
     .component-block {

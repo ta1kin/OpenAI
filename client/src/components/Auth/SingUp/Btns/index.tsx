@@ -2,15 +2,19 @@ import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { nextStep, prevStep } from '@/store/slices/singUpSlice'
+import { RouterPathes } from '@/config/config.router'
+import { registerAsync } from '@/store/slices/singUpSlice'
 
 import Button from '@mui/material/Button'
 
 import type { BtnsProps } from '@/types/types.auth'
 import type { State } from '@/types/redux'
+import type{ RegisterData } from '@/types/types.auth'
 
 
 type BtnsProps = typeof BtnsProps
 type State = typeof State
+type RegisterData = typeof RegisterData
 
 const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
     const { t, i18n } = useTranslation( [i18nPath] )
@@ -21,19 +25,32 @@ const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
         }
     ))
 
+    const data: RegisterData = useSelector( ( state: State ) => (
+        {
+            profession: state.auth.profession,
+            whoIs: state.auth.whoIs,
+            email: state.auth.email,
+            password: state.auth.password,
+            saveMe: state.auth.saveMe,
+        }
+    ))
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const handleNext = () => {
+    const handleNext = async () => {
         if( step === maxStep ) {
-            navigate('../auth/sing-in')
+            navigate( RouterPathes.Login )
+        } else if (step === maxStep - 1 ) {
+            await dispatch( registerAsync( data ) )
+            dispatch(nextStep())
         } else {
             dispatch(nextStep())
         }
     } 
     const handlePrev = () => {
         if( step === 0 ) {
-            navigate('../auth/sing-in')
+            navigate( RouterPathes.Login )
         } else {
             dispatch(prevStep())
         }
