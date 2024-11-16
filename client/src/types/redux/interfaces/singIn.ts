@@ -1,3 +1,4 @@
 export interface SingInState {
-    step: number
+    step: number,
+    isLoading: boolean,
 }

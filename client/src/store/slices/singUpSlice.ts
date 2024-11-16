@@ -1,9 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
+import type { SingUpState } from '@/types/redux/interfaces/singUp'
 
-const initialState = {
+type SingUpState = typeof SingUpState
+
+const initialState: SingUpState = {
     step: 0,
-    maxStep: 3
+    maxStep: 3,
+    isLoading: false,
 }
 
 const singUpSlice = createSlice({

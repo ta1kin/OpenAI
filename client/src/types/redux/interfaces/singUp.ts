@@ -1,4 +1,5 @@
 export interface SingUpState {
     step: number,
-    maxStep: number
+    maxStep: number,
+    isLoading: boolean,
 }

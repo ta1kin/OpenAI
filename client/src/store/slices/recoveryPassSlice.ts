@@ -1,9 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
+import type { RecoveryPassState } from '@/types/redux/interfaces/recoveryPass'
+type RecoveryPassState = typeof RecoveryPassState
 
-const initialState = {
+const initialState: RecoveryPassState = {
     step: 0,
-    maxStep: 2
+    code: '',
+    maxStep: 3,
+    isLoading: false
 }
 
 const recoveryPassSlice = createSlice({
@@ -12,16 +16,22 @@ const recoveryPassSlice = createSlice({
     reducers: {
         nextStep: state => {
             if ( state.step < state.maxStep ) {
-                state.step = state.step + 1
+                state.step++
             }
         },
         prevStep: state => {
             if (state.step > 0) {
                 state.step--
             }
-        }
+        },
+        setCode: (state, action) => {
+            state.code = action.payload
+        },
+        toggleLoading: state => {
+            state.isLoading = !state.isLoading
+        } 
     }
 })
 
-export const { nextStep, prevStep } = recoveryPassSlice.actions
+export const { nextStep, prevStep, setCode, toggleLoading } = recoveryPassSlice.actions
 export default recoveryPassSlice.reducer

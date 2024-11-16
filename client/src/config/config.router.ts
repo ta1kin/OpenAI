@@ -8,5 +8,5 @@ export enum RouterPathes {
     NotFound = '*',
     Docs = '/home/documents',
     Book = '/home/book',
-    Recovery = '/recovery'
+    Recovery = '/auth/recovery'
 }
