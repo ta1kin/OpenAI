@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { nextStep, prevStep } from '@/store/slices/recoveryPassSlice'
-import { verifyEmailAsync, verifyCodeAsync, sendNewPassAsync } from '@/store/slices/recoveryPassSlice'
+import { verifyEmailAsync, verifyCodeAsync, sendNewPassAsync, onIsClicked } from '@/store/slices/recoveryPassSlice'
 import { RouterPathes } from '@/config/config.router'
 
 import Button from '@mui/material/Button'
@@ -33,28 +33,33 @@ const RecoveryBtns = ( { i18nPath, baseBtnsPath }: BtnsProps ) => {
     ) )
     
     const handleNext = async () => {
+        dispatch( onIsClicked() )
+
         switch ( step ) {
             case 0: {
-                await dispatch( verifyEmailAsync( code ) )
-                dispatch( nextStep() )
+                if( email ) {
+                    await dispatch( verifyEmailAsync( email ) )
+                    dispatch( nextStep() )
+                }
                 break
             }
             case 1: {
-                await dispatch( verifyCodeAsync( email ) )
-                dispatch( nextStep() )
+                if( code ) {
+                    await dispatch( verifyCodeAsync( code ) )
+                    dispatch( nextStep() )
+                }
                 break
             }
             case 2: {
-                await dispatch( sendNewPassAsync( password ) )
-                dispatch( nextStep() )
+                if( password ) {
+                    await dispatch( sendNewPassAsync( password ) )
+                    dispatch( nextStep() )
+                }
                 break
             }
-            case maxStep: {
+            case 3: {
                 navigate( RouterPathes.Login )
                 break
-            }
-            default:  {
-                dispatch( nextStep() )
             }
         }
     }
@@ -66,6 +71,7 @@ const RecoveryBtns = ( { i18nPath, baseBtnsPath }: BtnsProps ) => {
             }
             default:  {
                 dispatch( prevStep() )
+                break
             }
         }
     }

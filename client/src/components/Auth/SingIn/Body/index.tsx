@@ -16,55 +16,76 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import EmailIcon from '@mui/icons-material/Email'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@/components/UI/CheckBox'
+import validator from 'validator'
 
 import type { BodyProps } from '@/types/types.auth'
 import type { State } from '@/types/redux'
 
-
 type BodyProps = typeof BodyProps
 type State = typeof State
+
 
 const SingInBody = ({ i18nPath, baseBodyPath }: BodyProps) => {
     const { t } = useTranslation([ i18nPath ])
     const dispatch = useDispatch()
 
-    const { email, password, saveMe } = useSelector((state: State) => ({
-        email: state.auth.email,
-        password: state.auth.password,
-        saveMe: state.auth.saveMe
-    }))
+    const { saveMe, isClicked } = useSelector(
+        ( state: State ) => (
+            {
+                saveMe: state.auth.saveMe,
+                isClicked: state.singIn.isClicked
+            }
+        )
+    )
 
-    const handleInputEmail = ( event: ChangeEvent<HTMLInputElement> ) => {
-        dispatch(setEmail(event.target.value))
-    }
+    const [ input, setInput ] = useState(
+        {
+            email: '',
+            isEmail: false,
+            password: '',
+            showPass: false,
+            passIsValid: false,
+        }
+    )
 
-    const handleInputPass = ( event: ChangeEvent<HTMLInputElement> ) => {
-        dispatch(setPassword(event.target.value))
-    }
-
-    const [ showPass, setShowPass ] = useState( false )
-
-    const handleClickShowPass = () => setShowPass( show => !show )
-
+    const handleClickShowPass = () => setInput({ ...input, showPass: !input.showPass })
     const handleMouseDownPassword = ( event: MouseEvent<HTMLButtonElement> ) => {
         event.preventDefault()
     }
     const handleMouseUpPassword = ( event: MouseEvent<HTMLButtonElement> ) => {
         event.preventDefault()
     }
+
+    const handleInputEmail = ( event: ChangeEvent<HTMLInputElement> ) => {
+        const newValue = event.target.value
+        const isValidValue = validator.isEmail( newValue )
+
+        setInput({ ...input, email: newValue, isEmail: isValidValue })
+        dispatch(setEmail( isValidValue ? newValue : '' ))
+    }
+    const handleInputPass = ( event: ChangeEvent<HTMLInputElement> ) => {
+        const newValue = event.target.value
+        const isValidValue = newValue.length >= 4
+
+        setInput({ ...input, password: newValue, passIsValid: isValidValue })
+        dispatch(setPassword( isValidValue ? newValue : '' ))
+    }
     const handleChange = ( checked: boolean, _id: number ) => {
         dispatch( setSaveMe( checked ) )
     }
 
+    const isEmailErr = isClicked ? !input.isEmail : false
+    const isPassErr = isClicked ? !input.passIsValid : false
+
     return (
         <>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column' }}>
-                <FormControl sx={{ m: 1 }} variant="outlined">
+            <Box>
+                <FormControl variant="outlined" className={ `${ isEmailErr ? 'error' : '' }` }>
                     <InputLabel htmlFor="outlined-adornment-password">{ t(`${baseBodyPath}.email`) }</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
                         type="text"
-                        value={email}
+                        value={input.email}
                         onChange={handleInputEmail}
                         endAdornment={
                             <InputAdornment position="end">
@@ -74,25 +95,25 @@ const SingInBody = ({ i18nPath, baseBodyPath }: BodyProps) => {
                         label={ t(`${baseBodyPath}.email`) }
                     />
                 </FormControl>
-                <FormControl sx={{ m: 1 }} variant="outlined">
+                <FormControl variant="outlined" className={ `${ isPassErr ? 'error' : '' }` }>
                     <InputLabel htmlFor="outlined-adornment-password">{ t(`${baseBodyPath}.pass`) }</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
-                        type={showPass ? 'text' : 'password'}
-                        value={password}
+                        type={input.showPass ? 'text' : 'password'}
+                        value={input.password}
                         onChange={handleInputPass}
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
                                     aria-label={
-                                        showPass ? 'hide the password' : 'display the password'
+                                        input.showPass ? 'hide the password' : 'display the password'
                                     }
                                     onClick={handleClickShowPass}
                                     onMouseDown={handleMouseDownPassword}
                                     onMouseUp={handleMouseUpPassword}
                                     edge="end"
                                 >
-                                    {showPass ? <VisibilityOff /> : <Visibility />}
+                                    {input.showPass ? <VisibilityOff /> : <Visibility />}
                                 </IconButton>
                             </InputAdornment>
                         }
@@ -100,7 +121,8 @@ const SingInBody = ({ i18nPath, baseBodyPath }: BodyProps) => {
                     />
                 </FormControl>
                 <div className="flex justify-between items-center">
-                    <FormControlLabel 
+                    <FormControlLabel
+                        className="noBorder" 
                         control={
                             <Checkbox
                                 id={0}

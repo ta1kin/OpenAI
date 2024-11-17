@@ -3,16 +3,15 @@ import { RouterPathes } from '@/config/config.router'
 
 import type { RecoveryPassState } from '@/types/redux/interfaces/recoveryPass'
 
-
 type RecoveryPassState = typeof RecoveryPassState
+
 
 const initialState: RecoveryPassState = {
     step: 0,
-    code: '',
     maxStep: 3,
-    isLoading: false
+    isClicked: false,
+    isLoading: false,
 }
-
 
 export const verifyEmailAsync = createAsyncThunk(
     `${RouterPathes.Recovery}/verify-email`,
@@ -26,7 +25,7 @@ export const verifyEmailAsync = createAsyncThunk(
             setTimeout(() => {
                 console.log('Задержка завершена')
                 resolve();
-            }, 10000);
+            }, 1000);
 
             return { message: 'success' }
         })
@@ -45,7 +44,7 @@ export const verifyCodeAsync = createAsyncThunk(
             setTimeout(() => {
                 console.log('Задержка завершена')
                 resolve();
-            }, 10000);
+            }, 1000);
 
             return { message: 'success' }
         })
@@ -64,7 +63,7 @@ export const sendNewPassAsync = createAsyncThunk(
             setTimeout(() => {
                 console.log('Задержка завершена')
                 resolve();
-            }, 10000);
+            }, 1000);
 
             return { message: 'success' }
         })
@@ -85,48 +84,48 @@ const recoveryPassSlice = createSlice({
                 state.step--
             }
         },
-        setCode: (state, action) => {
-            state.code = action.payload
+        onIsClicked: state => {
+            state.isClicked = true
         },
-        toggleLoading: state => {
-            state.isLoading = !state.isLoading
-        } 
     },
     extraReducers: (builder) => {
         // verifyEmailAsync
         builder.addCase(verifyEmailAsync.pending, (state) => {
-            state.isLoading = true;
+            state.isLoading = true
         })
-        builder.addCase(verifyEmailAsync.fulfilled, (state, action) => {
-            state.isLoading = false;
+        builder.addCase(verifyEmailAsync.fulfilled, (state, _action) => {
+            state.isLoading = false
+            state.isClicked = false
         })
         builder.addCase(verifyEmailAsync.rejected, (state) => {
-            state.isLoading = false;
+            state.isLoading = false
         })
 
         // verifyCodeAsync
         builder.addCase(verifyCodeAsync.pending, (state) => {
-            state.isLoading = true;
+            state.isLoading = true
         })
-        builder.addCase(verifyCodeAsync.fulfilled, (state, action) => {
-            state.isLoading = false;
+        builder.addCase(verifyCodeAsync.fulfilled, (state, _action) => {
+            state.isLoading = false
+            state.isClicked = false
         })
         builder.addCase(verifyCodeAsync.rejected, (state) => {
-            state.isLoading = false;
+            state.isLoading = false
         })
 
         // sendNewPassAsync
         builder.addCase(sendNewPassAsync.pending, (state) => {
-            state.isLoading = true;
+            state.isLoading = true
         })
-        builder.addCase(sendNewPassAsync.fulfilled, (state, action) => {
-            state.isLoading = false;
+        builder.addCase(sendNewPassAsync.fulfilled, (state, _action) => {
+            state.isLoading = false
+            state.isClicked = false
         })
         builder.addCase(sendNewPassAsync.rejected, (state) => {
-            state.isLoading = false;
+            state.isLoading = false
         })
     }
 })
 
-export const { nextStep, prevStep, setCode, toggleLoading } = recoveryPassSlice.actions
+export const { nextStep, prevStep, onIsClicked } = recoveryPassSlice.actions
 export default recoveryPassSlice.reducer

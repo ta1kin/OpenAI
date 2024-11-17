@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, MouseEvent, ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { setPassword } from '@/store/slices/authSlice'
 
 
 import Box from '@mui/material/Box'
@@ -19,69 +20,102 @@ type RecoveryStepProps = typeof RecoveryStepProps
 type State = typeof State
 
 const ThirdStep = ({ t, stepPath }: RecoveryStepProps) => {
-    const email = useSelector( (state: State) => state.auth.email )
     const dispatch = useDispatch()
+    const isClicked = useSelector( ( state: State ) => state.recoveryPass.isClicked )
 
-    const [ showPass, setShowPass ] = useState( false )
-    const [ showRepass, setShowRepass ] = useState( false )
+    const [ input, setInput ] = useState(
+        {
+            pass: '',
+            passIsValid: false,
+            showPass: false,
 
-    const handleClickShowPass = () => setShowPass( show => !show )
-    const handleClickShowRePass = () => setShowRepass( show => !show )
+            repass: '',
+            repassIsValid: false,
+            showRepass: false
+        }
+    )
 
-    const handleMouseDownPassword = ( event: React.MouseEvent<HTMLButtonElement> ) => {
+    const handleClickShowPass = () => setInput({ ...input, showPass: !input.showPass })
+    const handleClickShowRePass = () => setInput({ ...input, showRepass: !input.showRepass })
+    const handleMouseDownPassword = ( event: MouseEvent<HTMLButtonElement> ) => {
         event.preventDefault()
     }
-    const handleMouseUpPassword = ( event: React.MouseEvent<HTMLButtonElement> ) => {
+    const handleMouseUpPassword = ( event: MouseEvent<HTMLButtonElement> ) => {
         event.preventDefault()
     }
+
+    const handleInputPass = ( event: ChangeEvent<HTMLInputElement> ) => {
+        const newValue = event.target.value
+        const isValidValue = newValue.length >= 4
+        const isValidRepass = input.repass.length >= 4 && newValue === input.repass
+        const eqPassRepass = newValue === input.repass
+
+        setInput({ ...input, pass: newValue, passIsValid: isValidValue, repassIsValid: isValidRepass })
+        dispatch(setPassword( eqPassRepass && isValidValue ? newValue : '' ))
+    }
+    const handleInputRepass = ( event: ChangeEvent<HTMLInputElement> ) => {
+        const newValue = event.target.value
+        const isValidValue = newValue.length >= 4 && newValue === input.pass
+        const eqPassRepass = newValue === input.pass
+
+        setInput({ ...input, repass: newValue, repassIsValid: isValidValue })
+        dispatch(setPassword( eqPassRepass && isValidValue ? newValue : '' ))
+    }
+
+    const isPassErr = isClicked ? !input.passIsValid : false
+    const isRepassErr = isClicked ? !input.repassIsValid : false
 
     return (
         <>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column' }}>
-                <FormControl sx={{ m: 1 }} variant="outlined">
+            <Box>
+                <FormControl variant="outlined"  className={ `${ isPassErr ? 'error' : '' }` }>
                     <InputLabel htmlFor="outlined-adornment-password">{ t( `${stepPath}.pass` ) }</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
-                        type={showPass ? 'text' : 'password'}
+                        type={input.showPass ? 'text' : 'password'}
+                        value={input.pass}
+                        onChange={handleInputPass}
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
                                     aria-label={
-                                        showPass ? 'hide the password' : 'display the password'
+                                        input.showPass ? 'hide the password' : 'display the password'
                                     }
                                     onClick={handleClickShowPass}
                                     onMouseDown={handleMouseDownPassword}
                                     onMouseUp={handleMouseUpPassword}
                                     edge="end"
                                 >
-                                    {showPass ? <VisibilityOff /> : <Visibility />}
+                                    {input.showPass ? <VisibilityOff /> : <Visibility />}
                                 </IconButton>
                             </InputAdornment>
                         }
-                        label="pass"
+                        label={ t( `${stepPath}.pass` ) }
                     />
                 </FormControl>
-                <FormControl sx={{ m: 1, width: '53ch' }} variant="outlined">
+                <FormControl variant="outlined"  className={ `${ isRepassErr ? 'error' : '' }` }>
                     <InputLabel htmlFor="outlined-adornment-password">{ t( `${stepPath}.repass` ) }</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
-                        type={showRepass ? 'text' : 'password'}
+                        type={input.showRepass ? 'text' : 'password'}
+                        value={input.repass}
+                        onChange={handleInputRepass}
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
                                     aria-label={
-                                        showRepass ? 'hide the password' : 'display the password'
+                                        input.showRepass ? 'hide the password' : 'display the password'
                                     }
                                     onClick={handleClickShowRePass}
                                     onMouseDown={handleMouseDownPassword}
                                     onMouseUp={handleMouseUpPassword}
                                     edge="end"
                                 >
-                                    {showRepass ? <VisibilityOff /> : <Visibility />}
+                                    {input.showRepass ? <VisibilityOff /> : <Visibility />}
                                 </IconButton>
                             </InputAdornment>
                         }
-                        label="repass"
+                        label={ t( `${stepPath}.repass` ) }
                     />
                 </FormControl>
             </Box>

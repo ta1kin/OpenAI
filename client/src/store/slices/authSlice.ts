@@ -11,11 +11,11 @@ const initialState: AuthState = {
         second: false,
         third: false,
     },
-    email: 'Fallen-Angel@ya.ru',
+    email: '',
     password: '',
     accessToken: '',
     saveMe: false,
-    isValid: false,
+    code: '',
 }
 
 const authSlice = createSlice({
@@ -26,8 +26,7 @@ const authSlice = createSlice({
             state.profession = action.payload
         },
         setWhoIs: (state, action) => {
-            const key: string = action.payload.key 
-            state.whoIs[ key ] = action.payload.checked 
+            state.whoIs = action.payload
         },
         setEmail: (state, action) => {
             state.email = action.payload
@@ -37,9 +36,21 @@ const authSlice = createSlice({
         },
         setSaveMe: (state, action) => {
             state.saveMe = action.payload
-        }
+        },
+        setCode: (state, action) => {
+            state.code = action.payload
+        },
     }
 })
 
-export const { setProfession, setWhoIs, setEmail, setPassword, setSaveMe } = authSlice.actions
+export const {
+
+    setProfession, 
+    setWhoIs, 
+    setEmail,
+    setPassword,
+    setSaveMe, 
+    setCode,
+
+} = authSlice.actions
 export default authSlice.reducer

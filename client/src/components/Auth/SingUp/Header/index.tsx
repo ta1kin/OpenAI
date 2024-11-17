@@ -23,6 +23,13 @@ const SingUpHeader = ( { i18nPath, baseHeaderPath }: HeaderProps ) => {
                         </p>
                 }
                 <h2 className="title">{ t( `${baseHeaderPath}.title`, { email: email } ) }</h2>
+                {
+                    i18n.exists( `${baseHeaderPath}.postTitle` )
+                        &&
+                        <p className="description">
+                            { t( `${baseHeaderPath}.postTitle` ) }
+                        </p>
+                }
             </div>
         </>
     )

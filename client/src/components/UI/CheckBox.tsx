@@ -17,13 +17,6 @@ const CheckBox = ({ checked, onChange, id }: CheckboxProps) => {
             <Checkbox
                 checked={checked}
                 onChange={handleChange}
-                sx={{
-                    color: 'var(--auth-checkbox-main-color)',
-
-                    '&.Mui-checked': {
-                        color: 'var(--auth-checkbox-checked-color)',
-                    },
-                }}
             />
         </>
     )

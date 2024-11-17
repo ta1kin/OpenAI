@@ -11,6 +11,7 @@ import FormControl from '@mui/material/FormControl'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import EmailIcon from '@mui/icons-material/Email'
+import validator from 'validator'
 
 import type { State } from '@/types/redux'
 import type { RecoveryStepProps } from '@/types/types.auth'
@@ -20,16 +21,21 @@ type RecoveryStepProps = typeof RecoveryStepProps
 type State = typeof State
 
 const ThirdStep = ({ t, stepPath }: RecoveryStepProps) => {
-    const email = useSelector((state: State) => state.auth.email )
-
     const dispatch = useDispatch()
+    const isClicked = useSelector( ( state: State ) => state.singUp.isClicked )
 
     const [ input, setInput ] = useState(
-        {
+        {   
+            email: '',
+            isEmail: false,
+
             pass: '',
-            repass: '',
+            passIsValid: false,
             showPass: false,
-            showRepass: false
+
+            repass: '',
+            repassIsValid: false,
+            showRepass: false,
         }
     )
     
@@ -44,34 +50,43 @@ const ThirdStep = ({ t, stepPath }: RecoveryStepProps) => {
     }
 
     const handleInputEmail = ( event: ChangeEvent<HTMLInputElement> ) => {
-        dispatch(setEmail(event.target.value))
+        const newValue = event.target.value
+        const isValidValue = validator.isEmail( newValue )
+
+        setInput({ ...input, email: newValue, isEmail: isValidValue })
+        dispatch(setEmail( isValidValue ? newValue : '' ))
     }
     const handleInputPass = ( event: ChangeEvent<HTMLInputElement> ) => {
-        setInput({ ...input, pass: event.target.value })
-        if( input.pass === input.repass ) {
-            dispatch( setPassword( input.pass ) )
-        } else {
-            dispatch( setPassword( '' ) )
-        }
+        const newValue = event.target.value
+        const isValidValue = newValue.length >= 4
+        const isValidRepass = input.repass.length >= 4 && newValue === input.repass
+        const eqPassRepass = newValue === input.repass
+
+        setInput({ ...input, pass: newValue, passIsValid: isValidValue, repassIsValid: isValidRepass })
+        dispatch(setPassword( eqPassRepass && isValidValue ? newValue : '' ))
     }
     const handleInputRepass = ( event: ChangeEvent<HTMLInputElement> ) => {
-        setInput({ ...input, repass: event.target.value })
-        if( input.pass === input.repass ) {
-            dispatch( setPassword( input.repass ) )
-        } else {
-            dispatch( setPassword( '' ) )
-        }
+        const newValue = event.target.value
+        const isValidValue = newValue.length >= 4 && newValue === input.pass
+        const eqPassRepass = newValue === input.pass
+
+        setInput({ ...input, repass: newValue, repassIsValid: isValidValue })
+        dispatch(setPassword( eqPassRepass && isValidValue ? newValue : '' ))
     }
+
+    const isEmailErr = isClicked ? !input.isEmail : false
+    const isPassErr = isClicked ? !input.passIsValid : false
+    const isRepassErr = isClicked ? !input.repassIsValid : false
 
     return (
         <>  
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'column' }}>
-            <FormControl sx={{ m: 1 }} variant="outlined">
+            <Box>
+            <FormControl variant="outlined" className={ `${ isEmailErr ? 'error' : '' }` }>
                     <InputLabel htmlFor="outlined-adornment-password">{ t(`${stepPath}.email`) }</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
                         type="text"
-                        value={email}
+                        value={input.email}
                         onChange={handleInputEmail}
                         endAdornment={
                             <InputAdornment position="end">
@@ -81,7 +96,7 @@ const ThirdStep = ({ t, stepPath }: RecoveryStepProps) => {
                         label={t(`${stepPath}.email`)}
                     />
                 </FormControl>
-                <FormControl sx={{ m: 1 }} variant="outlined">
+                <FormControl variant="outlined" className={ `${ isPassErr ? 'error' : '' }` }>
                     <InputLabel htmlFor="outlined-adornment-password">{ t(`${stepPath}.pass`) }</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
@@ -106,7 +121,7 @@ const ThirdStep = ({ t, stepPath }: RecoveryStepProps) => {
                         label={t(`${stepPath}.pass`)}
                     />
                 </FormControl>
-                <FormControl sx={{ m: 1 }} variant="outlined">
+                <FormControl variant="outlined" className={ `${ isRepassErr ? 'error' : '' }` }>
                     <InputLabel htmlFor="outlined-adornment-password">{t(`${stepPath}.repass`)}</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"

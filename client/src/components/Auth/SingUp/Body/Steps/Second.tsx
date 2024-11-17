@@ -1,50 +1,74 @@
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setWhoIs } from '@/store/slices/authSlice'
 
 import FormGroup from '@mui/material/FormGroup'
+import Box from '@mui/material/Box'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@/components/UI/CheckBox'
 
 import type { State } from '@/types/redux'
-import type { RecoveryStepProps } from '@/types/types.auth'
+import type { RecoveryStepProps, WhoIsLocalType } from '@/types/types.auth'
 
-
-type RecoveryStepProps = typeof RecoveryStepProps
 type State = typeof State
+type RecoveryStepProps = typeof RecoveryStepProps
+type WhoIsLocalType = typeof WhoIsLocalType
+
 
 const SecondStep = ({ t, stepPath }: RecoveryStepProps) => {
-    const {profession, whoIs} = useSelector((state: State) => (
-        {
-            profession: state.auth.profession,
-            whoIs: state.auth.whoIs,
-        }
-    ))
-
     const dispatch = useDispatch()
-    const labels = Object.keys( whoIs )
+    const profession = useSelector( (state: State) => state.auth.profession )
+
+    const [ whoIsLocal, setWhoIsLocal ] = useState<WhoIsLocalType>(
+        {
+            first: false,
+            second: false,
+            third: false,
+        }
+    )
+    const labels = Object.keys( whoIsLocal )
 
     const handleChange = ( checked: boolean, key: string ) => {
-        dispatch( setWhoIs( { checked, key } ) )
+        const newState: WhoIsLocalType = Object({ ...whoIsLocal })
+        newState[key] = checked
+        
+        setWhoIsLocal(newState)
+
+        let whoIsList: string[] | [] = []
+
+        labels.forEach(
+            (item, index) => {
+                if( newState[ item ] ) {
+                    //@ts-ignore
+                    whoIsList.push( t( `${stepPath}.${profession}.${index}` ) )
+                }
+            }
+        )
+
+        dispatch( setWhoIs( whoIsList ) )
     }
     
     return (
         <>
-            <FormGroup className="checkbox-form">
-                {
-                    labels.map( (item, index) => (
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    id={item}
-                                    checked={whoIs[ item ]}
-                                    onChange={handleChange}
-                                />
-                            }
-                            label={t( `${stepPath}.${profession}.${index}` )}
-                        />
-                    ) )
-                }
-            </FormGroup>
+            <Box>
+                <FormGroup className="checkbox-form">
+                    {
+                        labels.map( (item, index) => (
+                            <FormControlLabel
+                                className="noBorder"
+                                control={
+                                    <Checkbox
+                                        id={item}
+                                        checked={whoIsLocal[ item ]}
+                                        onChange={handleChange}
+                                    />
+                                }
+                                label={t( `${stepPath}.${profession}.${index}` )}
+                            />
+                        ) )
+                    }
+                </FormGroup>
+            </Box>
         </>
     )
 }

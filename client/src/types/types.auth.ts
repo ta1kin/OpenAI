@@ -1,6 +1,3 @@
-import type { WhoIsObject } from './redux/interfaces/auth'
-
-
 export interface HeaderProps {
     i18nPath: string,
     baseHeaderPath: string,
@@ -27,7 +24,6 @@ export interface LoginData {
 
 export interface RegisterData {
     profession: string,
-    whoIs: WhoIsObject,
     email: string,
     password: string,
     saveMe: boolean,
@@ -36,4 +32,11 @@ export interface RegisterData {
 export interface RecoveryStepProps {
     t: Function,
     stepPath: string
+}
+
+export interface WhoIsLocalType {
+    first: boolean
+    second: boolean
+    third: boolean
+    [ key: string ]: boolean
 }

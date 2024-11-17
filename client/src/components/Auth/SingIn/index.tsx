@@ -7,8 +7,8 @@ import SingInBtns from './Btns'
 
 import type { State } from '@/types/redux'
 
-
 type State = typeof State
+
 
 const SingIn = () => {
     const loaderColor = 'var(--auth-loader-color)'

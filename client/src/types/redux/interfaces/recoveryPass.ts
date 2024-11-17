@@ -1,6 +1,6 @@
 export interface RecoveryPassState {
-    step: number,
-    code: string,
-    maxStep: number,
+    step: number
+    maxStep: number
+    isClicked: boolean
     isLoading: boolean
 }

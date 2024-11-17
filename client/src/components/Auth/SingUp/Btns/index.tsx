@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { nextStep, prevStep } from '@/store/slices/singUpSlice'
 import { RouterPathes } from '@/config/config.router'
-import { registerAsync } from '@/store/slices/singUpSlice'
+import { registerAsync, onIsClicked } from '@/store/slices/singUpSlice'
 
 import Button from '@mui/material/Button'
 
@@ -39,20 +39,44 @@ const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
     const navigate = useNavigate()
 
     const handleNext = async () => {
-        if( step === maxStep ) {
-            navigate( RouterPathes.Login )
-        } else if (step === maxStep - 1 ) {
-            await dispatch( registerAsync( data ) )
-            dispatch(nextStep())
-        } else {
-            dispatch(nextStep())
+        dispatch( onIsClicked() )
+
+        switch ( step ) {
+            case 1: {
+                if( data.whoIs.length ) {
+                    dispatch( nextStep() )
+                }
+                break
+            }
+            case 2: {
+                if( data.email, data.password ) {
+                    await dispatch( registerAsync( data ) )
+                    dispatch( nextStep() )
+                }
+                break
+            }
+            case 3: {
+                navigate( RouterPathes.Login )
+                break
+            }
+            default:  {
+                dispatch( nextStep() )
+                break
+            }
         }
-    } 
+    }
+
+
     const handlePrev = () => {
-        if( step === 0 ) {
-            navigate( RouterPathes.Login )
-        } else {
-            dispatch(prevStep())
+        switch ( step ) {
+            case 0: {
+                navigate( RouterPathes.Login )
+                break
+            }
+            default:  {
+                dispatch( prevStep() )
+                break
+            }
         }
     }
 
