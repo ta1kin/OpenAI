@@ -13,6 +13,7 @@ import '@/assets/scss/global.scss'
 import '@/assets/scss/auth.scss'
 import '@/assets/scss/error.scss'
 import '@/assets/scss/not-found.scss'
+import '@/assets/scss/info.scss'
 
 
 createRoot( document.getElementById( 'root' )! )

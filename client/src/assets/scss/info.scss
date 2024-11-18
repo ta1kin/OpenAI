@@ -1,0 +1,114 @@
+:root {
+    #light {
+        --info-background: #fffffe;
+        --info-block-background: #faeee7;
+        --info-headline: #33272a;
+        --info-paragraph: #594a4e;
+
+        --info-header-headline: #33272a;
+        --info-header-paragraph: #594a4e;
+
+        --info-button-background: #ff8ba7;
+        --info-button-text-color: #33272a;
+        --info-button-box-shadow: #110d0e;
+        
+
+    }
+    
+    #dark {
+
+    }
+}
+
+.info-layout {
+    background: var(--info-background);
+
+    .title {
+        font-size: 1.5em;
+        color: var(--info-headline);
+        font-weight: 800;
+        letter-spacing: -1px;
+    }
+
+    .description {
+        font-size: 1.2em;
+        color: var(--info-header-description);
+        letter-spacing: -0.5px;
+        font-weight: 600;
+    }
+    
+    .paragraph {
+        font-size: 1.2em;
+        color: var(--info-paragraph);
+        opacity: 0.8;
+        letter-spacing: -0.5px;
+        font-weight: 500;
+    }
+
+    .info__header {
+        background: var(--info-block-background);
+
+        .nav__link {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: var(--info-header-headline);
+            transition: all .5s ease;
+
+            &:hover {
+                text-decoration: underline;
+                letter-spacing: 1px;
+            }
+        }
+
+        .header__title {
+            font-size: 2.5em;
+            color: var(--info-header-headline);
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .header__paragraph {
+            font-size: 1.2em;
+            color: var(--info-header-paragraph);
+            opacity: 0.8;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        button {
+            width: 70%;
+            height: 60px;
+            font-weight: 800;
+            font-size: 1.2em;
+            background: var(--info-button-background);
+            color: var(--info-button-text-color);
+            border-radius: 6px;
+
+            &:hover {
+                box-shadow: 0px 2px 4px var(--info-button-box-shadow);
+            }
+
+            &:active {
+                translate: 0px 2px;
+                box-shadow: 0px 0px 4px var(--info-button-box-shadow);
+            }
+        }
+
+        .header-bottom__img {
+            width: 50%;
+        }
+    }
+
+    .info__footer {
+        background: var(--info-block-background);
+
+        img {
+            width: 40px;
+        }
+
+        .footer__paragraph {
+            color: var(--info-paragraph);
+            text-wrap: nowrap;
+        }
+    }
+}

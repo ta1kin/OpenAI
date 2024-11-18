@@ -18,12 +18,7 @@ type RegisterData = typeof RegisterData
 
 const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
     const { t, i18n } = useTranslation( [i18nPath] )
-    const { step, maxStep } = useSelector( ( state: State ) => (
-        {
-            step: state.singUp.step,
-            maxStep: state.singUp.maxStep
-        }
-    ))
+    const step = useSelector( ( state: State ) => state.singUp.step)
 
     const data: RegisterData = useSelector( ( state: State ) => (
         {

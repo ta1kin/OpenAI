@@ -4,6 +4,13 @@ import singUpReducer from './singUpSlice'
 import errorReducer from './errorSlice'
 import authReducer from './authSlice'
 import recoveryPassReducer from './recoveryPassSlice'
+import homeReducer from './homeSlice'
+import docsReducer from './docsSlice'
+import bookReducer from './bookSlice'
+
+import type { State } from '@/types/redux'
+
+type State = typeof State
 
 
 export default {
@@ -12,5 +19,8 @@ export default {
     singUp: singUpReducer,
     error: errorReducer,
     auth: authReducer,
-    recoveryPass: recoveryPassReducer
-}
+    recoveryPass: recoveryPassReducer,
+    home: homeReducer,
+    docs: docsReducer,
+    book: bookReducer,
+} as State

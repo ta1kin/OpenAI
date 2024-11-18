@@ -5,7 +5,7 @@ import { useLocation  } from 'react-router-dom'
 import { RouterPathes } from '@/config/config.router'
 import type { State } from '@/types/redux'
 
-import Hat from '@/assets/icons/Hat.svg'
+import HatSvg from '@/assets/icons/Hat.svg'
 
 
 type State = typeof State
@@ -19,7 +19,7 @@ const Instruction = () => {
         <>
             <div className="instruction component-block">
                 <div className="instraction__main">
-                    <img src={ Hat } alt="hat-logo" />
+                    <img src={ HatSvg } alt="hat-logo" />
                     <h2 className="title">{ t('auth:instruction.main_text') }</h2>
                     <p className="description">{ t('auth:instruction.sub_text') }</p>
                 </div>
