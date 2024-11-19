@@ -14,6 +14,11 @@ import '@/assets/scss/auth.scss'
 import '@/assets/scss/error.scss'
 import '@/assets/scss/not-found.scss'
 import '@/assets/scss/info.scss'
+import '@/assets/scss/home.scss'
+import '@/assets/scss/author.scss'
+import '@/assets/scss/layouts/layout.home.scss'
+import '@/assets/scss/layouts/layout.info.scss'
+
 
 
 createRoot( document.getElementById( 'root' )! )

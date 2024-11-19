@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+import { SourcesLinks } from '@/config/config.router'
 
 import HatSvg from '@/assets/icons/Hat.svg'
 import GitSvg from '@/assets/icons/git.svg'
@@ -7,32 +9,41 @@ import TgSvg from '@/assets/icons/telegram.svg'
 
 
 const InfoFooter = () => {
-    const i18nPath = 'info'
+    const i18nPath = 'infoLayout'
     const baseHeadPath = `${i18nPath}:footer`
     const { t } = useTranslation([ i18nPath ])
 
     return (
         <>
-            <footer className="info__footer box">
-                <div className="w-full flex flex-row justify-between">
+            <footer className="info-layout__footer box pt-[15px]">
+                <div className="w-full flex flex-wrap flex-row sm:justify-between justify-center gap-[40px]">
                     <div  className="flex flex-row items-center gap-[15px]">
                         <img src={ HatSvg } alt="hat-logo" />
-                        <h2 className="title">{ t(`${baseHeadPath}.title`) }</h2>
+                        <h2 className="sub-headline">{ t(`${baseHeadPath}.title`) }</h2>
                     </div>
-                    <nav className="flex items-center flex justify-center gap-[20px]">
-                        <button>
-                            <img src={VkSvg} alt="vk-logo" />
-                        </button>
-                        <button>
-                            <img src={GitSvg} alt="git-logo" />
-                        </button>
-                        <button>
-                            <img src={TgSvg} alt="tg-logo" />
-                        </button>
-                    </nav>
+                    <div>
+                        <h2 className="description">{ t(`${baseHeadPath}.navTitle`) }</h2>
+                        <nav className="flex items-center mt-[10px] flex justify-center gap-[20px]">
+                            <Link  to={ SourcesLinks.Vk } target="_blank" title="VK">
+                                <button>
+                                    <img src={VkSvg} alt="vk-logo" className="btn" />
+                                </button>
+                            </Link>
+                            <Link to={ SourcesLinks.Git } target="_blank" title="Git Hub">
+                                <button>
+                                    <img src={GitSvg} alt="git-logo" className="btn" />
+                                </button>
+                            </Link>
+                            <Link to={ SourcesLinks.Tg } target="_blank" title="Telegram">
+                                <button>
+                                    <img src={TgSvg} alt="tg-logo" className="btn" />
+                                </button>
+                            </Link>
+                        </nav>
+                    </div>
                 </div>
-                <div className="w-full h-[40px] mt-[10px] mb-[20px] flex justify-center">
-                    <p className="footer__paragraph flex flex-row gap-[5px]">
+                <div className="w-full h-[40px] mt-[20px] mb-[20px] flex justify-center">
+                    <p className="description flex flex-row gap-[5px]">
                         <p dangerouslySetInnerHTML={{__html: '&copy;'}} />
                         { t(`${baseHeadPath}.description`) }
                     </p>

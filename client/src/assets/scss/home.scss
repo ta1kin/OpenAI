@@ -1,0 +1,15 @@
+:root {
+    #light {
+        --home-bg: #faeee7;
+        --home-line: #33272a2b;
+    }
+    
+    #dark {}
+}
+
+.home-page {
+    background: var(--home-bg);
+    min-height: 85lvh;
+    border-top: 1.5px solid var(--home-line);
+    border-bottom: 1.5px solid var(--home-line);
+}

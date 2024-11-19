@@ -2,6 +2,8 @@ import { ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setProfession } from '@/store/slices/authSlice'
 import { professionConfig } from '@/config/config.auth'
+import { Link } from 'react-router-dom'
+import { RouterPathes } from '@/config/config.router'
 
 import Radio from '@mui/material/Radio'
 import Box from '@mui/material/Box'
@@ -41,7 +43,7 @@ const FirsStep = ({ t, stepPath }: RecoveryStepProps) => {
                                     <FormControlLabel
                                         key={index}
                                         value={item}
-                                        label={t(`${stepPath}.${index}`)}
+                                        label={t(`${stepPath}.radioList.${index}`)}
                                         control={
                                             <Radio />
                                         }  
@@ -51,6 +53,9 @@ const FirsStep = ({ t, stepPath }: RecoveryStepProps) => {
                         }
                     </RadioGroup>
                 </FormControl>
+                <div className="mt-2 w-full flex justify-end">
+                    <Link to={RouterPathes.Login}>{ t(`${stepPath}.link`) }</Link>
+                </div>
             </Box>
         </>
     )

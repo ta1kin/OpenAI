@@ -5,7 +5,6 @@ import InfoFooter from '@/components/InfoLayout/Footer'
 
 
 const InfoLayout = () => {
-
     return (
         <>
             <div className="layout info-layout">

@@ -7,6 +7,12 @@ export enum RouterPathes {
     Error = '/error',
     NotFound = '*',
     Docs = '/home/documents',
-    Book = '/home/book',
+    Book = '/home/documents/:id',
     Recovery = '/auth/recovery'
+}
+
+export enum SourcesLinks {
+    Vk = '#',
+    Tg = '#',
+    Git = 'https://github.com/Terrorick2020'
 }

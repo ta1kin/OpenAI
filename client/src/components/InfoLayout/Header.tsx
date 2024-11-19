@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { RouterPathes } from '@/config/config.router'
@@ -7,38 +8,57 @@ import DraftSvg from '@/assets/icons/Draft.svg'
 
 
 const InfoHeader = () => {
-    const i18nPath = 'info'
+    const i18nPath = 'infoLayout'
     const baseHeadPath = `${i18nPath}:header`
     const { t } = useTranslation([ i18nPath ])
 
+    const [ link, setLink ] = useState('first')
+
+    const handleFirstLink = () => setLink('first')
+    const handleSecondLink = () => setLink('second')
+
     return (
         <>
-            <header className="info__header box">
+            <header className="info-layout__header box">
                 <div className="w-full mt-[10px] mb-[10px]">
-                    <div className="header-top w-full flex flex-row justify-between">
-                        <div className="header-top__logo flex flex-row items-center">
-                            <div className="logo__img">
-                                <img src={ HatSvg } alt="hat-logo" />
+                    <div className="w-full flex flex-wrap flex-row sm:justify-between justify-center gap-[40px]">
+                        <div className="flex flex-row items-center">
+                            <div className="">
+                                <Link to={ RouterPathes.Info }>
+                                    <img src={ HatSvg } alt="hat-logo" />
+                                </Link>
                             </div>
-                            <div className="logo__text ml-[10px] flex flex-col">
-                                <h2 className="title">{ t(`${baseHeadPath}.logo.title`) }</h2>
+                            <div className="ml-[10px] flex flex-col">
+                                <h2 className="sub-headline">{ t(`${baseHeadPath}.logo.title`) }</h2>
                                 <p className="description">{ t(`${baseHeadPath}.logo.description`) }</p>
                             </div>
                         </div>
-                        <nav className="header-top__nav flex flex-row items-center gap-[30px]">
-                            <Link to={ RouterPathes.Info } className="nav__link" >{ t(`${baseHeadPath}.nav.first`) }</Link>
-                            <Link to={ RouterPathes.Author } className="nav__link" >{ t(`${baseHeadPath}.nav.second`) }</Link>
+                        <nav className="mt-[20px] flex flex-row items-center gap-[30px]">
+                            <Link 
+                                to={ RouterPathes.Info }
+                                className={`nav__link ${link === 'first' ? 'is-active' : '' }`}
+                                onClick={handleFirstLink}
+                            >
+                                { t('info:title') }
+                            </Link>
+                            <Link 
+                                to={ RouterPathes.Author }
+                                className={`nav__link ${link === 'second' ? 'is-active' : '' }`}
+                                onClick={handleSecondLink}
+                            >
+                                { t('author:title') }
+                            </Link>
                         </nav>
                     </div>
-                    <div className="header-bottom w-full flex flex-row justify-between">
-                        <div className="header-bottom__text w-[40%] flex flex-col justify-center items-start gap-[20px]">
-                            <h2 className="header__title w-[80%]">{ t(`${baseHeadPath}.text.headline`) }</h2>
-                            <p className="header__paragraph">{ t(`${baseHeadPath}.text.paragraph`) }</p>
+                    <div className="w-full mt-[40px] flex flex-row justify-between  max-md:justify-center">
+                        <div className="w-[50%] max-md:w-full flex flex-col justify-center items-start gap-[20px]">
+                            <h2 className="headline w-[80%]">{ t(`${baseHeadPath}.text.headline`) }</h2>
+                            <p className="paragraph">{ t(`${baseHeadPath}.text.paragraph`) }</p>
                             <Link to={ RouterPathes.Register  } className="w-full">
-                                <button>{ t(`${baseHeadPath}.text.button`) }</button>
+                                <button className="btn w-[70%] max-sm:w-full">{ t(`${baseHeadPath}.text.button`) }</button>
                             </Link>
                         </div>
-                        <div className="header-bottom__img w-[60%] flex flex-col justify-center items-end">
+                        <div className="bottom__img w-[50%] flex flex-col justify-center items-end max-lg:w-[30%] max-md:hidden">
                             <img src={ DraftSvg } alt="draft-info-header" />
                         </div>
                     </div>

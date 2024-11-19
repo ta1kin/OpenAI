@@ -1,4 +1,6 @@
-import type { BookParams } from "@/types/book"
+import type { BookParams } from '@/types/types.book'
+
+type BookParams = typeof BookParams
 
 
 const BookContent = ({ bookId }: BookParams) => {

@@ -1,1 +1,3 @@
-export interface HomeState {}
+export interface HomeState {
+    variant: number
+}

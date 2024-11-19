@@ -65,7 +65,7 @@ const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
     const handlePrev = () => {
         switch ( step ) {
             case 0: {
-                navigate( RouterPathes.Login )
+                navigate( RouterPathes.Info )
                 break
             }
             default:  {

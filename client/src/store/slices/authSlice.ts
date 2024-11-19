@@ -11,9 +11,9 @@ const initialState: AuthState = {
         second: false,
         third: false,
     },
-    email: '',
+    email: 'FallenAngel@ya.ru',
     password: '',
-    accessToken: '',
+    accessToken: 'xsdvdvsdvsdvsdvsd',
     saveMe: false,
     code: '',
 }

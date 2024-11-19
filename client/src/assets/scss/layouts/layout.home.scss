@@ -1,0 +1,37 @@
+:root {
+    #light {
+        --home-layout-bg: #faeee7;
+
+        --home-layout-lang: #231a1c;
+        --home-layout-lang-decoration: #231a1c;
+        --home-layout-lang-decoration-hover: #231a1c40;
+    }
+    
+    #dark {}
+}
+
+.home-layout__header {
+    background: var(--home-layout-bg);
+    padding-block: 10px;
+
+    .person-img {
+        width: 70px;
+    }
+
+    .select-lang {
+        font-size: 1.1em;
+        font-weight: 500;
+        cursor: pointer;
+        color: var(--home-layout-lang);
+
+        &:hover {
+            text-decoration: underline;
+            text-decoration-color: var(--home-layout-lang-decoration-hover);
+        }
+
+        &.is-active {
+            text-decoration: underline;
+            text-decoration-color: var(--home-layout-lang-decoration);
+        }
+    }
+}

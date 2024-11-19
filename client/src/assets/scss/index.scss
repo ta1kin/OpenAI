@@ -1,3 +1,9 @@
+@use "./components/mixins";
+@use "./components/vars";
+@use "./components/fonts";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "./ui/mui.button.scss";

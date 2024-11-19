@@ -1,3 +1,7 @@
 {
-    "title": "Главная"
+    "title": "Главная",
+    "header": {
+        "title": "Информация о функционале сервиса",
+        "description": "dvdfbddfbdfbdfbdfb"
+    }
 }
