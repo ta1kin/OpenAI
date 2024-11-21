@@ -1,0 +1,24 @@
+:root {
+    #light {
+        --input-border: #33272a;
+        --input-border-hover: #9b4358;
+        --input-border-focused: #ff8ba7;
+    }
+    
+    #dark {}
+}
+
+.MuiOutlinedInput-root { 
+    & fieldset {
+        border-width: 2px;
+        border-color: var(--input-border) !important;
+    }
+    &:hover fieldset {
+        border-width: 2px;
+        border-color: var(--input-border-hover) !important;
+    }
+    &.Mui-focused fieldset { 
+        border-width: 2px;
+        border-color: var(--input-border-focused) !important;
+    } 
+}

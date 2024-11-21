@@ -1,21 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { professionConfig  } from '@/config/config.auth'
 
 import type { AuthState } from '@/types/redux/interfaces/auth'
 type AuthState = typeof AuthState
 
 const initialState: AuthState = {
-    profession: professionConfig[0],
-    whoIs: {
-        first: false,
-        second: false,
-        third: false,
-    },
-    email: 'FallenAngel@ya.ru',
+    profession: '',
+    profValue: '',
+    whoIs: [],
+    email: '',
     password: '',
-    accessToken: 'xsdvdvsdvsdvsdvsd',
+    accessToken: 'ddddsdvsdvsdvsdv',
+    resetToken: '',
     saveMe: false,
     code: '',
+    role: '',
 }
 
 const authSlice = createSlice({
@@ -24,6 +22,9 @@ const authSlice = createSlice({
     reducers: {
         setProfession: (state, action) => {
             state.profession = action.payload
+        },
+        setProfValue: (state, action) => {
+            state.profValue = action.payload
         },
         setWhoIs: (state, action) => {
             state.whoIs = action.payload
@@ -40,17 +41,40 @@ const authSlice = createSlice({
         setCode: (state, action) => {
             state.code = action.payload
         },
+        setAccessToken: (state, action) => {
+            state.accessToken = action.payload
+        },
+        setResetToken: (state, action) => {
+            state.resetToken = action.payload
+        },
+        setRole: (state, action) => {
+            state.role = action.payload
+        },
+        resetData: state => {
+            state.profession = ''
+            state.whoIs = []
+            state.email = ''
+            state.password = ''
+            state.accessToken = ''
+            state.saveMe = false
+            state.code = ''
+            state.role = ''
+        }
     }
 })
 
 export const {
 
-    setProfession, 
+    setProfession,
+    setProfValue,
     setWhoIs, 
     setEmail,
     setPassword,
     setSaveMe, 
     setCode,
+    setAccessToken,
+    setRole,
+    resetData,
 
 } = authSlice.actions
 export default authSlice.reducer

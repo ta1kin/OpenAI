@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setProfession } from '@/store/slices/authSlice'
+import { setProfession, setProfValue } from '@/store/slices/authSlice'
 import { professionConfig } from '@/config/config.auth'
 import { Link } from 'react-router-dom'
 import { RouterPathes } from '@/config/config.router'
@@ -23,7 +23,9 @@ const FirsStep = ({ t, stepPath }: RecoveryStepProps) => {
     const dispatch = useDispatch()
 
     const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
-        dispatch(setProfession(event.target.value))
+        const newProf = event.target.value
+        dispatch(setProfession(newProf))
+        dispatch(setProfValue(t(`${stepPath}.${newProf}`)))
     }
 
     return (

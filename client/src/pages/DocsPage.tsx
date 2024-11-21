@@ -12,9 +12,12 @@ type State = typeof State
 
 
 const DocPage = () => {
+    const i18nPath = 'docs'
+    const titlePath = `${i18nPath}:title`
+
     const navigate = useNavigate()
 
-    const { t } = useTranslation([ 'doc' ])
+    const { t } = useTranslation([ i18nPath ])
     const accessToken = useSelector( (state: State) => state.auth.accessToken )
 
     useEffect(
@@ -26,11 +29,11 @@ const DocPage = () => {
         [accessToken]
     )
 
-    document.title = t('doc:title')
+    document.title = t(`${titlePath}`)
     return (
         <>
-            <div className="doc-page">
-                <DocsContent />
+            <div className="docs-page">
+                <DocsContent  t={t} i18nPath={i18nPath} />
             </div>
         </>
     )

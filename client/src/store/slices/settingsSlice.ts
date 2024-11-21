@@ -17,9 +17,12 @@ const settingsSlice = createSlice({
         },
         setLng: (state, action) => {
             state.lng = action.payload
+        },
+        setTheme: (state, action) => {
+            state.theme = action.payload
         }
     }
 })
 
-export const { toggleTheme, setLng } = settingsSlice.actions
+export const { toggleTheme, setLng, setTheme } = settingsSlice.actions
 export default settingsSlice.reducer

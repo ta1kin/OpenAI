@@ -13,5 +13,16 @@
         font-weight: 600;
         background-color: var(--button-bg);
         color: var(--button-text);
+
+        &.outlined {
+            background: transparent;
+            border: 2px solid var(--button-bg);
+        }
+
+        svg {
+            path {
+                fill: var(--button-text);
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { faker } from '@faker-js/faker'
+import { da, faker } from '@faker-js/faker'
 import { hash, verify } from 'argon2'
 
 import asyncHandler from 'express-async-handler'
@@ -85,13 +85,17 @@ export default {
                 role: user.role,
                 ...info,
                 ...config,
-                ...data
+                ...data,
+                token: access_token,
             },
             message: "success" } )
     } ),
 
     singUp: asyncHandler( async ( req: Request, res: Response ) => {
-        const { email, password } = req.body
+        const data = req.body
+
+        const email = data.email
+        const password = data.password
 
         const isHaveUser = await prisma.user.findUnique({
             where: {
@@ -305,13 +309,16 @@ export default {
 
         res.setHeader('Authorization', `Bearer ${reset_token}`)
 
-        res.status( 201 ).json( { message: 'success' } )
+        res.status( 201 ).json(
+            {
+                token: reset_token,
+                message: 'success',
+            } 
+        )
     } ),
 
     rewritePass: asyncHandler( async ( req: Request, res: Response ) => {
         const { email, password } = req.body
-
-
 
         const user = await prisma.user.update({
             where: {

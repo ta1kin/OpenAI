@@ -1,12 +1,14 @@
-import type { BookParams } from '@/types/types.book'
-
-type BookParams = typeof BookParams
+import BookPDFViewer from './BookPDFViewer'
 
 
-const BookContent = ({ bookId }: BookParams) => {
+const BookContent = () => {
     return (
-        <>
-            { bookId }
+        <>  
+            <div className="book-page__content box">
+                <div className="w-full flex justify-center items-center">
+                    <BookPDFViewer />
+                </div>
+            </div>
         </>
     )
 }

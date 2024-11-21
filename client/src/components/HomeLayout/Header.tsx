@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { RouterPathes } from '@/config/config.router'
 import { setLng, toggleTheme } from '@/store/slices/settingsSlice'
 
@@ -11,13 +11,31 @@ import ThemeSwitch from '@/components/UI/ThemeSwitch'
 import ManSvg from '@/assets/icons/Man.svg'
 
 import type { State } from '@/types/redux'
-
+import type { HeaderRouting } from '@/types/types.home'
 
 type State = typeof State
+type HeaderRouting = typeof HeaderRouting
 
 
 const HomeHeader = () => {
+    const i18nPath = 'homeLayout'
+    const baseHeadPath = `${i18nPath}:header`
+    const { t, i18n } = useTranslation([ i18nPath ])
+
     const dispatch =  useDispatch()
+    const location = useLocation()
+
+    const regex = /\/(\d+)/
+    const modifyLocation = location.pathname.replace(regex, '/:id')
+
+    let locationObject: HeaderRouting = {}
+
+    locationObject[ RouterPathes.Home ] = { to: RouterPathes.Docs, text: t(`${baseHeadPath}.toDocs`) }
+    locationObject[ RouterPathes.Docs ] = { to: RouterPathes.Home, text: t(`${baseHeadPath}.toProfile`) }
+    locationObject[ RouterPathes.Book ] = { to:RouterPathes.Docs, text: t(`${baseHeadPath}.toDocs`)}
+
+    const toItem = locationObject[ modifyLocation ]
+
     const { email, lng } = useSelector(
         ( state: State ) => (
             {
@@ -26,10 +44,6 @@ const HomeHeader = () => {
             }
         )
     )
-
-    const i18nPath = 'homeLayout'
-    const baseHeadPath = `${i18nPath}:header`
-    const { t, i18n } = useTranslation([ i18nPath ])
 
     const handleRu = () => {
         dispatch(setLng('ru'))
@@ -61,9 +75,9 @@ const HomeHeader = () => {
                             <span className={ `select-lang ${isRuLng ? 'is-active' : ''}` } onClick={handleRu}>ru</span>
                             <span className={ `select-lang ${isEnLng ? 'is-active' : ''}` } onClick={handleEn}>en</span>
                         </div>
-                        <Link to={RouterPathes.Docs} className="w-[220px]">
+                        <Link to={toItem.to} className="w-[220px]">
                             <Button variant="contained" className="btn w-full">
-                                { t(`${baseHeadPath}.docsLink`) }
+                                { toItem.text }
                             </Button>
                         </Link>
                     </div>

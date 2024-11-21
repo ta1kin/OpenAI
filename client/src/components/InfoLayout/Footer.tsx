@@ -43,9 +43,8 @@ const InfoFooter = () => {
                     </div>
                 </div>
                 <div className="w-full h-[40px] mt-[20px] mb-[20px] flex justify-center">
-                    <p className="description flex flex-row gap-[5px]">
-                        <p dangerouslySetInnerHTML={{__html: '&copy;'}} />
-                        { t(`${baseHeadPath}.description`) }
+                    <p className="description">
+                        © { t(`${baseHeadPath}.description`) }
                     </p>
                 </div>
             </footer>

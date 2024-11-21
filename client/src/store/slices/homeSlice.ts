@@ -6,7 +6,12 @@ type HomeState = typeof HomeState
 
 
 const initialState: HomeState = {
-    variant: 0
+    variant: 0,
+    personalInfo: {
+        nickName: '',
+        fullName: '',
+        phone: ''
+    },
 }
 
 const homeSlice = createSlice({
@@ -15,9 +20,12 @@ const homeSlice = createSlice({
     reducers: {
         setVariant: (state, action) => {
             state.variant = action.payload
+        },
+        setPersonalInfo: (state, action) => {
+            state.personalInfo = action.payload
         }
     }
 })
 
-export const { setVariant } = homeSlice.actions
+export const { setVariant, setPersonalInfo } = homeSlice.actions
 export default homeSlice.reducer

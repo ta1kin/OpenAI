@@ -2,7 +2,7 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
 import ruAuthor from './ru/author.json'
-import ruDoc from './ru/doc.json'
+import ruDoc from './ru/docs.json'
 import ruError from './ru/error.json'
 import ruHome from './ru/home.json'
 import ruInfo from './ru/info.json'
@@ -16,7 +16,7 @@ import ruInfoLayout from './ru/info-layout.json'
 import ruHomeLayout from './ru/home-layout.json'
 
 import enAuthor from './en/author.json'
-import enDoc from './en/doc.json'
+import enDoc from './en/docs.json'
 import enError from './en/error.json'
 import enHome from './en/home.json'
 import enInfo from './en/info.json'
@@ -34,7 +34,7 @@ const resources = {
     ru: {
         auth: ruAuth,
         author: ruAuthor,
-        doc: ruDoc,
+        docs: ruDoc,
         error: ruError,
         home: ruHome,
         homeLayout: ruHomeLayout,
@@ -49,7 +49,7 @@ const resources = {
     en: {
         auth: enAuth,
         author: enAuthor,
-        doc: enDoc,
+        docs: enDoc,
         error: enError,
         home: enHome,
         homeLayout: enHomeLayout,

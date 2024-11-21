@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { nextStep, prevStep } from '@/store/slices/singUpSlice'
 import { RouterPathes } from '@/config/config.router'
-import { registerAsync, onIsClicked } from '@/store/slices/singUpSlice'
+import { nextStep, prevStep, registerAsync, onIsClicked, resetStep } from '@/store/slices/singUpSlice'
+import { resetData } from '@/store/slices/authSlice'
 
 import Button from '@mui/material/Button'
 
@@ -22,13 +22,14 @@ const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
 
     const data: RegisterData = useSelector( ( state: State ) => (
         {
-            profession: state.auth.profession,
+            profValue: state.auth.profValue,
             whoIs: state.auth.whoIs,
             email: state.auth.email,
             password: state.auth.password,
-            saveMe: state.auth.saveMe,
         }
     ))
+
+    const  isValid = useSelector( ( state: State ) => state.singUp.isValid )
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -37,6 +38,12 @@ const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
         dispatch( onIsClicked() )
 
         switch ( step ) {
+            case 0: {
+                if( data.profValue ) {
+                    dispatch( nextStep() )
+                }
+                break
+            }
             case 1: {
                 if( data.whoIs.length ) {
                     dispatch( nextStep() )
@@ -51,11 +58,12 @@ const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
                 break
             }
             case 3: {
-                navigate( RouterPathes.Login )
-                break
-            }
-            default:  {
-                dispatch( nextStep() )
+                if( isValid ) {
+                    navigate( RouterPathes.Login )
+                    dispatch(resetData())
+                } else {
+                    dispatch(resetStep())
+                }
                 break
             }
         }
@@ -82,7 +90,13 @@ const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
                         className="w-full"
                         onClick={handleNext}
                 >
-                    { t( `${baseBtnsPath}.next` ) }
+                    {
+                        isValid
+                            ?
+                            t( `${baseBtnsPath}.next` )
+                            :
+                            t( `${baseBtnsPath}.error` )
+                    }
                 </Button>
                 {
                     i18n.exists(`${baseBtnsPath}.prev`)

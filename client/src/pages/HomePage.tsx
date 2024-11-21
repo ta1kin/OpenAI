@@ -12,9 +12,13 @@ type State = typeof State
 
 
 const HomePage = () => {
-    const navigate = useNavigate()
+    const i18nPath = 'home'
+    const titlePath = `${i18nPath}:title`
 
     const { t } = useTranslation([ 'home' ])
+
+    const navigate = useNavigate()
+
     const accessToken = useSelector( (state: State) => state.auth.accessToken )
 
     useEffect(
@@ -26,11 +30,11 @@ const HomePage = () => {
         [accessToken]
     )
 
-    document.title = t('home:title')
+    document.title = t(titlePath)
     return (
         <>
             <div  className="home-page">
-                <HomeContent />
+                <HomeContent t={t} i18nPath={i18nPath} />
             </div>
         </>
     )
