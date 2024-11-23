@@ -1,5 +1,7 @@
-{   
+{
     "header": {
-        "docsLink": "To docs"
+        "toProfile": "Personal Cabinet",
+        "toDocs": "Document List",
+        "theme": "Theme"
     }
 }

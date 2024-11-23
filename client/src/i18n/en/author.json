@@ -1,3 +1,30 @@
 {
-    "title": "Об авторе"
+    "title": "About Author",
+    "header": {
+        "title": "Resume Presentation",
+        "description": "The author possesses a wide range of technical skills and knowledge that enable him/her to create high-quality web solutions. The list of skills and abilities will be presented below on this page!"
+    },
+    "about": {
+        "title": "About the Author:",
+        "description": "Person Description"
+    },
+    "experience": {
+        "title": "Key Skills:",
+        "skills": [
+            "ddd",
+            "ddd",
+            "ddd",
+            "ddd",
+            "ddd"
+        ]
+    },
+    "projects": {
+        "title": "Created Projects:",
+        "items": [
+            {
+                "headline": "Name:",
+                "link": "http://localhost:5173/author"
+            }
+        ]
+    }
 }

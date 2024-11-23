@@ -1,59 +1,99 @@
-import { MouseEvent } from 'react'
+import { MouseEvent, useState } from 'react'
+import { resetData } from '@/store/slices/authSlice'
+import { deleteAsync, toggleReset, updatePersonalInfo } from '@/store/slices/homeSlice'
+import { sendNewPassAsync } from '@/store/slices/recoveryPassSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Button from '@mui/material/Button'
+import ResetForm from '@/components/HomeLayout/ResetForm'
 
 import type { State } from '@/types/redux'
-import type { HomeState } from '@/types/redux/interfaces/home'
+import type { SettingsBlock, BlockItem, SettingTargetFunc } from '@/types/types.home'
 import type { BaseProps } from '@/types/types.components'
 
 type State = typeof State
-type HomeState = typeof HomeState
+type BlockItem = typeof BlockItem
+type SettingsBlock = typeof SettingsBlock
+type SettingTargetFunc = typeof SettingTargetFunc
 type BaseProps = typeof BaseProps
 
-interface SettingsBlock {
-    headline: string
-    list: string[]
-}
 
 const HomeSettings = ({ t, baseTextPath }: BaseProps) => {
     const settingBlocks: SettingsBlock[] = t(`${baseTextPath}.list`, { returnObjects: true })
+    
+    const dispatch = useDispatch()
+    
+    const { delErr, isReset, accessToken } = useSelector(
+        ( state: State ) => (
+            {
+                delErr: state.home.delErr,
+                isReset: state.home.isReset,
+                accessToken: state.auth.accessToken
+            }
+        )
+    )
 
-    const resetPhone = (_event: MouseEvent<HTMLButtonElement>) => {
-        console.log( 'resetPhone' )
-    }
-    const resetName = (_event: MouseEvent<HTMLButtonElement>) => {
-        console.log( 'resetName' )
-    }
-    const resetNickName = (_event: MouseEvent<HTMLButtonElement>) => {
-        console.log( 'resetNickName' )
-    }
+    const [ content, setContent ] = useState(
+        {
+            inputText: '',
+            btnText: '',
+            targetFunc: {} as SettingTargetFunc
+        }
+    )
 
-    const profileFuncList = [
-        resetPhone,
-        resetName,
-        resetNickName,
+    const storeFuncList = [
+        [
+            {
+                key: 'nickName',
+                func: updatePersonalInfo
+            },
+            {
+                key: 'fullName',
+                func: updatePersonalInfo
+            },
+            {
+                key: 'phone',
+                func: updatePersonalInfo
+            },
+        ],
+        [
+            {
+                key: 'password',
+                func: sendNewPassAsync
+            },
+        ]
     ]
 
-
-    const resetPass = (_event: MouseEvent<HTMLButtonElement>) => {
-        console.log( 'resetPass' )
+    const resetSetting = ( inp: string, btn: string, func: SettingTargetFunc ) => {
+        setContent(
+            {
+                inputText: inp,
+                btnText: btn,
+                targetFunc: func
+            }
+        )
+        dispatch( toggleReset() )
     }
 
-    const securityFuncList = [
-        resetPass
-    ]
-
-    const mainFuncList = [
-        profileFuncList,
-        securityFuncList
-    ]
-
-    const deleteProfile = (_event: MouseEvent<HTMLButtonElement>) => {
+    const deleteProfile = async ( _event: MouseEvent<HTMLButtonElement> ) => {
         console.log( 'delete profile' )
+        await deleteAsync(accessToken)
+        if( !delErr ) {
+            dispatch(resetData())
+        }
     }
 
     return (
-        <>
+        <>  
+            {
+                isReset
+                    &&
+                    <ResetForm 
+                        inputText={ content.inputText }
+                        btnText={ content.btnText }
+                        targetFunc={ content.targetFunc }
+                    />
+            }
             <div className="main__settings w-full h-[100%] flex flex-col gap-[15px]">
                 {
                     settingBlocks.map(
@@ -63,14 +103,16 @@ const HomeSettings = ({ t, baseTextPath }: BaseProps) => {
                                 <ul className="ml-5 flex flex-col gap-[5px]">
                                     {
                                         elem.list.map(
-                                            ( item: string, j: number ) => (
+                                            ( item: BlockItem, j: number ) => (
                                                 <li key={j}>
                                                     <Button 
                                                         className="icon w-[30%]"
                                                         variant="text"
-                                                        onClick={mainFuncList[i][j]}
+                                                        onClick={
+                                                            _event => resetSetting( item.inp, item.btn, storeFuncList[i][j] )
+                                                        }
                                                     >
-                                                        { item }
+                                                        { item.item }
                                                     </Button>
                                                 </li>
                                             )

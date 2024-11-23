@@ -7,4 +7,6 @@ export interface PersonalInfoType {
 export interface HomeState {
     variant: number
     personalInfo: PersonalInfoType
+    delErr: boolean
+    isReset: boolean
 }

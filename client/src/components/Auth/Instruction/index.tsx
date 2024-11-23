@@ -36,8 +36,7 @@ const Instruction = () => {
                                     :
                                 <h2 className="title pre-title">
                                     { 
-                                        t('auth:instruction.steps_text.regular')
-                                            .replace( '{step_counter}', `${state.maxStep - state.step + 1}` ) 
+                                        t('auth:instruction.steps_text.regular', { stepCounter: state.maxStep - state.step + 1 }) 
                                     }
                                 </h2>
                             }

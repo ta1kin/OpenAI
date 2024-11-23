@@ -27,7 +27,7 @@ export const verifyEmailAsync = createAsyncThunk(
         
         if( !SERVER_URL || !VERIFY_EMAIL ) throw new Error('Нет путей для верификации почты')
 
-        const response = await axios.post(
+        const response = await axios.put(
             `${SERVER_URL}/${VERIFY_EMAIL}`,
             {
                 email

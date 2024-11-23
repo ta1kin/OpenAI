@@ -2,17 +2,17 @@
     "header": {
         "logo": {
             "title": "Magic Net",
-            "description": "Сайт-резюме"
+            "description": "Online Resume"
         },
         "text": {
-            "headline": "Веб-резюме: показ возможностей автора!",
-            "paragraph": "Сервис построен так, чтобы не только HR мог просмотреть резюме и его скачать, но и для того, чтобы специалист мог оценить навыки, путем просмотра сервиса! Для рассмотрения полного функционала необходимо зарегистрироваться!",
-            "button": "Регистрация / Вход"
+            "headline": "Web Resume: Show off your skills!",
+            "paragraph": "The service is designed not only for HR to view and download resumes, but also for specialists to assess skills by viewing the service. To explore the full functionality, you need to register!",
+            "button": "Register / Log in"
         }
     },
     "footer": {
         "title": "Magic Net",
-        "description": "Все права защищены!",
-        "navTitle": "Написать мне:"
+        "description": "All rights reserved!",
+        "navTitle": "Contact me:"
     }
 }

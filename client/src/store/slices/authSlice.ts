@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import type { AuthState } from '@/types/redux/interfaces/auth'
+
 type AuthState = typeof AuthState
+
 
 const initialState: AuthState = {
     profession: '',

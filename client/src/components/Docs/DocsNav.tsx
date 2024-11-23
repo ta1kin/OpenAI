@@ -1,5 +1,4 @@
-import { ChangeEvent, MouseEvent } from 'react'
-import { useSelector } from 'react-redux'
+import { ChangeEvent, MouseEvent, useState } from 'react'
 import { selectionConfig } from '@/config/config.docs'
 import { useDispatch } from 'react-redux'
 import { setSearch, setSelect } from '@/store/slices/docsSlice'
@@ -13,46 +12,45 @@ import SearchIcon from '@mui/icons-material/Search'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import OutlinedInput from '@mui/material/OutlinedInput'
 
-import type { State } from '@/types/redux'
 import type { BaseProps } from '@/types/redux/interfaces/docs'
 
 type BaseProps = typeof BaseProps
-type State = typeof State
 
 
 const DocsNav = ({t, baseTextPath}: BaseProps) => {
     const dispatch = useDispatch()
 
-    const { select, search } = useSelector(
-        (state: State) => (
-            {
-                select: state.docs.select,
-                search: state.docs.search,
-            }
-        )
+    const [ selectors, setSelectors ] = useState(
+        {
+            select: '',
+            search: '',
+        }
     )
 
     const handleChange = (event: SelectChangeEvent) => {
-        dispatch(setSelect(event.target.value))
+        const newSelect = event.target.value
+        setSelectors({ ...selectors, select: newSelect })
     }
     const handleInput = (event: ChangeEvent<HTMLInputElement> ) => {
-        dispatch(setSearch(event.target.value))
+        const newSearch = event.target.value
+        setSelectors({ ...selectors, search: newSearch })
     }
     const handleApplySelection = (_event: MouseEvent<HTMLButtonElement>) => {
-        console.log( 'handleApplySelection' )
+        dispatch(setSelect(selectors.select))
+        dispatch(setSearch(selectors.search))
     }
 
     return (
         <>
             <div className="select__block flex flex-row justify-between items-center">
-                <Box sx={{ minWidth: 120 }}>
+                <Box>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">{t(`${baseTextPath}.selection.name`)}</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             className="w-[200px]"
-                            value={select}
+                            value={selectors.select}
                             label={t(`${baseTextPath}.selection.name`)}
                             onChange={handleChange}
                         >   
@@ -72,7 +70,7 @@ const DocsNav = ({t, baseTextPath}: BaseProps) => {
                         id="outlined-adornment-password"
                         type="text"
                         className="w-[400px]"
-                        value={search}
+                        value={selectors.search}
                         onChange={handleInput}
                         label={t(`${baseTextPath}.input`)}
                     />

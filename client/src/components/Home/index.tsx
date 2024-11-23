@@ -58,7 +58,7 @@ const HomeContent = ({i18nPath, t}: PageProps) => {
                             {
                                 navList.map(
                                     (item: string, index: number) => (
-                                        <li className="w-full">
+                                        <li className="w-full" key={index}>
                                             <Button className="w-full" variant="text" onClick={_event => handleNav(index)}>
                                                 { item }
                                             </Button>

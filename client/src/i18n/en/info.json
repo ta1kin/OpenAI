@@ -1,7 +1,29 @@
 {
-    "title": "Главная",
+    "title": "Main Page",
     "header": {
-        "title": "Информация о функционале сервиса",
-        "description": "dvdfbddfbdfbdfbdfb"
-    }
+        "title": "Service Functionality Information",
+        "description": "The project is an online platform providing users with a wide range of tools for managing personal data and documents. The main features of the project include user registration and authorization, a personal account with profile settings and an intuitive interface, a technical support communication system for quick assistance when needed, a function for uploading and storing PDF files in the user's personal archive, as well as an integrated document viewer for comfortable work with uploaded files. The platform has been developed with ease of use in mind and provides users with the ability to easily manage their data, customize the system according to their preferences, and receive necessary support when problems arise."
+    },
+    "description": [
+        {
+            "title": "Authorization",
+            "description": "Multi-level authorization helps prevent unauthorized access and ensures secure login.",
+            "img": "auth"
+        },
+        {
+            "title": "Authorization",
+            "description": "Multi-level authorization helps prevent unauthorized access and ensures secure login.",
+            "img": "auth"
+        },
+        {
+            "title": "Authorization",
+            "description": "Multi-level authorization helps prevent unauthorized access and ensures secure login.",
+            "img": "auth"
+        },
+        {
+            "title": "Authorization",
+            "description": "Multi-level authorization helps prevent unauthorized access and ensures secure login.",
+            "img": "auth"
+        }
+    ]
 }

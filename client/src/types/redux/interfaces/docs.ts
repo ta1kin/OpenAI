@@ -1,13 +1,18 @@
-export interface DocsItem {
+export interface DocsFile {
     id: number
     headline: string
     date: Date
+    formatDate: string
 }
 
 export interface DocsState {
-    itemsList: DocsItem[] | []
-    fileList: File[] | []
+    fileList: DocsFile[] | []
     select: string
     search: string
     isLoading: boolean
+}
+
+export interface LoadData {
+    token: string
+    files: File[]
 }

@@ -102,3 +102,10 @@ i {
     letter-spacing: 0.5px;
     font-weight: 500;
 }
+
+
+.file__name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

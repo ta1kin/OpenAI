@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, MouseEvent } from 'react'
-import { useDispatch } from 'react-redux'
-import { setFileList } from '@/store/slices/docsSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { loadDocsAsync } from '@/store/slices/docsSlice'
 
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
 import CloseIcon from '@mui/icons-material/Close'
@@ -9,13 +9,16 @@ import Button from '@mui/material/Button'
 
 import type { UploadedFile } from '@/types/types.home'
 import type { BaseProps } from '@/types/types.components'
+import type { State } from '@/types/redux'
 
 type UploadedFile = typeof UploadedFile
 type BaseProps = typeof BaseProps
+type State = typeof State
 
 
 const HomeLoad = ({ t, baseTextPath }: BaseProps) => {
     const dispatch = useDispatch()
+    const accessToken = useSelector( (state: State) => state.auth.accessToken )
     const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([])
 
     const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -38,10 +41,15 @@ const HomeLoad = ({ t, baseTextPath }: BaseProps) => {
         newListUploadedFiles.splice( index, 1 )
         setUploadedFiles([ ...newListUploadedFiles ])
     }
-
-    const handleSaveFiles = (_event: MouseEvent<HTMLButtonElement>) => {
-        console.log( uploadedFiles )
-        dispatch(setFileList(uploadedFiles))
+    const handleSaveFiles = async (_event: MouseEvent<HTMLButtonElement>) => {
+        await dispatch(
+            loadDocsAsync(
+                {
+                    token: accessToken,
+                    files: uploadedFiles
+                }
+            )
+        )
         setUploadedFiles( [] )
     }
 
