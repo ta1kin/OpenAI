@@ -11,12 +11,27 @@
         --info-layout-nav-decoration-hover: #231a1c4c;
 
         --info-layout-button-bg: #ff8ba7;
-        --info-layout-button-text-color:#33272a;
+        --info-layout-button-text-color: #33272a;
         --info-layout-button-shadow: #33272a;
     }
     
-    #dark {}
+    #dark {
+        --info-layout-bg: #16161a;
+
+        --info-layout-headline: #fffffe;
+        --info-layout-sub-headline: #94a1b2;
+        --info-layout-paragraph: #94a1b2;
+
+        --info-layout-nav: #fffffe;
+        --info-layout-nav-decoration: #94a1b2;
+        --info-layout-nav-decoration-hover: #01010142;
+
+        --info-layout-button-bg: #7f5af0;
+        --info-layout-button-text-color: #fffffe;
+        --info-layout-button-shadow: #fffffe6a;
+    }
 }
+
 
 .info-layout__header {
     background: var(--info-layout-bg);

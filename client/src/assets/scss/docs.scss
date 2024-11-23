@@ -11,7 +11,17 @@
         --docs-block-card-bg: #faeee7;
     }
     
-    #dark {}
+    #dark {
+        --docs-bg: #242629;
+        --docs-color: #fffffe;
+
+        --docs-select-bg: #16161a;
+        --docs-select-border: #7f5af0;
+        --docs-select-shadow: #b090f051;
+
+        --docs-block-bg: #242629;
+        --docs-block-card-bg: #16161a;
+    }
 }
 
 .docs-page {

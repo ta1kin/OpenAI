@@ -24,7 +24,14 @@ body {
         --primary-paragraph-color: #594a4e;
     }
     
-    #dark {}
+    #dark {
+        --primary-bg-color: #242629;
+
+        --primary-headline-color: #fffffe;
+        --primary-sub-headline-color: #94a1b2;
+        --primary-description-color: #b8c5d5;
+        --primary-paragraph-color: #94a1b2;
+    }
 }
 
 ::selection {

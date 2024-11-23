@@ -4,7 +4,10 @@
         --label-color-focused: #ff8ba7;
     }
     
-    #dark {}
+    #dark {
+        --label-color: #94a1b2;
+        --label-color-focused: #7f5af0;
+    }
 }
 
 .MuiInputLabel-root {

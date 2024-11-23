@@ -17,7 +17,19 @@
     }
     
     #dark {
+        --info-bg: #242629;
+        --info-block-bg: #16161a;
+        --info-headline: #fffffe;
+        --info-paragraph: #94a1b2;
 
+        --info-header-headline: #fffffe;
+        --info-header-paragraph: #94a1b2;
+        --info--header-text-decoration: #eaeaea;
+        --info--header-text-decoration-hover: #eaeaea3e;
+
+        --info-button-background: #7f5af0;
+        --info-button-text-color: #fffffe;
+        --info-button-box-shadow: #b1b1b1;
     }
 }
 

@@ -7,7 +7,13 @@
         --home-layout-lang-decoration-hover: #231a1c40;
     }
     
-    #dark {}
+    #dark {
+        --home-layout-bg: #16161a;
+
+        --home-layout-lang: #94a1b2;
+        --home-layout-lang-decoration: #94a1b2;
+        --home-layout-lang-decoration-hover: #01010142;
+    }
 }
 
 .home-layout__header {

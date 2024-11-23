@@ -4,7 +4,10 @@
         --book-line: #33272a2b;
     }
     
-    #dark {}
+    #dark {
+        --book-bg: #242629;
+        --book-line: #fffffe35;
+    }
 }
 
 .book-page {

@@ -5,7 +5,11 @@
         --info-button-box-shadow: #110d0e;
     }
     
-    #dark {}
+    #dark {
+        --button-bg: #7f5af0;
+        --button-text: #fffffe;
+        --info-button-box-shadow: #81818148;
+    }
 }
 
 .MuiButtonBase-root {

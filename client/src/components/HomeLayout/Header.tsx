@@ -70,7 +70,7 @@ const HomeHeader = () => {
                         <h2 className="description">{email}</h2>
                     </div>
                     <div className="flex flex-row items-center gap-10">
-                        <FormControlLabel control={<ThemeSwitch />} onClick={handleTheme}  label={t(`${baseHeadPath}.theme`)} />
+                        <FormControlLabel className="description" control={<ThemeSwitch />} onClick={handleTheme}  label={t(`${baseHeadPath}.theme`)} />
                         <div className="flex flex-row items-center gap-2">
                             <span className={ `select-lang ${isRuLng ? 'is-active' : ''}` } onClick={handleRu}>ru</span>
                             <span className={ `select-lang ${isEnLng ? 'is-active' : ''}` } onClick={handleEn}>en</span>

@@ -14,7 +14,20 @@
         --home-file-card-bg-hover: #ff8ba7;
     }
     
-    #dark {}
+    #dark {
+        --home-bg: #16161a;
+        --home-line: #010101;
+
+        --home-btn-color: #fffffe;
+        --home-btn-end-color: #fa2b5c;
+        --home-btn-hover: #7f5af0;
+
+        --home-file-border: #010101;
+        --home-file-card-text: #fffffe;
+        --home-file-card: transparent;
+        --home-file-card-border: #010101;
+        --home-file-card-bg-hover: #7f5af0;
+    }
 }
 
 .home-page {
