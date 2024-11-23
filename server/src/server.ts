@@ -6,9 +6,9 @@ import helmet from 'helmet'
 
 import homeRouter from './app/home/home.router'
 import authRouter from './app/auth/auth.router'
-import settingsRouter from './app/settings/settings.router'
-import dataRouter from './app/data/data.router'
+import configRouter from './app/config/config.router'
 import infoRouter from './app/info/info.router'
+import docsRouter from './app/docs/docs.router'
 
 import {
   PORT,
@@ -33,9 +33,9 @@ const start = async () => {
 
   app.use( '/api', homeRouter )
   app.use( '/api/auth', authRouter )
-  app.use( '/api', settingsRouter )
-  app.use( '/api', dataRouter )
+  app.use( '/api', configRouter )
   app.use( '/api', infoRouter )
+  app.use( '/api', docsRouter )
 
   app.use( notFound )
   app.use( errorHandler )

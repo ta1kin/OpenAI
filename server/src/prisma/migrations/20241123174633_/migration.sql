@@ -1,6 +1,9 @@
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('Admin', 'Guest');
 
+-- CreateEnum
+CREATE TYPE "MimeType" AS ENUM ('PDF');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
@@ -15,24 +18,16 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "Data" (
-    "id" SERIAL NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP(3) NOT NULL,
-    "nickname" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
-    "user_id" INTEGER NOT NULL,
-
-    CONSTRAINT "Data_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Info" (
     "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
+    "sphereDef" TEXT NOT NULL,
+    "direction" TEXT NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Не задано',
     "about" TEXT NOT NULL DEFAULT 'Не задано',
+    "nickname" TEXT NOT NULL DEFAULT 'Не задано',
+    "phone" TEXT NOT NULL DEFAULT 'Не задано',
     "user_id" INTEGER NOT NULL,
 
     CONSTRAINT "Info_pkey" PRIMARY KEY ("id")
@@ -44,26 +39,41 @@ CREATE TABLE "Config" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "theme" TEXT NOT NULL DEFAULT 'light',
-    "icon" BYTEA NOT NULL DEFAULT '\x',
+    "lang" TEXT NOT NULL DEFAULT 'ru',
     "user_id" INTEGER NOT NULL,
 
     CONSTRAINT "Config_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Docs" (
+    "id" SERIAL NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+    "headline" TEXT NOT NULL,
+    "mimeType" "MimeType" NOT NULL DEFAULT 'PDF',
+    "size" INTEGER NOT NULL,
+    "data" BYTEA NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "user_id" INTEGER NOT NULL,
+
+    CONSTRAINT "Docs_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Data_nickname_key" ON "Data"("nickname");
+CREATE UNIQUE INDEX "Info_user_id_key" ON "Info"("user_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Data_phone_key" ON "Data"("phone");
-
--- AddForeignKey
-ALTER TABLE "Data" ADD CONSTRAINT "Data_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE UNIQUE INDEX "Config_user_id_key" ON "Config"("user_id");
 
 -- AddForeignKey
 ALTER TABLE "Info" ADD CONSTRAINT "Info_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Config" ADD CONSTRAINT "Config_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Docs" ADD CONSTRAINT "Docs_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

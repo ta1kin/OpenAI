@@ -1,18 +1,10 @@
 :root {
     #light {
         --home-layout-bg: #faeee7;
-
-        --home-layout-lang: #231a1c;
-        --home-layout-lang-decoration: #231a1c;
-        --home-layout-lang-decoration-hover: #231a1c40;
     }
     
     #dark {
         --home-layout-bg: #16161a;
-
-        --home-layout-lang: #94a1b2;
-        --home-layout-lang-decoration: #94a1b2;
-        --home-layout-lang-decoration-hover: #01010142;
     }
 }
 
@@ -22,23 +14,6 @@
 
     .person-img {
         width: 70px;
-    }
-
-    .select-lang {
-        font-size: 1.1em;
-        font-weight: 500;
-        cursor: pointer;
-        color: var(--home-layout-lang);
-
-        &:hover {
-            text-decoration: underline;
-            text-decoration-color: var(--home-layout-lang-decoration-hover);
-        }
-
-        &.is-active {
-            text-decoration: underline;
-            text-decoration-color: var(--home-layout-lang-decoration);
-        }
     }
 }
 

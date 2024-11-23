@@ -5,6 +5,7 @@ import { RouterPathes } from '@/config/config.router'
 
 import HatSvg from '@/assets/icons/Hat.svg'
 import DraftSvg from '@/assets/icons/Draft.svg'
+import ThemeAndLang from '@/components/UI/ThemeAndLang'
 
 
 const InfoHeader = () => {
@@ -33,6 +34,7 @@ const InfoHeader = () => {
                                 <p className="description">{ t(`${baseHeadPath}.logo.description`) }</p>
                             </div>
                         </div>
+                        <ThemeAndLang />
                         <nav className="mt-[20px] flex flex-row items-center gap-[30px]">
                             <Link 
                                 to={ RouterPathes.Info }

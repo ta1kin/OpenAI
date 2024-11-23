@@ -1,12 +1,10 @@
 import { useTranslation } from 'react-i18next'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { RouterPathes } from '@/config/config.router'
-import { setLng, toggleTheme } from '@/store/slices/settingsSlice'
 
 import Button from '@mui/material/Button'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import ThemeSwitch from '@/components/UI/ThemeSwitch'
+import ThemeAndLang from '@/components/UI/ThemeAndLang'
 
 import ManSvg from '@/assets/icons/Man.svg'
 
@@ -20,9 +18,7 @@ type HeaderRouting = typeof HeaderRouting
 const HomeHeader = () => {
     const i18nPath = 'homeLayout'
     const baseHeadPath = `${i18nPath}:header`
-    const { t, i18n } = useTranslation([ i18nPath ])
-
-    const dispatch =  useDispatch()
+    const { t } = useTranslation([ i18nPath ])
     const location = useLocation()
 
     const regex = /\/(\d+)/
@@ -36,30 +32,7 @@ const HomeHeader = () => {
 
     const toItem = locationObject[ modifyLocation ]
 
-    const { email, lng } = useSelector(
-        ( state: State ) => (
-            {
-                email: state.auth.email,
-                lng: state.settings.lng,
-            }
-        )
-    )
-
-    const handleRu = () => {
-        dispatch(setLng('ru'))
-        i18n.changeLanguage('ru')
-    }
-    const handleEn = () => {
-        dispatch(setLng('en'))
-        i18n.changeLanguage('en')
-    }
-
-    const handleTheme = () => {
-        dispatch(toggleTheme())
-    }
-
-    const isRuLng = lng === 'ru'
-    const isEnLng = lng === 'en'
+    const email = useSelector( ( state: State ) => state.auth.email )
 
     return (
         <>
@@ -70,11 +43,7 @@ const HomeHeader = () => {
                         <h2 className="description">{email}</h2>
                     </div>
                     <div className="flex flex-row items-center gap-10">
-                        <FormControlLabel className="description" control={<ThemeSwitch />} onClick={handleTheme}  label={t(`${baseHeadPath}.theme`)} />
-                        <div className="flex flex-row items-center gap-2">
-                            <span className={ `select-lang ${isRuLng ? 'is-active' : ''}` } onClick={handleRu}>ru</span>
-                            <span className={ `select-lang ${isEnLng ? 'is-active' : ''}` } onClick={handleEn}>en</span>
-                        </div>
+                        <ThemeAndLang />
                         <Link to={toItem.to} className="w-[220px]">
                             <Button variant="contained" className="btn w-full">
                                 { toItem.text }

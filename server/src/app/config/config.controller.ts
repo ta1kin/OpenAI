@@ -5,12 +5,12 @@ import { prisma } from '../prisma'
 
 import asyncHandler from 'express-async-handler'
 
-import type { UserInfo } from '../../types/type.info'
+import type { UserConfig } from '../../types/type.config'
 
 
 export default {
-    updateInfo: asyncHandler( async ( req: Request, res: Response ) => {
-        const info: UserInfo = req.body
+    updateSettings: asyncHandler( async ( req: Request, res: Response ) => {
+        const config: UserConfig = req.body
 
         let access_token
         let userFound
@@ -21,13 +21,13 @@ export default {
         
         if ( access_token ) userFound = await verifyToken( access_token, ACCESS )
 
-        prisma.info.update({
+        await prisma.config.update({
             where: {
                 userId: userFound?.id
             },
-            data: info
+            data: config
         })
 
-        res.status( 200 ).json( { message: 'updated info' } )
+        res.status( 200 ).json( { message: 'updated config' } )
     } )
 }
