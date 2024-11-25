@@ -37,15 +37,17 @@ const SingInBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
         if( data.email && data.password ) {
             const { payload } = await dispatch( loginAsync( data ) )
 
+            console.log( payload )
+
             if( payload ) {
-                dispatch(setAccessToken(payload.token))
+                dispatch(setAccessToken(payload.accessToken))
                 dispatch(setRole(payload.role))
                 dispatch(setTheme(payload.theme))
                 dispatch(
                     setPersonalInfo(
                         {
-                            nickName: payload.nickname,
-                            fullName: payload.name,
+                            nickname: payload.nickname,
+                            name: payload.name,
                             phone: payload.phone,
                         }
                     )

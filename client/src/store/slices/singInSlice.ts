@@ -34,7 +34,7 @@ export const loginAsync = createAsyncThunk(
 
         if( response.status !== 201 ) throw new Error( 'Ошибка при попытки входа!' )
 
-        return response.data.data
+        return response.data
     }
 )
 

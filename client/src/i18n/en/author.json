@@ -1,30 +1,42 @@
 {
-    "title": "About Author",
+    "title": "About the Author",
     "header": {
-        "title": "Resume Presentation",
-        "description": "The author possesses a wide range of technical skills and knowledge that enable him/her to create high-quality web solutions. The list of skills and abilities will be presented below on this page!"
+      "title": "Resume Presentation",
+      "description": "The author possesses a wide range of technical skills and knowledge that allow him to create high-quality web solutions. A list of skills and abilities will be presented below on this page!"
     },
     "about": {
-        "title": "About the Author:",
-        "description": "Person Description"
+      "title": "About the Author:",
+      "description": "Hardworking FullStack developer with deep knowledge of Node.js and extensive technical portfolio has rich experience in web application development and microservice architecture. He worked in various startups, large companies, and as a freelancer, allowing him to accumulate valuable experience in various IT fields. The specialist has deep knowledge of Node.js and modern frameworks (Express.js, Koa.js), flexible work with various databases (MongoDB, PostgreSQL, Redis) and confident understanding of RESTful API and GraphQL. He is also experienced in working with modern frontend technologies (React.js, Angular.js, Vue.js) and DevOps practices. Constantly self-improving, this specialist regularly participates in conferences and meetups, reads technical literature, and actively uses online platforms for learning. High level of responsibility, ability to effectively manage time and prioritize tasks, excellent communication skills and teamwork skills - all this makes him a valuable employee. Flexibility in adapting to new technologies and processes, striving for continuous improvement of code quality and system performance - these are key features of this specialist's work. He is ready to apply his skills to create innovative projects and participate in developing complex systems, constantly striving for self-improvement and ready to quickly adapt to market changes."
     },
     "experience": {
-        "title": "Key Skills:",
-        "skills": [
-            "ddd",
-            "ddd",
-            "ddd",
-            "ddd",
-            "ddd"
-        ]
+      "title": "Key Skills:",
+      "skills": [
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "RESTful API",
+        "React.js",
+        "Vue.js",
+        "TypeScript",
+        "Docker",
+        "Kubernetes",
+        "Git",
+        "English (B2)",
+        "GraphQL",
+        "Prisma ORM",
+        "OAuth 2.0",
+        "CI/CD pipelines",
+        "Web security best practices"
+      ]
     },
     "projects": {
-        "title": "Created Projects:",
-        "items": [
-            {
-                "headline": "Name:",
-                "link": "http://localhost:5173/author"
-            }
-        ]
+      "title": "Created Projects:",
+      "items": [
+        {
+          "headline": "Title:",
+          "link": "http://localhost:5173/author"
+        }
+      ]
     }
-}
+  }
+  

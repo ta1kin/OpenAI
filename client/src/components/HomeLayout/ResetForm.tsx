@@ -17,10 +17,9 @@ type State = typeof State
 
 const ResetForm = ({inputText, btnText, targetFunc}: ResetFormProps) => {
     const dispatch = useDispatch()
-    const {email, accessToken, personalInfo} = useSelector(
+    const {accessToken, personalInfo} = useSelector(
         ( state: State ) => (
             {
-                email: state.auth.email,
                 accessToken: state.auth.accessToken,
                 personalInfo: state.home.personalInfo,
             }

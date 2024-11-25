@@ -1,7 +1,11 @@
 import type { InfoProps, DescriptionListItem, ImgObject } from '@/types/types.info'
 
 import AuthPng from '@/assets/img/auth.png'
-import BlockchainPng from '@/assets/img/blockchain.png'
+import Info from '@/assets/img/info.png'
+import Personal from '@/assets/img/personal.png'
+import Skills from '@/assets/img/skills.png'
+import Docs from '@/assets/img/docs.png'
+import Customizability from '@/assets/img/customizability.png'
 
 type InfoProps = typeof InfoProps
 type DescriptionListItem = typeof DescriptionListItem
@@ -13,7 +17,11 @@ const InfoDescription = ({ t, basePath }: InfoProps) => {
 
     const imgObject: ImgObject = {
         auth: AuthPng,
-        blockchain: BlockchainPng
+        info: Info,
+        personal: Personal,
+        skills: Skills,
+        docs: Docs,
+        customizability: Customizability
     }
 
     return (

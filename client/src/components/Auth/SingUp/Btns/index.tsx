@@ -22,8 +22,8 @@ const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
 
     const data: RegisterData = useSelector( ( state: State ) => (
         {
-            profValue: state.auth.profValue,
-            whoIs: state.auth.whoIs,
+            sphereDef: state.auth.profValue,
+            direction: state.auth.whoIs[0],
             email: state.auth.email,
             password: state.auth.password,
         }
@@ -39,13 +39,13 @@ const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
 
         switch ( step ) {
             case 0: {
-                if( data.profValue ) {
+                if( data.sphereDef ) {
                     dispatch( nextStep() )
                 }
                 break
             }
             case 1: {
-                if( data.whoIs.length ) {
+                if( data.direction ) {
                     dispatch( nextStep() )
                 }
                 break

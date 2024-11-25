@@ -16,7 +16,3 @@ export interface SettingsPutData {
     data: string
     accessToken: string
 }
-
-export interface ReqData {
-    [key: string]: string
-}

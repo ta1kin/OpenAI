@@ -3,11 +3,10 @@ import { RouterPathes } from '@/config/config.router'
 
 import axios from 'axios'
 
-import type { HomeState, ReqData, SettingsPutData } from '@/types/redux/interfaces/home'
+import type { HomeState, SettingsPutData } from '@/types/redux/interfaces/home'
 
 type HomeState = typeof HomeState
 type SettingsPutData = typeof SettingsPutData
-type ReqData = typeof ReqData
 
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
@@ -54,14 +53,16 @@ export const updatePersonalInfo = createAsyncThunk(
 
 export const deleteAsync = createAsyncThunk(
     `${RouterPathes.Home}/delete`,
-    async ( token, _thunkAPI ) => {
+    async ( accessToken, _thunkAPI ) => {
         if( !SERVER_URL || !VITE_DELETE ) throw new Error( 'Не заданы пути для удаления!' )
         
+        console.log( accessToken )
+
         const response = await axios.delete(
             `${SERVER_URL}/${VITE_DELETE}`,
             {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${accessToken}`
                 }
             }
         )

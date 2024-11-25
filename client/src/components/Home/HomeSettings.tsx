@@ -77,7 +77,7 @@ const HomeSettings = ({ t, baseTextPath }: BaseProps) => {
     }
 
     const deleteProfile = async ( _event: MouseEvent<HTMLButtonElement> ) => {
-        await deleteAsync(accessToken)
+        await dispatch(deleteAsync(accessToken))
         if( !delErr ) {
             dispatch(resetData())
         }

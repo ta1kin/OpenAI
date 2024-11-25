@@ -207,14 +207,14 @@ export default {
 
             const info = await prisma.info.findUnique({
                 where: { 
-                    id: userFound.id
+                    userId: userFound.id
                 },
                 select: InfoFields
             })
 
             const config = await prisma.config.findUnique({
                 where: {
-                    id: userFound.id
+                    userId: userFound.id
                 },
                 select: ConfigFields
             })
