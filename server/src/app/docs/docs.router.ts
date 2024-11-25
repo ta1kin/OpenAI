@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { protect } from '../middlewares/auth.middleware'
+
 import docsController from './docs.controller'
 
 
@@ -10,7 +11,7 @@ docsRouter.use( protect )
 docsRouter.get( '/docs', docsController.getDocs )
 docsRouter.get( '/docs/:id', docsController.getDoc )
 
-docsRouter.put( '/docs', docsController.updateDocs )
+docsRouter.post( '/docs',  docsController.downloadDocs )
 
 docsRouter.delete( '/docs:id', docsController.deleteDoc )
 

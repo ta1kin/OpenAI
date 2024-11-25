@@ -1,4 +1,4 @@
-export interface DocsFile {
+export interface FileListItem {
     id: number
     headline: string
     date: Date
@@ -6,13 +6,14 @@ export interface DocsFile {
 }
 
 export interface DocsState {
-    fileList: DocsFile[] | []
+    fileList: FileListItem[] | []
     select: string
     search: string
+    targetId: number | null
     isLoading: boolean
 }
 
 export interface LoadData {
-    token: string
+    accessToken: string
     files: File[]
 }

@@ -10,8 +10,8 @@
         "exit": "Выход"
     },
     "personal": {
-        "nickName": "Имя пользователя:",
-        "fullName": "ФИО:",
+        "nickname": "Имя пользователя:",
+        "name": "ФИО:",
         "phone": "Телефон:"
     },
     "settings": {

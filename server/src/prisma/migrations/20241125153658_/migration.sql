@@ -1,9 +1,6 @@
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('Admin', 'Guest');
 
--- CreateEnum
-CREATE TYPE "MimeType" AS ENUM ('PDF');
-
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
@@ -50,11 +47,11 @@ CREATE TABLE "Docs" (
     "id" SERIAL NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
-    "headline" TEXT NOT NULL,
-    "mimeType" "MimeType" NOT NULL DEFAULT 'PDF',
-    "size" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
     "data" BYTEA NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "size" INTEGER NOT NULL,
+    "date" BIGINT NOT NULL,
+    "mimetype" TEXT NOT NULL,
     "user_id" INTEGER NOT NULL,
 
     CONSTRAINT "Docs_pkey" PRIMARY KEY ("id")

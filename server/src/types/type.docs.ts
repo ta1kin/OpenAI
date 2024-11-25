@@ -1,11 +1,11 @@
 export interface UserDoc {
     headline: string
-    mimeType: MimeDocType
-    size: number
-    data: Buffer
+    file: File
     date: Date
+    formatDate: string
 }
 
-enum MimeDocType {
-    Pdf = 'PDF'
+export interface ResLoadData {
+    id: number
+    formatDate: Date
 }

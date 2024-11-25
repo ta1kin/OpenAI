@@ -33,3 +33,7 @@ export interface ResetFormProps {
     btnText: string
     targetFunc: SettingTargetFunc
 }
+
+export interface BookProps {
+    bookId: number
+}

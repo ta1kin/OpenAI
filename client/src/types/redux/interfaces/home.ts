@@ -10,3 +10,13 @@ export interface HomeState {
     delErr: boolean
     isReset: boolean
 }
+
+export interface SettingsPutData {
+    key: string
+    data: string
+    accessToken: string
+}
+
+export interface ReqData {
+    [key: string]: string
+}

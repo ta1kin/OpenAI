@@ -10,7 +10,7 @@ import type { UserInfo } from '../../types/type.info'
 
 export default {
     updateInfo: asyncHandler( async ( req: Request, res: Response ) => {
-        const info: UserInfo = req.body
+        const { data } : { data: UserInfo } = req.body
 
         let access_token
         let userFound
@@ -21,12 +21,14 @@ export default {
         
         if ( access_token ) userFound = await verifyToken( access_token, ACCESS )
 
-        prisma.info.update({
+        const result = await prisma.info.update({
             where: {
                 userId: userFound?.id
             },
-            data: info
+            data: { ...data }
         })
+
+        console.log( result )
 
         res.status( 200 ).json( { message: 'updated info' } )
     } )

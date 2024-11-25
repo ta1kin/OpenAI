@@ -59,16 +59,15 @@ model Config {
 }
 
 model Docs {
-  id        Int      @id               @default( autoincrement() )
+  id         Int      @id               @default( autoincrement() )
   createdAt  DateTime @default( now() ) @map( "created_at" )
   updatedAt  DateTime @updatedAt        @map( "updated_at" )
 
-  headline   String
-  mimeType   MimeType @default( PDF )
+  name       String
+  data       Bytes
   size       Int
-  content    Bytes
-  date       DateTime @default( now() )
-  formatDate String
+  date       BigInt
+  mimetype   String
 
   userId     Int      @map( "user_id" ) 
   User       User     @relation( fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade )
@@ -77,8 +76,4 @@ model Docs {
 enum Role {
   Admin
   Guest
-}
-
-enum MimeType {
-  PDF
 }

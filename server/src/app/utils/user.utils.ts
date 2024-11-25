@@ -27,5 +27,5 @@ export const DocsFields = {
 
 export const DocFields = {
     id: true,
-    content: true,
+    data: true,
 }

@@ -10,8 +10,8 @@
         "exit": "Logout"
     },
     "personal": {
-        "nickName": "Username:",
-        "fullName": "Full Name:",
+        "nickname": "Username:",
+        "name": "Full Name:",
         "phone": "Phone:"
     },
     "settings": {

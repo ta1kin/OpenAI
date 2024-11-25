@@ -35,7 +35,6 @@ const ResetForm = ({inputText, btnText, targetFunc}: ResetFormProps) => {
     }
     const handleBtn = async ( _event: MouseEvent<HTMLButtonElement> ) => {
         const data: { [key: string]: string } = {
-            email: email,
             accessToken: accessToken,
         }
         data[ targetFunc.key ] = value

@@ -33,7 +33,6 @@ const HomeLoad = ({ t, baseTextPath }: BaseProps) => {
         } else {
             alert( t(`${baseTextPath}.alert`) )
         }
-        
     }
 
     const handleDeleteFile = (index: number) => {
@@ -45,7 +44,7 @@ const HomeLoad = ({ t, baseTextPath }: BaseProps) => {
         await dispatch(
             loadDocsAsync(
                 {
-                    token: accessToken,
+                    accessToken: accessToken,
                     files: uploadedFiles
                 }
             )
@@ -74,7 +73,7 @@ const HomeLoad = ({ t, baseTextPath }: BaseProps) => {
                         {
                             uploadedFiles.map(
                                 (file, index) => (
-                                    <div className="files__item flex flex-row justify-between" key={file.name}>
+                                    <div className="files__item flex flex-row justify-between" key={index}>
                                         <p className="file__name">{ file.name }</p>
                                         <Button 
                                             className="icon" 

@@ -3,9 +3,12 @@ import { RouterPathes } from '@/config/config.router'
 
 import axios from 'axios'
 
-import type { HomeState } from '@/types/redux/interfaces/home'
+import type { HomeState, ReqData, SettingsPutData } from '@/types/redux/interfaces/home'
 
 type HomeState = typeof HomeState
+type SettingsPutData = typeof SettingsPutData
+type ReqData = typeof ReqData
+
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL
 const VITE_DELETE = import.meta.env.VITE_DELETE
@@ -14,8 +17,8 @@ const VITE_UPDATE_INFO = import.meta.env.VITE_UPDATE_INFO
 const initialState: HomeState = {
     variant: 0,
     personalInfo: {
-        nickName: '',
-        fullName: '',
+        nickname: '',
+        name: '',
         phone: '',
     },
     delErr: false,
@@ -24,18 +27,27 @@ const initialState: HomeState = {
 
 export const updatePersonalInfo = createAsyncThunk(
     `${RouterPathes.Home}/update`,
-    async ( data, _thunkAPI ) => {
+    async ( data: SettingsPutData, _thunkAPI ) => {
         if( !SERVER_URL || !VITE_UPDATE_INFO ) throw new Error( 'Не заданы пути для изменения данных!' )
+
+        const accessToken = data.accessToken
+
+        delete data.accessToken
         
-        // const response = await axios.put(
-        //     `${SERVER_URL}/${VITE_UPDATE_INFO}`,
-        //     {
-        //         email: data.email,
+        const response = await axios.put(
+            `${SERVER_URL}/${VITE_UPDATE_INFO}`,
+            {
+                data: data
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${ accessToken }`
+                }
+            }
+        )
 
-        //     }
-        // )
-
-        // if( response.status !== 200 ) throw new Error( 'Ошибка при изменении данных!' )
+        if( response.status !== 200 ) throw new Error( 'Ошибка при изменении данных!' )
+        
         return data
     }
 )
@@ -69,15 +81,6 @@ const homeSlice = createSlice({
         setPersonalInfo: (state, action) => {
             state.personalInfo = action.payload
         },
-        // setNick: (state, action) => {
-        //     state.personalInfo.nickName = action.payload
-        // },
-        // setFullName: (state, action) => {
-        //     state.personalInfo.fullName = action.payload
-        // },
-        // setPhone: (state, action) => {
-        //     state.personalInfo.phone = action.payload
-        // },
         toggleReset: state => {
             state.isReset = !state.isReset
         }
@@ -86,8 +89,10 @@ const homeSlice = createSlice({
         builder.addCase(updatePersonalInfo.pending, (state) => {
             state.delErr = false
         })
-        builder.addCase(updatePersonalInfo.fulfilled, (state, _action) => {
+        builder.addCase(updatePersonalInfo.fulfilled, (state, action) => {
             state.delErr = false
+            state.personalInfo = { ...state.personalInfo, ...action.payload }
+            console.log( state.personalInfo )
         })
         builder.addCase(updatePersonalInfo.rejected, (state) => {
             state.delErr = true

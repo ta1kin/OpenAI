@@ -1,4 +1,5 @@
 import express from 'express'
+import fileUpload from 'express-fileupload'
 import morgan from 'morgan'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
@@ -24,12 +25,15 @@ import { notFound, errorHandler } from './app/middlewares/error.middleware'
 const start = async () => {
   const app = express()
 
+  app.use( express.static('./src/public/data') )
   app.use( express.json() )
   app.use( cookieParser() )
   app.use( helmet() )
 
   if( isDev ) app.use( morgan( 'dev' ) )
   if( isDev ) app.use( cors() )
+
+  app.use( fileUpload() )
 
   app.use( '/api', homeRouter )
   app.use( '/api/auth', authRouter )

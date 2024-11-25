@@ -44,11 +44,11 @@ const HomeSettings = ({ t, baseTextPath }: BaseProps) => {
     const storeFuncList = [
         [
             {
-                key: 'nickName',
+                key: 'nickname',
                 func: updatePersonalInfo
             },
             {
-                key: 'fullName',
+                key: 'name',
                 func: updatePersonalInfo
             },
             {
@@ -72,11 +72,11 @@ const HomeSettings = ({ t, baseTextPath }: BaseProps) => {
                 targetFunc: func
             }
         )
+
         dispatch( toggleReset() )
     }
 
     const deleteProfile = async ( _event: MouseEvent<HTMLButtonElement> ) => {
-        console.log( 'delete profile' )
         await deleteAsync(accessToken)
         if( !delErr ) {
             dispatch(resetData())
