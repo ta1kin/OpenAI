@@ -11,22 +11,60 @@
     "experience": {
         "title": "Ключевые навыки:",
         "skills": [
-            "Node.js",
-            "Express.js",
-            "MongoDB",
-            "RESTful API",
-            "React.js",
-            "Vue.js",
-            "TypeScript",
-            "Docker",
-            "Kubernetes",
-            "Git",
-            "English (B2)",
-            "GraphQL",
-            "Prisma ORM",
-            "OAuth 2.0",
-            "CI/CD пайплайны",
-            "Web security best practices"
+            {
+                "title": "Frontend",
+                "items": [
+                    "Node.js",
+                    "Express.js",
+                    "MongoDB",
+                    "RESTful API",
+                    "React.js",
+                    "Vue.js",
+                    "TypeScript",
+                    "Docker"
+                ]
+            },
+            {
+                "title": "Backend",
+                "items": [
+                    "English (B2)",
+                    "GraphQL",
+                    "Prisma ORM",
+                    "OAuth 2.0",
+                    "CI/CD пайплайны",
+                    "Web security best practices"
+                ]
+            },
+            {
+                "title": "DevOps",
+                "items": [
+                    "Node.js",
+                    "Express.js",
+                    "MongoDB",
+                    "RESTful API",
+                    "React.js",
+                    "Vue.js",
+                    "TypeScript",
+                    "Docker",
+                    "Kubernetes",
+                    "Git"
+                ]
+            },
+            {
+                "title": "Прочее",
+                "items": [
+                    "Node.js",
+                    "Express.js",
+                    "MongoDB",
+                    "RESTful API",
+                    "React.js",
+                    "Vue.js",
+                    "TypeScript",
+                    "Docker",
+                    "Kubernetes",
+                    "Git"
+                ]
+            }
         ]
     },
     "projects": {

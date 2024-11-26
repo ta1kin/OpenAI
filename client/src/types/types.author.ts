@@ -7,3 +7,8 @@ export interface ProjectsListItem {
     headline: string
     link: string
 }
+
+export interface AuthorScills {
+    title: string
+    items: string[]
+}

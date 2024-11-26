@@ -1,12 +1,13 @@
 import PointSvg from '@/assets/icons/point.svg'
 
-import type { AuthorProps } from '@/types/types.author'
+import type { AuthorProps, AuthorScills } from '@/types/types.author'
 
 type AuthorProps = typeof AuthorProps
+type AuthorScills = typeof AuthorScills
 
 
 const AuthorExperience = ({ t, basePath }: AuthorProps) => {
-    const itemsList: string[] = t(`${basePath}.skills`, { returnObjects: true })
+    const itemsList: AuthorScills[] = t(`${basePath}.skills`, { returnObjects: true })
 
     return (
         <>
@@ -16,10 +17,21 @@ const AuthorExperience = ({ t, basePath }: AuthorProps) => {
                     <ul>
                         {
                             itemsList.map(
-                                (item, index) => (
-                                    <li key={index} className="flex flex-row items-center gap-[5px]">
-                                        <img src={PointSvg} alt="point-svg" />
-                                        <p className="description">{ item }</p>
+                                (block, index) => (
+                                    <li key={index} className="mt-[15px] flex flex-col items-start gap-[5px]">
+                                        <div className="flex flex-row items-center gap-[5px]">
+                                            <img src={PointSvg} alt="point-svg" />
+                                            <h2 className="description">{ block.title }:</h2>
+                                        </div>
+                                        <dl className="ml-[60px]">
+                                            {
+                                                block.items.map(
+                                                    (elem: string, ind: number) => (
+                                                        <li key={ind}>{ elem }</li>
+                                                    )
+                                                )
+                                            }
+                                        </dl>
                                     </li>
                                 )
                             )
