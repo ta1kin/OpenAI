@@ -20,5 +20,11 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@Components': fileURLToPath(new URL('./src/components', import.meta.url)),
     }
+  },
+  server: {
+    port: 4173,
+    strictPort: true,
+    host: true,
+    origin: "http://localhost:4173",
   }
 })
