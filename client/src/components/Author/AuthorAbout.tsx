@@ -9,7 +9,7 @@ const AuthorAbout = ({ t, basePath }: AuthorProps) => {
             <div className="content__block">
                 <h2 className="min-headline">{ t(`${basePath}.title`) }</h2>
                 <div className="block__items mt-[15px]">
-                    <p>{ t(`${basePath}.description`) }</p>
+                    <p className="paragraph">{ t(`${basePath}.description`) }</p>
                 </div>
             </div>
         </>

@@ -11,7 +11,7 @@ const initialState: AuthState = {
     whoIs: [],
     email: '',
     password: '',
-    accessToken: '',
+    accessToken: 'dcdcdcdcd',
     resetToken: '',
     saveMe: false,
     code: '',

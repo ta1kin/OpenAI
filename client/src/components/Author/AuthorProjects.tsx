@@ -23,8 +23,8 @@ const AuthorProjects = ({ t, basePath }: AuthorProps) => {
                                     <li key={index} className="flex flex-row items-start gap-[5px]">
                                         <img src={PointSvg} alt="point-svg" />
                                         <div>
-                                            <p>{ item.headline }</p>
-                                            <Link to={item.link}>{item.link}</Link>
+                                            <p className="description">{ item.headline }</p>
+                                            <Link  className="paragraph" to={item.link}>{item.link}</Link>
                                         </div>
                                     </li>
                                 )

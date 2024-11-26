@@ -8,7 +8,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import type { State } from '@/types/redux'
 import type { DocsFile } from '@/types/redux/interfaces/docs'
 import type { BaseProps } from '@/types/redux/interfaces/docs'
-import { useEffect } from 'react'
 
 type State = typeof State
 type BaseProps = typeof BaseProps

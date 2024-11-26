@@ -19,7 +19,7 @@ const AuthorExperience = ({ t, basePath }: AuthorProps) => {
                                 (item, index) => (
                                     <li key={index} className="flex flex-row items-center gap-[5px]">
                                         <img src={PointSvg} alt="point-svg" />
-                                        <p>{ item }</p>
+                                        <p className="description">{ item }</p>
                                     </li>
                                 )
                             )

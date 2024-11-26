@@ -1,11 +1,11 @@
-import type { InfoProps, DescriptionListItem, ImgObject } from '@/types/types.info'
-
 import AuthPng from '@/assets/img/auth.png'
 import Info from '@/assets/img/info.png'
 import Personal from '@/assets/img/personal.png'
 import Skills from '@/assets/img/skills.png'
 import Docs from '@/assets/img/docs.png'
 import Customizability from '@/assets/img/customizability.png'
+
+import type { InfoProps, DescriptionListItem, ImgObject } from '@/types/types.info'
 
 type InfoProps = typeof InfoProps
 type DescriptionListItem = typeof DescriptionListItem
