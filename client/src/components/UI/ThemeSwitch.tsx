@@ -1,5 +1,10 @@
 import { styled } from '@mui/material/styles'
+import { useSelector } from 'react-redux'
+
 import Switch from '@mui/material/Switch'
+
+import { State } from '@/types/redux'
+type State = typeof State
 
 
 const ThemeSwitch = styled(Switch)(({ theme }) => ({
@@ -58,4 +63,14 @@ const ThemeSwitch = styled(Switch)(({ theme }) => ({
     },
   }))
 
-export default ThemeSwitch
+const MySwitch = () => {
+  const theme = useSelector( (state: State) => state.settings.theme )
+
+  return (
+    <>
+      <ThemeSwitch checked={theme === 'dark'} />
+    </>
+  )
+}
+
+export default MySwitch

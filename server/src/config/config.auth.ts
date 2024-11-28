@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 
 import type { TokenVariant } from '../types/type.auth'
 
-dotenv.config({ path: 'src/.env' })
+dotenv.config({ path: '.env' })
 
 const ACCESS_SECRET = process.env.ACCESS_SECRET
 const REFRESH_SECRET = process.env.REFRESH_SECRET

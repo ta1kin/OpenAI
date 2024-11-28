@@ -25,9 +25,9 @@ const InfoHeader = () => {
         <>
             <header className="info-layout__header box">
                 <div className="w-full mt-[10px] mb-[10px]">
-                    <div className="w-full flex flex-wrap flex-row sm:justify-between justify-center gap-[40px]">
+                    <div className="w-full flex flex-wrap flex-row justify-between max-md:justify-center gap-[40px]">
                         <div className="flex flex-row items-center">
-                            <div className="">
+                            <div>
                                 <Link to={ RouterPathes.Info }>
                                     <img src={ HatSvg } alt="hat-logo" />
                                 </Link>
@@ -38,7 +38,7 @@ const InfoHeader = () => {
                             </div>
                         </div>
                         <ThemeAndLang />
-                        <nav className="mt-[20px] flex flex-row items-center gap-[30px]">
+                        <nav className=" flex flex-row items-center gap-[30px]">
                             <Link 
                                 to={ RouterPathes.Info }
                                 className={`nav__link ${link === 'first' ? 'is-active' : '' }`}
@@ -57,10 +57,10 @@ const InfoHeader = () => {
                     </div>
                     <div className="w-full mt-[40px] flex flex-row justify-between  max-md:justify-center">
                         <div className="w-[50%] max-md:w-full flex flex-col justify-center items-start gap-[20px]">
-                            <h2 className="headline w-[80%]">{ t(`${baseHeadPath}.text.headline`) }</h2>
-                            <p className="paragraph">{ t(`${baseHeadPath}.text.paragraph`) }</p>
+                            <h2 className="headline w-[80%] max-md:w-full">{ t(`${baseHeadPath}.text.headline`) }</h2>
+                            <p className="paragraph max-md:w-full">{ t(`${baseHeadPath}.text.paragraph`) }</p>
                             <Link to={ RouterPathes.Register  } className="w-full">
-                                <button className="btn w-[70%] max-sm:w-full">{ t(`${baseHeadPath}.text.button`) }</button>
+                                <button className="btn w-[70%] max-md:w-full">{ t(`${baseHeadPath}.text.button`) }</button>
                             </Link>
                         </div>
                         <div className="bottom__img w-[50%] flex flex-col justify-center items-end max-lg:w-[30%] max-md:hidden">

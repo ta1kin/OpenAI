@@ -24,7 +24,7 @@ const AuthorExperience = ({ t, basePath }: AuthorProps) => {
                                             <img src={PointSvg} alt="point-svg" />
                                             <h2 className="description">{ block.title }:</h2>
                                         </div>
-                                        <dl className="ml-[100px]">
+                                        <dl className="ms:ml-[100px] ml-[50px]">
                                             {
                                                 block.items.map(
                                                     (elem: string, ind: number) => (

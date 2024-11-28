@@ -33,7 +33,7 @@ const DocsContent = ({i18nPath, t}: PageProps) => {
                             </div>
                         </div>
                         :
-                        <div>
+                        <div className="text-center">
                             <p className="sub-headline">{ t(`${i18nPath}:void`) }</p>
                         </div>
                 }

@@ -46,7 +46,7 @@ const HomeContent = ({i18nPath, t}: PageProps) => {
     return (
         <>
             <div className="home-page__content w-full flex flex-row">
-                <aside className="content__aside">
+                <aside className="content__aside closed">
                     <ul className="aside__list">
                         <div className="list__header w-full flex flex-row justify-between items-center">
                             <p className="description">{ t(`${i18nPath}:nav.panel`) }</p>

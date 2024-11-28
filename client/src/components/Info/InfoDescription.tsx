@@ -26,7 +26,7 @@ const InfoDescription = ({ t, basePath }: InfoProps) => {
 
     return (
         <>
-            <div className="content__description-site w-full flex flex-row justify-between flex-wrap gap-[20px]">
+            <div className="content__description-site w-full flex flex-row max-md:flex-col md:justify-between flex-wrap gap-[20px]">
                 {
                     itemList.map(
                         ( item, index ) => (

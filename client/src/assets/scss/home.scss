@@ -36,6 +36,11 @@
     border-top: 1.5px solid var(--home-line);
     border-bottom: 1.5px solid var(--home-line);
 
+    @media ( max-width: 600px ) {
+        overflow-x: scroll;
+    }
+    overflow-x: auto;
+
     .MuiButtonBase-root {
         color: var(--home-btn-color);
         font-weight: 600;
@@ -59,12 +64,13 @@
     }
 
     .content__aside {
-        width: 18%;
+        width: 250px;
         height: 85lvh;
         border: 1px solid var(--home-line);
+        position: relative;
 
         .aside__list {
-            width: 100%;
+            width: 250px;
             height: 100%;
             display: flex;
             flex-direction: column;

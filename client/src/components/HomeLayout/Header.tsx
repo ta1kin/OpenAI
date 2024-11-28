@@ -37,14 +37,14 @@ const HomeHeader = () => {
     return (
         <>
             <div className="home-layout__header box">
-                <div className="w-full flex flex-row justify-between items-center">
+                <div className="w-full flex flex-row flex-wrap justify-between max-lg:justify-center items-center gap-5">
                     <div className="flex flex-row items-center gap-4">
                         <img className="person-img" src={ManSvg} alt="" />
-                        <h2 className="description">{email}</h2>
+                        <h2 className="description">{email}xcdfbdfnfndfgndfndfn</h2>
                     </div>
-                    <div className="flex flex-row items-center gap-10">
+                    <div className="flex flex-row max-[480px]:flex-col items-center gap-10">
                         <ThemeAndLang />
-                        <Link to={toItem.to} className="w-[220px]">
+                        <Link to={toItem.to} className="w-[220px] max-[480px]:260px">
                             <Button variant="contained" className="btn w-full">
                                 { toItem.text }
                             </Button>

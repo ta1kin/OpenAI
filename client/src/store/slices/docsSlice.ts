@@ -15,7 +15,20 @@ const VITE_LOAD_DOCS = import.meta.env.VITE_LOAD_DOCS
 const VITE_GET_DOC = import.meta.env.VITE_GET_DOC
 
 const initialState: DocsState = {
-    fileList: [],
+    fileList: [
+        {
+            id: 0,
+            headline: 'dfbdfbdfbdfbdfbdf',
+            date: 446252351,
+            formatDate: '12.12.2020',
+        },
+        {
+            id: 1,
+            headline: 'dfbdfbdfbdfbdfbdf',
+            date: 446252351,
+            formatDate: '12.12.2020',
+        }
+    ],
     select: '',
     search: '',
     targetId: null,
