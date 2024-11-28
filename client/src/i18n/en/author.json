@@ -1,42 +1,76 @@
 {
-    "title": "About the Author",
-    "header": {
-      "title": "Resume Presentation",
-      "description": "The author possesses a wide range of technical skills and knowledge that allow him to create high-quality web solutions. A list of skills and abilities will be presented below on this page!"
-    },
-    "about": {
+  "title": "About the Author",
+  "header": {
+      "title": "Ilya Dmitrievich Taraskin: \"Full Stack Node.js Developer\"",
+      "description": "Possesses a wide range of technical skills and knowledge that allow him to create high-quality web solutions. The list of skills and abilities will be presented below on this page!"
+  },
+  "about": {
       "title": "About the Author:",
-      "description": "Hardworking FullStack developer with deep knowledge of Node.js and extensive technical portfolio has rich experience in web application development and microservice architecture. He worked in various startups, large companies, and as a freelancer, allowing him to accumulate valuable experience in various IT fields. The specialist has deep knowledge of Node.js and modern frameworks (Express.js, Koa.js), flexible work with various databases (MongoDB, PostgreSQL, Redis) and confident understanding of RESTful API and GraphQL. He is also experienced in working with modern frontend technologies (React.js, Angular.js, Vue.js) and DevOps practices. Constantly self-improving, this specialist regularly participates in conferences and meetups, reads technical literature, and actively uses online platforms for learning. High level of responsibility, ability to effectively manage time and prioritize tasks, excellent communication skills and teamwork skills - all this makes him a valuable employee. Flexibility in adapting to new technologies and processes, striving for continuous improvement of code quality and system performance - these are key features of this specialist's work. He is ready to apply his skills to create innovative projects and participate in developing complex systems, constantly striving for self-improvement and ready to quickly adapt to market changes."
-    },
-    "experience": {
+      "description": "Being essentially a hardworking and persistent person, I have a strong desire to constantly develop myself in the field of FullStack development using Node.js. I am punctual and responsible, always striving to fulfill my obligations and achieve set goals. My experience includes developing full-cycle web applications using Node.js and related frameworks, creating secure web applications. I am well-versed in asynchronous programming and event-driven architecture. My desire for self-development and deepening knowledge allows me to constantly learn new technologies and innovative approaches in development. I'm ready to work overtime when necessary to complete all promised tasks. For me, the main thing is not just to perform the work, but to do it qualitatively and on time. I strive to find a job where I can develop, learn something new, and absorb the experience of more experienced colleagues. I'm ready to apply my skills and knowledge to create efficient, scalable, and secure web applications using Node.js and modern development practices."
+  },
+  "experience": {
       "title": "Key Skills:",
       "skills": [
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "RESTful API",
-        "React.js",
-        "Vue.js",
-        "TypeScript",
-        "Docker",
-        "Kubernetes",
-        "Git",
-        "English (B2)",
-        "GraphQL",
-        "Prisma ORM",
-        "OAuth 2.0",
-        "CI/CD pipelines",
-        "Web security best practices"
+          {
+              "title": "Client-side",
+              "items": [
+                  "HTML5",
+                  "CSS3",
+                  "JavaScript",
+                  "TypeScript",
+                  "jQuery",
+                  "Gulp",
+                  "Webpack",
+                  "Vite",
+                  "Vue.js",
+                  "React.js",
+                  "Nuxt.js",
+                  "Next.js"
+              ]
+          },
+          {
+              "title": "Server-side",
+              "items": [
+                  "Node.js",
+                  "Express.js",
+                  "Nest.js",
+                  "RESTful API",
+                  "GraphQL",
+                  "PostgreSQL",
+                  "Redis",
+                  "MongoDB"
+              ]
+          },
+          {
+              "title": "Administration",
+              "items": [
+                  "Docker",
+                  "Docker Compose",
+                  "K8s (Kubernetes)",
+                  "Linux",
+                  "CI/CD",
+                  "Git",
+                  "Unit testing",
+                  "E2e testing"
+              ]
+          },
+          {
+              "title": "Other",
+              "items": [
+                  "Go",
+                  "PHP",
+                  "Python"
+              ]
+          }
       ]
-    },
-    "projects": {
+  },
+  "projects": {
       "title": "Created Projects:",
       "items": [
-        {
-          "headline": "Title:",
-          "link": "http://localhost:5173/author"
-        }
+          {
+              "headline": "Title:",
+              "link": "http://localhost:5173/author"
+          }
       ]
-    }
   }
-  
+}

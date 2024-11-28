@@ -1,4 +1,5 @@
 import PointSvg from '@/assets/icons/point.svg'
+import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 
 import type { AuthorProps, AuthorScills } from '@/types/types.author'
 
@@ -23,11 +24,14 @@ const AuthorExperience = ({ t, basePath }: AuthorProps) => {
                                             <img src={PointSvg} alt="point-svg" />
                                             <h2 className="description">{ block.title }:</h2>
                                         </div>
-                                        <dl className="ml-[60px]">
+                                        <dl className="ml-[100px]">
                                             {
                                                 block.items.map(
                                                     (elem: string, ind: number) => (
-                                                        <li key={ind}>{ elem }</li>
+                                                        <div key={ind} className="flex flex-row gap-2">
+                                                            <ArrowRightIcon />
+                                                            <li className="description">{ elem }</li>
+                                                        </div>
                                                     )
                                                 )
                                             }

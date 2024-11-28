@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link, useLocation  } from 'react-router-dom'
 import { RouterPathes } from '@/config/config.router'
 
 import HatSvg from '@/assets/icons/Hat.svg'
@@ -12,8 +12,11 @@ const InfoHeader = () => {
     const i18nPath = 'infoLayout'
     const baseHeadPath = `${i18nPath}:header`
     const { t } = useTranslation([ i18nPath ])
+    const location= useLocation ()
 
-    const [ link, setLink ] = useState('first')
+    const [ link, setLink ] = useState(
+        location.pathname === RouterPathes.Info ? 'first' : 'second'
+    )
 
     const handleFirstLink = () => setLink('first')
     const handleSecondLink = () => setLink('second')

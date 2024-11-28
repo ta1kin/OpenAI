@@ -1,12 +1,10 @@
-FROM node:18-alpine
+FROM node:20-alpine
 
-WORKDIR /api
+WORKDIR /server
 
-COPY package*.json ./
+COPY ./server .
 
 RUN npm install
-
-COPY . .
 
 EXPOSE 3000
 
