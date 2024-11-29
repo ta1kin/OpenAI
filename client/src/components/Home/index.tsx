@@ -1,4 +1,4 @@
-import { ReactElement, MouseEvent } from 'react'
+import { ReactElement, MouseEvent, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setVariant } from '@/store/slices/homeSlice'
@@ -22,6 +22,8 @@ const HomeContent = ({i18nPath, t}: PageProps) => {
     const basePersonalPath = `${i18nPath}:personal`
     const baseSettingsPath = `${i18nPath}:settings`
     const baseLoadPath = `${i18nPath}:load`
+
+    const [ isClosed, setClosed ] = useState(true)
     
     const componentList: ReactElement[] = [
         <HomePersonal t={t} baseTextPath={basePersonalPath} />,
@@ -42,15 +44,19 @@ const HomeContent = ({i18nPath, t}: PageProps) => {
         dispatch(resetData())
         navigate(RouterPathes.Info)
     }
+    const handleClickNav = (_event: MouseEvent<HTMLButtonElement>) => {
+        setClosed( !isClosed )
+    }
+
 
     return (
         <>
             <div className="home-page__content w-full flex flex-row">
-                <aside className="content__aside closed">
+                <aside className={`content__aside ${isClosed ? 'closed' : ''}`}>
                     <ul className="aside__list">
-                        <div className="list__header w-full flex flex-row justify-between items-center">
+                        <div className="list__header w-full flex flex-row justify-between max-[550px]:justify-end items-center">
                             <p className="description">{ t(`${i18nPath}:nav.panel`) }</p>
-                            <Button className="icon" variant="text">
+                            <Button className="icon" variant="text" onClick={handleClickNav}>
                                 <LayersIcon /> 
                             </Button>
                         </div>
@@ -78,7 +84,7 @@ const HomeContent = ({i18nPath, t}: PageProps) => {
                         </li>
                     </ul>
                 </aside>
-                <main className="content__main">
+                <main className="content__main w-full">
                     { componentList[variant] }
                 </main>
             </div>

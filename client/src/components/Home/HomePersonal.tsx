@@ -21,7 +21,7 @@ const HomePersonal = ({ t, baseTextPath }: BaseProps) => {
                         (key, index) => (
                             <div key={index}>
                                 <h3 className="description">{t(`${baseTextPath}.${key}`)}</h3>
-                                <h4 className="ml-10">{personalInfo[ key ]}</h4>
+                                <h4 className="ml-10 max-md:ml-5">{personalInfo[ key ]}</h4>
                             </div>
                         )
                     )

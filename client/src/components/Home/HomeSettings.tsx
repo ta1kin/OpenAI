@@ -98,15 +98,15 @@ const HomeSettings = ({ t, baseTextPath }: BaseProps) => {
                 {
                     settingBlocks.map(
                         ( elem, i ) => (
-                            <div className="settings__block" key={i} >
-                                <h2 className="description">{ elem.headline }</h2>
-                                <ul className="ml-5 flex flex-col gap-[5px]">
+                            <div className="settings__block w-full" key={i} >
+                                <h2 className="description  w-full">{ elem.headline }</h2>
+                                <ul className="ml-5 flex flex-col gap-[5px] w-full">
                                     {
                                         elem.list.map(
                                             ( item: BlockItem, j: number ) => (
-                                                <li key={j}>
+                                                <li key={j} className="w-full">
                                                     <Button 
-                                                        className="icon w-[30%]"
+                                                        className="icon w-[30%] max-md:w-[57%] max-sm:w-full"
                                                         variant="text"
                                                         onClick={
                                                             _event => resetSetting( item.inp, item.btn, storeFuncList[i][j] )
@@ -124,7 +124,7 @@ const HomeSettings = ({ t, baseTextPath }: BaseProps) => {
                     )
                 }
                 <Button 
-                    className="btn w-[20%]"
+                    className="btn w-[25%] max-lg:w-[35%] max-md:w-[45%] max-sm:w-full"
                     variant="contained"
                     onClick={deleteProfile}
                 >

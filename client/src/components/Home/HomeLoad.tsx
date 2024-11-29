@@ -55,7 +55,7 @@ const HomeLoad = ({ t, baseTextPath }: BaseProps) => {
     return (
         <>
             <div className="main__load flex flex-row">
-                <main className="load__body">
+                <main className="load__body w-[70%] max-md:w-full">
                     <input
                         type="file"
                         multiple
@@ -68,39 +68,43 @@ const HomeLoad = ({ t, baseTextPath }: BaseProps) => {
                         <h2 className="description">{ t(`${baseTextPath}.input`) }</h2>
                     </div>
                 </main>
-                <aside className="load__files w-full flex flex-col gap-[20px]">
-                    <div className="w-full flex flex-col gap-[10px]">
-                        {
-                            uploadedFiles.map(
-                                (file, index) => (
-                                    <div className="files__item flex flex-row justify-between" key={index}>
-                                        <p className="file__name">{ file.name }</p>
-                                        <Button 
-                                            className="icon" 
-                                            variant="text"
-                                            onClick={_event => handleDeleteFile(index)}
-                                        >
-                                            <CloseIcon /> 
-                                        </Button>
-                                    </div>
-                                )
-                            )
-                        }
-                    </div>
-                    {
-                        Boolean( uploadedFiles.length )
-                            &&
-                            <Button 
-                                className="btn w-full"
-                                title="сохранить"
-                                variant="contained"
-                                onClick={handleSaveFiles}
-                            >
-                                { t(`${baseTextPath}.save`) }
-                                <SaveIcon className="ml-2" /> 
-                            </Button>
-                    }
-                </aside>
+                {
+                    Boolean( uploadedFiles.length )
+                        &&
+                        <aside className="load__files flex flex-col gap-[20px]">
+                            <div className="w-full flex flex-col gap-[10px]">
+                                {
+                                    uploadedFiles.map(
+                                        (file, index) => (
+                                            <div className="files__item flex flex-row justify-between" key={index}>
+                                                <p className="file__name">{ file.name }</p>
+                                                <Button 
+                                                    className="icon" 
+                                                    variant="text"
+                                                    onClick={_event => handleDeleteFile(index)}
+                                                >
+                                                    <CloseIcon /> 
+                                                </Button>
+                                            </div>
+                                        )
+                                    )
+                                }
+                            </div>
+                            {
+                                Boolean( uploadedFiles.length )
+                                    &&
+                                    <Button 
+                                        className="btn w-full"
+                                        title="сохранить"
+                                        variant="contained"
+                                        onClick={handleSaveFiles}
+                                    >
+                                        { t(`${baseTextPath}.save`) }
+                                        <SaveIcon className="ml-2" /> 
+                                    </Button>
+                            }
+                        </aside>
+                }
             </div>
         </>
     )
