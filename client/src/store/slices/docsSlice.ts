@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RouterPathes } from '@/config/config.router'
+import { SERVER_URL, VITE_LOAD_DOCS } from '@/config/api.config'
 
 import axios from 'axios'
 
@@ -9,10 +10,6 @@ type DocsState = typeof DocsState
 type LoadData = typeof LoadData
 type FileListItem= typeof FileListItem
 
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL
-const VITE_LOAD_DOCS = import.meta.env.VITE_LOAD_DOCS
-const VITE_GET_DOC = import.meta.env.VITE_GET_DOC
 
 const initialState: DocsState = {
     fileList: [
@@ -38,7 +35,6 @@ const initialState: DocsState = {
 export const getDocAsync = createAsyncThunk(
     `${RouterPathes.Docs}/get-doc`,
     async ( data: LoadData, _thunkAPI ) => {
-        if( !SERVER_URL || !VITE_GET_DOC ) throw new Error( 'Не заданы пути для получения читаемого файла!' )
         
         const response = await axios.get(
             `${SERVER_URL}/${VITE_LOAD_DOCS}/${data.bookId}`,
@@ -58,7 +54,6 @@ export const getDocAsync = createAsyncThunk(
 export const loadDocsAsync = createAsyncThunk(
     `${RouterPathes.Docs}/load-docs`,
     async ( data: LoadData, _thunkAPI ) => {
-        if( !SERVER_URL || !VITE_LOAD_DOCS ) throw new Error( 'Не заданы пути для загрузки файлов!' )
         
         const response = await axios.post(
             `${SERVER_URL}/${VITE_LOAD_DOCS}`,

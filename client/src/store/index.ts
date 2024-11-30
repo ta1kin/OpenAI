@@ -20,7 +20,6 @@ import authReducer from './slices/authSlice'
 import recoveryPassReducer from './slices/recoveryPassSlice'
 import homeReducer from './slices/homeSlice'
 import docsReducer from './slices/docsSlice'
-import bookReducer from './slices/bookSlice'
 
 
 const rootReducer = combineReducers(
@@ -33,7 +32,6 @@ const rootReducer = combineReducers(
         recoveryPass: recoveryPassReducer,
         home: homeReducer,
         docs: docsReducer,
-        book: bookReducer,
     }
 )
 

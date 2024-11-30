@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RouterPathes } from '@/config/config.router'
+import { SERVER_URL, SING_UP } from '@/config/api.config'
 
 import axios from 'axios'
 
@@ -10,8 +11,6 @@ import type { SingUpState } from '@/types/redux/interfaces/singUp'
 type SingUpState = typeof SingUpState
 type RegisterData = typeof RegisterData
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL
-const SING_UP = import.meta.env.VITE_SING_UP
 
 const initialState: SingUpState = {
     step: 0,
@@ -24,7 +23,6 @@ const initialState: SingUpState = {
 export const registerAsync = createAsyncThunk(
     `${RouterPathes.Register}/register`,
     async ( data: RegisterData, _thunkAPI ) => {
-        if( !SERVER_URL || !SING_UP ) throw new Error( 'Не заданы пути для регистрации!' )
         
         const response = await axios.post(
             `${SERVER_URL}/${SING_UP}`,

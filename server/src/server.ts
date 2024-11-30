@@ -14,6 +14,7 @@ import docsRouter from './app/docs/docs.router'
 import {
   PORT,
   HOST,
+  POSTFIX,
   isDev
 } from './config/config.server'
 
@@ -35,18 +36,18 @@ const start = async () => {
 
   app.use( fileUpload() )
 
-  app.use( '/api', homeRouter )
-  app.use( '/api/auth', authRouter )
-  app.use( '/api', configRouter )
-  app.use( '/api', infoRouter )
-  app.use( '/api', docsRouter )
+  app.use( `/${POSTFIX}`, homeRouter )
+  app.use( `/${POSTFIX}/auth`, authRouter )
+  app.use( `/${POSTFIX}`, configRouter )
+  app.use( `/${POSTFIX}`, infoRouter )
+  app.use( `/${POSTFIX}`, docsRouter )
 
   app.use( notFound )
   app.use( errorHandler )
 
 
   app.listen( PORT, HOST, () => {
-    console.log( `\n🚀 Сервер запущен по адресу: http://${ HOST }:${ PORT }/api\n` )
+    console.log( `\n🚀 Сервер запущен по адресу: http://${ HOST }:${ PORT }/${POSTFIX}\n` )
   } )
 }
 

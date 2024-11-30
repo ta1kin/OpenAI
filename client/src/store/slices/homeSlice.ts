@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RouterPathes } from '@/config/config.router'
+import { SERVER_URL, VITE_DELETE, VITE_UPDATE_INFO } from '@/config/api.config'
 
 import axios from 'axios'
 
@@ -8,10 +9,6 @@ import type { HomeState, SettingsPutData } from '@/types/redux/interfaces/home'
 type HomeState = typeof HomeState
 type SettingsPutData = typeof SettingsPutData
 
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL
-const VITE_DELETE = import.meta.env.VITE_DELETE
-const VITE_UPDATE_INFO = import.meta.env.VITE_UPDATE_INFO
 
 const initialState: HomeState = {
     variant: 0,
@@ -27,7 +24,6 @@ const initialState: HomeState = {
 export const updatePersonalInfo = createAsyncThunk(
     `${RouterPathes.Home}/update`,
     async ( data: SettingsPutData, _thunkAPI ) => {
-        if( !SERVER_URL || !VITE_UPDATE_INFO ) throw new Error( 'Не заданы пути для изменения данных!' )
 
         const accessToken = data.accessToken
 
@@ -54,7 +50,6 @@ export const updatePersonalInfo = createAsyncThunk(
 export const deleteAsync = createAsyncThunk(
     `${RouterPathes.Home}/delete`,
     async ( accessToken, _thunkAPI ) => {
-        if( !SERVER_URL || !VITE_DELETE ) throw new Error( 'Не заданы пути для удаления!' )
         
         console.log( accessToken )
 

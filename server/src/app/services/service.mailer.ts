@@ -1,27 +1,9 @@
 import nodemailer from 'nodemailer'
 import ejs from 'ejs'
-import dotenv from 'dotenv'
 import path from 'path'
 
-dotenv.config({ path: 'src/.env' })
-const HOST = process.env.HOST || 'localhost'
-const PORT = process.env.PORT || 3000
-
-const MAIL_SERVICE = process.env.EMAIL_SERVICE
-const MAIL_HOST = process.env.EMAIL_HOST
-const MAIL_PORT = Number( process.env.EMAIL_PORT )
-const MAIL_USER = process.env.EMAIL_USER
-const MAIL_PASS = process.env.EMAIL_PASS
-
-if(
-    !MAIL_SERVICE ||
-    !MAIL_HOST ||
-    !MAIL_PORT ||
-    !MAIL_USER ||
-    !MAIL_PASS
-) {
-    throw Error( 'Don`t have one of the mail settings!' )
-} 
+import { HOST, PORT } from '../../config/config.server'
+import { MAIL_SERVICE, MAIL_HOST, MAIL_PORT, MAIL_USER, MAIL_PASS } from '../../config/mailer.config'
 
 
 const transporter = nodemailer.createTransport( {

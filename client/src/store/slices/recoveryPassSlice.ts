@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { RouterPathes } from '@/config/config.router'
+import { SERVER_URL, VERIFY_EMAIL, VERIFY_CODE, RECOVERY_PASS } from '@/config/api.config'
 
 import axios from 'axios'
 
@@ -7,11 +8,6 @@ import type { RecoveryPassState } from '@/types/redux/interfaces/recoveryPass'
 
 type RecoveryPassState = typeof RecoveryPassState
 
-
-const SERVER_URL = import.meta.env.VITE_SERVER_URL
-const VERIFY_EMAIL = import.meta.env.VITE_VERIFY_EMAIL
-const VERIFY_CODE = import.meta.env.VITE_VERIFY_CODE
-const RECOVERY_PASS = import.meta.env.VITE_RECOVERY_PASS
 
 const initialState: RecoveryPassState = {
     step: 0,
@@ -24,8 +20,6 @@ const initialState: RecoveryPassState = {
 export const verifyEmailAsync = createAsyncThunk(
     `${RouterPathes.Recovery}/verify-email`,
     async ( email, _thunkAPI ) => {
-        
-        if( !SERVER_URL || !VERIFY_EMAIL ) throw new Error('Нет путей для верификации почты')
 
         const response = await axios.put(
             `${SERVER_URL}/${VERIFY_EMAIL}`,
@@ -41,7 +35,6 @@ export const verifyEmailAsync = createAsyncThunk(
 export const verifyCodeAsync = createAsyncThunk(
     `${RouterPathes.Recovery}/verify-code`,
     async ( data, _thunkAPI ) => {
-        if( !SERVER_URL || !VERIFY_CODE ) throw new Error('Нет путей для верификации кода')
         
         const response = await axios.post(
             `${SERVER_URL}/${VERIFY_CODE}`,
@@ -57,7 +50,6 @@ export const verifyCodeAsync = createAsyncThunk(
 export const sendNewPassAsync = createAsyncThunk(
     `${RouterPathes.Recovery}/send-new-pass`,
     async ( data, _thunkAPI ) => {
-        if( !SERVER_URL || !RECOVERY_PASS ) throw new Error('Нет путей для верификации кода')
         
         const response = await axios.post(
             `${SERVER_URL}/${RECOVERY_PASS}`,
