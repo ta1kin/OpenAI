@@ -51,6 +51,12 @@ const singInSlice = createSlice({
         resetValid: state => {
             state.isValid = true 
         },
+        resetSingInState: state => {
+            state.step = 0
+            state.isClicked = false
+            state.isLoading = false
+            state.isValid = true
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(loginAsync.pending, (state) => {
@@ -67,5 +73,5 @@ const singInSlice = createSlice({
     }
 })
 
-export const { nextStep, prevStep, onIsClicked, resetValid } = singInSlice.actions
+export const { nextStep, prevStep, onIsClicked, resetValid, resetSingInState } = singInSlice.actions
 export default singInSlice.reducer

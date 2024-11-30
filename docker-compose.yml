@@ -27,6 +27,8 @@ services:
     build: ./server
     environment:
       - DATABASE_URL=postgresql://postgres:password@db:5432/magic
+      - HOST=0.0.0.0
+      - EMAIL_TO=localhost
       - REDIS_PORT=6379
       - REDIS_HOST=redis
     depends_on:
@@ -40,7 +42,7 @@ services:
   client:
     build: ./client
     environment:
-      - VITE_SERVER_URL=http://localhost:3000/api
+      - VITE_SERVER_URL=http://localhost/api
     depends_on:
       - server
     networks:
@@ -51,7 +53,7 @@ services:
   proxy:
     build: ./nginx
     depends_on:
-      - client
+      # - client
       - server
     networks:
       - planner_network
@@ -61,3 +63,4 @@ services:
 networks:
   planner_network:
     driver: bridge
+    

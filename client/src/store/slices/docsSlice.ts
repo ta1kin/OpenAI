@@ -12,20 +12,7 @@ type FileListItem= typeof FileListItem
 
 
 const initialState: DocsState = {
-    fileList: [
-        {
-            id: 0,
-            headline: 'dfbdfbdfbdfbdfbdf',
-            date: 446252351,
-            formatDate: '12.12.2020',
-        },
-        {
-            id: 1,
-            headline: 'dfbdfbdfbdfbdfbdf',
-            date: 446252351,
-            formatDate: '12.12.2020',
-        }
-    ],
+    fileList: [],
     select: '',
     search: '',
     targetId: null,

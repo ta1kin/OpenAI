@@ -79,6 +79,12 @@ const recoveryPassSlice = createSlice({
         onIsClicked: state => {
             state.isClicked = true
         },
+        resetRecoveryState: state => {
+            state.step = 0
+            state.isClicked = false
+            state.isLoading = false
+            state.codeIsValid = true
+        }
     },
     extraReducers: (builder) => {
         // verifyEmailAsync
@@ -122,5 +128,5 @@ const recoveryPassSlice = createSlice({
     }
 })
 
-export const { nextStep, prevStep, onIsClicked } = recoveryPassSlice.actions
+export const { nextStep, prevStep, onIsClicked, resetRecoveryState } = recoveryPassSlice.actions
 export default recoveryPassSlice.reducer

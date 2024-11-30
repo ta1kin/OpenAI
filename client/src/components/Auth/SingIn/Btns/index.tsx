@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { loginAsync, onIsClicked, resetValid } from '@/store/slices/singInSlice'
+import { loginAsync, onIsClicked, resetValid, resetSingInState } from '@/store/slices/singInSlice'
 import { setAccessToken, setRole, resetData } from '@/store/slices/authSlice'
 import { setPersonalInfo } from '@/store/slices/homeSlice'
 import { setTheme } from '@/store/slices/settingsSlice'
@@ -40,9 +40,9 @@ const SingInBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
             console.log( payload )
 
             if( payload ) {
-                dispatch(setAccessToken(payload.accessToken))
-                dispatch(setRole(payload.role))
-                dispatch(setTheme(payload.theme))
+                dispatch( setAccessToken(payload.accessToken) )
+                dispatch( setRole(payload.role) )
+                dispatch( setTheme(payload.theme) )
                 dispatch(
                     setPersonalInfo(
                         {
@@ -52,13 +52,14 @@ const SingInBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
                         }
                     )
                 )
-                dispatch(resetValid())
+                dispatch( resetValid() )
                 navigate( RouterPathes.Home )
             }
         }
     }
     const handlePrev = () => {
         navigate( RouterPathes.Register )
+        dispatch( resetSingInState() )
         dispatch(resetData())
     }
 

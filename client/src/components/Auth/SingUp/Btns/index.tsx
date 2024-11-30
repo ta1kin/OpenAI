@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { RouterPathes } from '@/config/config.router'
-import { nextStep, prevStep, registerAsync, onIsClicked, resetStep } from '@/store/slices/singUpSlice'
+import { nextStep, prevStep, registerAsync, onIsClicked, resetStep, resetSingUpState } from '@/store/slices/singUpSlice'
 import { resetData } from '@/store/slices/authSlice'
 
 import Button from '@mui/material/Button'
@@ -60,7 +60,8 @@ const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
             case 3: {
                 if( isValid ) {
                     navigate( RouterPathes.Login )
-                    dispatch(resetData())
+                    dispatch( resetSingUpState() )
+                    dispatch( resetData() )
                 } else {
                     dispatch(resetStep())
                 }
@@ -74,6 +75,7 @@ const SingUpBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
         switch ( step ) {
             case 0: {
                 navigate( RouterPathes.Info )
+                dispatch( resetSingUpState() )
                 break
             }
             default:  {

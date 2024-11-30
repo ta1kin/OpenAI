@@ -1,7 +1,12 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Link, useLocation  } from 'react-router-dom'
 import { RouterPathes } from '@/config/config.router'
+import { resetData } from '../../store/slices/authSlice'
+import { resetRecoveryState } from '@/store/slices/recoveryPassSlice'
+import { resetSingInState } from '@/store/slices/singInSlice'
+import { resetSingUpState } from '@/store/slices/singUpSlice'
 
 import HatSvg from '@/assets/icons/Hat.svg'
 import DraftSvg from '@/assets/icons/Draft.svg'
@@ -12,7 +17,9 @@ const InfoHeader = () => {
     const i18nPath = 'infoLayout'
     const baseHeadPath = `${i18nPath}:header`
     const { t } = useTranslation([ i18nPath ])
+
     const location= useLocation ()
+    const dispatch = useDispatch()
 
     const [ link, setLink ] = useState(
         location.pathname === RouterPathes.Info ? 'first' : 'second'
@@ -20,6 +27,13 @@ const InfoHeader = () => {
 
     const handleFirstLink = () => setLink('first')
     const handleSecondLink = () => setLink('second')
+
+    const handleToAuth = () => {
+        dispatch( resetData() )
+        dispatch( resetRecoveryState() )
+        dispatch( resetSingInState() )
+        dispatch( resetSingUpState() )
+    }
 
     return (
         <>
@@ -59,7 +73,11 @@ const InfoHeader = () => {
                         <div className="w-[50%] max-md:w-full flex flex-col justify-center items-start gap-[20px]">
                             <h2 className="headline w-[80%] max-md:w-full">{ t(`${baseHeadPath}.text.headline`) }</h2>
                             <p className="paragraph max-md:w-full">{ t(`${baseHeadPath}.text.paragraph`) }</p>
-                            <Link to={ RouterPathes.Register  } className="w-full">
+                            <Link 
+                                to={ RouterPathes.Register  }
+                                className="w-full"
+                                onClick={handleToAuth}
+                            >
                                 <button className="btn w-[70%] max-md:w-full">{ t(`${baseHeadPath}.text.button`) }</button>
                             </Link>
                         </div>

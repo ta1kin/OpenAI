@@ -7,7 +7,8 @@ import
     { 
         nextStep, prevStep, 
         verifyEmailAsync, verifyCodeAsync, 
-        sendNewPassAsync, onIsClicked 
+        sendNewPassAsync, onIsClicked,
+        resetRecoveryState
     } 
     from '@/store/slices/recoveryPassSlice'
 import { RouterPathes } from '@/config/config.router'
@@ -87,7 +88,8 @@ const RecoveryBtns = ( { i18nPath, baseBtnsPath }: BtnsProps ) => {
             }
             case maxStep - 1: {
                 navigate( RouterPathes.Login )
-                dispatch(resetData())
+                dispatch( resetData() )
+                dispatch( resetRecoveryState() )
                 break
             }
             default: {

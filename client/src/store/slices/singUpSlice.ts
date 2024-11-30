@@ -56,6 +56,13 @@ const singUpSlice = createSlice({
         resetStep: (state: SingUpState) => {
             state.isValid = true
             state.step = 0
+        },
+        resetSingUpState: state => {
+            state.step = 0
+            state.maxStep = 3
+            state.isClicked = false
+            state.isLoading = false
+            state.isValid = true
         }
     },
     extraReducers: (builder) => {
@@ -75,5 +82,5 @@ const singUpSlice = createSlice({
     }
 })
 
-export const { nextStep, prevStep, onIsClicked, resetStep } = singUpSlice.actions
+export const { nextStep, prevStep, onIsClicked, resetStep, resetSingUpState } = singUpSlice.actions
 export default singUpSlice.reducer

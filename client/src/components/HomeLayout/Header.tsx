@@ -40,7 +40,7 @@ const HomeHeader = () => {
                 <div className="w-full flex flex-row flex-wrap justify-between max-lg:justify-center items-center gap-5">
                     <div className="flex flex-row items-center gap-4">
                         <img className="person-img" src={ManSvg} alt="" />
-                        <h2 className="description">{email}xcdfbdfnfndfgndfndfn</h2>
+                        <h2 className="description">{email}</h2>
                     </div>
                     <div className="flex flex-row max-[480px]:flex-col items-center gap-10">
                         <ThemeAndLang />
