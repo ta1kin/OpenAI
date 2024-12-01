@@ -1,7 +1,7 @@
 export interface FileListItem {
     id: number
     headline: string
-    date: Date
+    date: number
     formatDate: string
 }
 
@@ -16,4 +16,11 @@ export interface DocsState {
 export interface LoadData {
     accessToken: string
     files: File[]
+}
+
+export interface GetPayloadItem {
+    id: number
+    name: string
+    date: number
+    createdAt: Date
 }

@@ -5,7 +5,8 @@ import asyncHandler from 'express-async-handler'
 
 import { prisma } from '../prisma'
 import { redis } from '../redis'
-import { InfoFields, ConfigFields, UserFields } from '../utils/user.utils'
+import { FormatDocs } from '../../types/type.docs'
+import { InfoFields, ConfigFields, UserFields, DocsFields } from '../utils/user.utils'
 import { sendVerifyToEmail, sendRecoveryToEmail } from '../services/service.mailer'
 import { verifyToken } from '../middlewares/auth.middleware'
 import { 
@@ -219,6 +220,26 @@ export default {
                 select: ConfigFields
             })
 
+            const docs = await prisma.docs.findMany({
+                where: {
+                    userId: userFound.id
+                },
+                select: DocsFields
+            })
+
+            const newDocs: FormatDocs[] = []
+
+            docs.map(
+                item => {
+                    newDocs.push( {
+                        id: item.id,
+                        headline: item.name,
+                        date: Number(item.date),
+                        formatDate: item.createdAt,
+                    })
+                }
+            )
+
             if( !info || !config ) {
                 res.status( 504 ).json(
                     {
@@ -264,6 +285,7 @@ export default {
                     email: userFound.email,
                     role: userFound.role,
                     accessToken: access_token,
+                    docs: newDocs,
                     ...info,
                     ...config,
                     message: 'success'

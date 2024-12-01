@@ -1,14 +1,15 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { RouterPathes } from '@/config/config.router'
 import { SERVER_URL, VITE_LOAD_DOCS } from '@/config/api.config'
 
 import axios from 'axios'
 
-import type { DocsState, LoadData, FileListItem } from '@/types/redux/interfaces/docs'
+import type { DocsState, LoadData, FileListItem, GetPayloadItem } from '@/types/redux/interfaces/docs'
 
 type DocsState = typeof DocsState
 type LoadData = typeof LoadData
 type FileListItem= typeof FileListItem
+type GetPayloadItem = typeof GetPayloadItem
 
 
 const initialState: DocsState = {
@@ -89,7 +90,7 @@ const docsSlice = createSlice({
         setFileList: (state, action) => {
             state.fileList = action.payload
         },
-        resetData: state => {
+        resetDocs: state => {
             state.itemsList = []
             state.select = ''
             state.search = ''
@@ -110,5 +111,5 @@ const docsSlice = createSlice({
     }
 })
 
-export const { setSelect, setSearch, setFileList, resetData } = docsSlice.actions
+export const { setSelect, setSearch, setFileList, resetDocs } = docsSlice.actions
 export default docsSlice.reducer

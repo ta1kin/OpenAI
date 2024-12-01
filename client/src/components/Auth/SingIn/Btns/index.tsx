@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { loginAsync, onIsClicked, resetValid, resetSingInState } from '@/store/slices/singInSlice'
+import { setFileList } from '@/store/slices/docsSlice'
 import { setAccessToken, setRole, resetData } from '@/store/slices/authSlice'
 import { setPersonalInfo } from '@/store/slices/homeSlice'
 import { setTheme } from '@/store/slices/settingsSlice'
@@ -52,6 +53,7 @@ const SingInBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
                         }
                     )
                 )
+                // dispatch( setFileList( payload.docs ) )
                 dispatch( resetValid() )
                 navigate( RouterPathes.Home )
             }

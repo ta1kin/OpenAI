@@ -13,35 +13,6 @@ import type { ResLoadData } from '../../types/type.docs'
 
 
 export default {
-    getDocs: asyncHandler(
-        async (req: Request, res: Response) => {
-            let access_token
-            let docs
-            let userFound: User | null = null
-
-            if( req.headers.authorization?.startsWith('Bearer') ) {
-                access_token = req.headers.authorization.split( ' ' )[1]
-            }
-            
-            if ( access_token ) userFound = await verifyToken( access_token, ACCESS )
-            
-            if( userFound ) {
-                docs = await prisma.docs.findMany({
-                    where: {
-                        userId: userFound?.id
-                    },
-                    select: DocsFields
-                })
-            }
-
-            res.status( 200 ).json( 
-                {   
-                    data: docs,
-                    message: 'get docs'
-                } 
-            )
-        }
-    ),
     getDoc: asyncHandler(
         async (req: Request, res: Response) => {
             const { id } = req.params

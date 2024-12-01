@@ -8,7 +8,6 @@ const docsRouter = Router()
 
 docsRouter.use( protect )
 
-docsRouter.get( '/docs', docsController.getDocs )
 docsRouter.get( '/docs/:id', docsController.getDoc )
 
 docsRouter.post( '/docs',  docsController.downloadDocs )

@@ -2,6 +2,7 @@ import { ReactElement, MouseEvent, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setVariant } from '@/store/slices/homeSlice'
+import { resetDocs } from '@/store/slices/docsSlice'
 import { resetData } from '@/store/slices/authSlice'
 import { RouterPathes } from '@/config/config.router'
 
@@ -41,6 +42,7 @@ const HomeContent = ({i18nPath, t}: PageProps) => {
         dispatch(setVariant(index))
     }
     const handleExit = (_event: MouseEvent<HTMLButtonElement>) => {
+        dispatch(resetDocs())
         dispatch(resetData())
         navigate(RouterPathes.Info)
     }

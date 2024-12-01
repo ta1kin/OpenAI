@@ -46,15 +46,14 @@ const DocsList = ({t, baseTextPath}: BaseProps) => {
                         ?
                         sortedList.map(
                             ( item: DocsFile ) => (
-                                <div key={item.id} className="block__card w-full flex justify-between items-center">
-                                    <div className=" w-[45%]">
-                                        <h2 className="description file__name">{item.headline}</h2>
-                                        <div className="card__text flex flex-row items-center gap-2">
+                                <div key={item.id} className="block__card w-full flex flex-row max-md:flex-col justify-between items-center gap-2">
+                                    <div className="w-[45%] max-md:w-full">
+                                        <h2 className="description file__name max-md:w-full">{item.headline}</h2>
+                                        <div className="card__text flex flex-row justify-start items-center gap-2">
                                             <p>{t(`${baseTextPath}.date`)}</p>
-                                            <p>{item.formatDate}</p>
+                                            <p className="file__name whitespace-nowrap">{item.formatDate}</p>
                                         </div>
                                     </div>
-                                    <div></div>
                                     <div>
                                         <Link to={RouterPathes.Book.replace(':id', item.id )}>
                                             <Button variant="outlined" className="card__btn btn outlined flex justify-between items-center gap-1">

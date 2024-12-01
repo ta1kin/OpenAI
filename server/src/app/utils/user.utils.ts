@@ -20,9 +20,9 @@ export const ConfigFields = {
 
 export const DocsFields = {
     id: true,
-    headline: true,
+    name: true,
     date: true,
-    formatDate: true,
+    createdAt: true,
 }
 
 export const DocFields = {
