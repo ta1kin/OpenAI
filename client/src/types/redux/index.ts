@@ -5,7 +5,6 @@ import type { ErrorState } from './interfaces/error'
 import type { AuthState } from './interfaces/auth'
 import type { RecoveryPassState } from './interfaces/recoveryPass'
 import type { HomeState } from './interfaces/home'
-import type { BookState } from './interfaces/book'
 import type { DocsState } from './interfaces/docs'
 
 
@@ -17,6 +16,5 @@ export interface State {
     auth: AuthState
     recoveryPass: RecoveryPassState
     home: HomeState
-    book: BookState
     docs: DocsState
 }

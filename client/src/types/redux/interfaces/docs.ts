@@ -17,10 +17,3 @@ export interface LoadData {
     accessToken: string
     files: File[]
 }
-
-export interface GetPayloadItem {
-    id: number
-    name: string
-    date: number
-    createdAt: Date
-}

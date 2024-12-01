@@ -38,8 +38,6 @@ const SingInBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
         if( data.email && data.password ) {
             const { payload } = await dispatch( loginAsync( data ) )
 
-            console.log( payload )
-
             if( payload ) {
                 dispatch( setAccessToken(payload.accessToken) )
                 dispatch( setRole(payload.role) )
@@ -53,7 +51,7 @@ const SingInBtns = ({ i18nPath, baseBtnsPath }: BtnsProps) => {
                         }
                     )
                 )
-                // dispatch( setFileList( payload.docs ) )
+                dispatch( setFileList( payload.docs ) )
                 dispatch( resetValid() )
                 navigate( RouterPathes.Home )
             }
