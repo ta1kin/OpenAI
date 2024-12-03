@@ -3,7 +3,7 @@ import ejs from 'ejs'
 import path from 'path'
 
 import { PORT } from '../../config/config.server'
-import { MAIL_SERVICE, MAIL_HOST, MAIL_PORT, MAIL_USER, MAIL_PASS, MAIL_TO } from '../../config/mailer.config'
+import { MAIL_SERVICE, MAIL_HOST, MAIL_PORT, MAIL_USER, MAIL_PASS, MAIL_TO, MAIL_CONNECT } from '../../config/mailer.config'
 
 
 const transporter = nodemailer.createTransport( {
@@ -25,7 +25,7 @@ export const sendVerifyToEmail = async ( to: string, access_token: string ) => {
         from: MAIL_USER,
         to: to,
         subject: 'Подтверждение регистрации!',
-        html: await ejs.renderFile( ejsPath, { MAIL_TO, PORT, access_token } )
+        html: await ejs.renderFile( ejsPath, { MAIL_CONNECT, MAIL_TO, PORT, access_token } )
     }
 
     return await transporter.sendMail( mailOptions)

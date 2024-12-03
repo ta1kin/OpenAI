@@ -43,6 +43,9 @@ services:
     build: ./client
     environment:
       - VITE_SERVER_URL=http://localhost/api
+      - EMAIL_CONNECT=https
+      - EMAIL_TO=magicnet.site
+      - EMAIL_PORT=80
     depends_on:
       - server
     networks:
