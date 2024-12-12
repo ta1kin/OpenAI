@@ -9,24 +9,17 @@ export const notFound = ( req: Request, res: Response, next: NextFunction ) => {
     next( err )
 }
 
-export const errorHandler = ( err: ICustomError, _req: Request, res: Response, _next: NextFunction ) => {
-    let statusCode
-    let resJson
+export const errorHandler = (err: ICustomError, _req: Request, res: Response, _next: NextFunction) => {
+    let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
 
-    if( isDev ) {
-        statusCode = err.statusCode
-        resJson = {
-            message: err.message,
-            stack: err.stack
-        }
-    } else {
-        statusCode = res.statusCode === 200 ? 500: res.statusCode
-        resJson = {
-            message: err.message,
-        }
+    if (isDev && err.statusCode) {
+        statusCode = err.statusCode;
     }
 
-    res
-        .status( statusCode )
-        .json( resJson )
-}
+    const resJson = {
+        message: err.message || "Internal Server Error",
+        ...(isDev && { stack: err.stack }),
+    };
+
+    res.status(statusCode).json(resJson);
+};

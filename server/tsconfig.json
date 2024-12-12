@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ESNext",            // Современный JavaScript
-    "module": "CommonJS",          // Используем CommonJS для Node.js
-    "moduleResolution": "Node",    // Разрешение модулей по правилам Node.js
-    "esModuleInterop": true,       // Включаем поддержку для ESM и CommonJS
+    "target": "ES6",
+    "module": "commonjs",
     "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },

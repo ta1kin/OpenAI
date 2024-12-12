@@ -12,7 +12,7 @@ router.post('/generate', async (req, res) => {
 
 	try {
 		const stream = await openAIProvider.generate(prompt)
-		stream.pipe(res) // Передаем поток в ответ
+		stream.pipe(res) 
 	} catch (error) {
 		res.status(500).json({ error: 'Ошибка генерации' })
 	}

@@ -1,6 +1,4 @@
 export interface SingUpDataType {
-    sphereDef: string
-    direction: string
     email: string
     password: string
 }
