@@ -39,31 +39,6 @@ services:
     ports:
       - "3000:3000"
 
-  client:
-    build: ./client
-    environment:
-      - VITE_SERVER_URL=http://localhost/api
-      - EMAIL_CONNECT=https
-      - EMAIL_TO=magicnet.site
-      - EMAIL_PORT=80
-    depends_on:
-      - server
-    networks:
-      - planner_network
-    ports:
-      - "4173:4173"
-
-  proxy:
-    build: ./nginx
-    depends_on:
-      # - client
-      - server
-    networks:
-      - planner_network
-    ports:
-      - "80:80"
-
 networks:
   planner_network:
     driver: bridge
-    

@@ -1,20 +1,15 @@
 FROM node:20-alpine
 
-RUN apk add --no-cache bash
+RUN apk add --no-cache openssl
 
 WORKDIR /server
 
-COPY package*.json ./
+COPY ./server .
 
-RUN npm install --production
+RUN npm install
 
-COPY . .
-
-RUN npx prisma generate
+RUN npm run generate
 
 EXPOSE 3000
 
-COPY wait-for-db.sh /server/wait-for-db.sh
-RUN chmod +x /server/wait-for-db.sh
-
-CMD ["/bin/bash", "/server/wait-for-db.sh"]
+CMD ["npm", "run", "start"]

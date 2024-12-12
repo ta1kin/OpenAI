@@ -2,9 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "main": "server.ts",
+  "type": "module",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only --exit-child src/server.ts",
-    "start": "ts-node src/server.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --exit-child src/main.ts",
+    "start": "node --loader ts-node/esm src/main.ts",
     "generate": "npx prisma generate",
     "migrate": "npx prisma migrate dev"
   },
@@ -31,6 +32,7 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "node-fetch": "^3.3.2",
     "nodemailer": "^6.9.16",
     "uuid": "^11.0.3"
   },

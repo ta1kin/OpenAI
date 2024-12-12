@@ -17,15 +17,3 @@ export const ConfigFields = {
     theme: true,
     lang: true,
 }
-
-export const DocsFields = {
-    id: true,
-    name: true,
-    date: true,
-    createdAt: true,
-}
-
-export const DocFields = {
-    id: true,
-    data: true,
-}
